@@ -10,12 +10,15 @@
 	background-image: 
 		repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px),
 		repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
-	padding: 20px;
+	// Mobile-first: padding más pequeño en móviles
+	padding: clamp(12px, 3vw, 20px) clamp(12px, 3vw, 20px) clamp(50px, 12vw, 50px) clamp(12px, 3vw, 20px);
 	font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
+	margin-block-start: 0;
 }
 
 .landing-2000s-window {
-	width: 672px;
+	// Mobile-first: ancho responsivo con clamp
+	width: min(100%, 672px);
 	max-width: 100%;
 	background: #C0C0C0;
 	border: 2px outset #C0C0C0;
@@ -147,10 +150,11 @@
 }
 
 .window-content {
-	padding: 16px;
+	// Padding responsivo
+	padding: clamp(12px, 3vw, 16px);
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: clamp(8px, 2vw, 12px);
 }
 
 .content-section {
@@ -158,7 +162,8 @@
 		background: #FFFFFF;
 		border: 2px inset #C0C0C0;
 		border-color: #808080 #FFFFFF #FFFFFF #808080;
-		padding: 18px;
+		// Padding responsivo
+		padding: clamp(12px, 4vw, 18px);
 		text-align: center;
 	}
 }
@@ -166,17 +171,19 @@
 .main-title {
 	font-family: Arial, 'MS Sans Serif';
 	font-weight: 700;
-	font-size: 24px;
+	// Tamaño de fuente responsivo
+	font-size: clamp(18px, 4vw, 24px);
 	line-height: 1.5em;
 	color: #000080;
-	margin: 0 0 8px 0;
+	margin: 0 0 clamp(6px, 1.5vw, 8px) 0;
 	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
 }
 
 .subtitle {
 	font-family: 'MS Sans Serif', Tahoma;
 	font-weight: 400;
-	font-size: 14px;
+	// Tamaño de fuente responsivo
+	font-size: clamp(12px, 3vw, 14px);
 	line-height: 1.5em;
 	color: #000000;
 	margin: 0;
@@ -201,18 +208,19 @@
 }
 
 .fieldset-content {
-	padding: 14px;
+	// Padding responsivo
+	padding: clamp(10px, 3vw, 14px);
 	display: flex;
 	flex-wrap: wrap;
-	gap: 8px;
+	gap: clamp(6px, 1.5vw, 8px);
 
 	&.tech-stack {
 		justify-content: flex-start;
 	}
 
 	&.social-links {
-		flex-direction: column;
-		gap: 0;
+		justify-content: flex-start;
+		flex-wrap: wrap;
 	}
 }
 
@@ -242,7 +250,7 @@
 }
 
 .social-link {
-	display: block;
+	display: inline-block;
 	background: #C0C0C0;
 	border: 2px outset #C0C0C0;
 	border-color: #FFFFFF #808080 #808080 #FFFFFF;
@@ -251,10 +259,9 @@
 	font-weight: 400;
 	font-size: 11px;
 	line-height: 1.5em;
-	padding: 8px;
+	padding: 4px 12px;
 	text-align: center;
 	text-decoration: none;
-	margin-bottom: 2px;
 	user-select: none;
 
 	&:hover {
@@ -287,21 +294,533 @@
 	line-height: 1.5em;
 }
 
-@media (max-width: 768px) {
+// Accesos Directos
+.shortcuts {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.shortcut-button {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: #C0C0C0;
+	border: 2px outset #C0C0C0;
+	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	color: #000000;
+	font-family: 'MS Sans Serif', Tahoma;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 1.5em;
+	padding: 8px 12px;
+	cursor: pointer;
+	text-align: left;
+	user-select: none;
+	transition: all 0.1s;
+
+	&:hover {
+		background: #D4D4D4;
+	}
+
+	&:active {
+		background: #C0C0C0;
+		border: 2px inset #C0C0C0;
+		border-color: #808080 #FFFFFF #FFFFFF #808080;
+	}
+}
+
+.shortcut-icon {
+	font-size: 16px;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
+.shortcut-label {
+	flex: 1;
+}
+
+// Ventanas Popup
+.popup-window {
+	// Ancho responsivo con min/max
+	width: min(90vw, 500px);
+	max-width: 90vw;
+	max-height: 80vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+
+	&.maximized {
+		width: calc(100% - clamp(20px, 5vw, 40px)) !important;
+		height: calc(100% - clamp(20px, 5vw, 40px)) !important;
+		max-width: none;
+		max-height: none;
+	}
+
+	.window-content {
+		overflow-y: auto;
+		flex: 1;
+		min-height: 0;
+	}
+
+	h2 {
+		font-family: Arial, 'MS Sans Serif';
+		font-weight: 700;
+		// Tamaño de fuente responsivo
+		font-size: clamp(16px, 3.5vw, 18px);
+		line-height: 1.5em;
+		color: #000080;
+		margin: 0 0 clamp(8px, 2vw, 12px) 0;
+	}
+
+	p {
+		font-family: 'MS Sans Serif', Tahoma;
+		font-weight: 400;
+		font-size: clamp(10px, 2.5vw, 11px);
+		line-height: 1.5em;
+		color: #000000;
+		margin: 0 0 clamp(6px, 1.5vw, 8px) 0;
+	}
+
+	ul {
+		font-family: 'MS Sans Serif', Tahoma;
+		font-weight: 400;
+		font-size: clamp(10px, 2.5vw, 11px);
+		line-height: 1.6em;
+		color: #000000;
+	}
+}
+
+// ============================================
+// RESPONSIVE STYLES - Mobile-First Approach
+// ============================================
+
+// Mobile Small (hasta 480px) - Ya está cubierto por mobile-first
+// Los estilos base ya son para móviles
+
+// Tablet (481px - 768px)
+@media (min-width: 481px) {
+	.landing-2000s-window {
+		width: min(90vw, 672px);
+	}
+
+	.fieldset-content {
+		&.tech-stack {
+			// En tablets, permitir 2 columnas
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	.tech-button,
+	.social-link {
+		// En tablets, no ocupar todo el ancho
+		width: auto;
+		min-width: 120px;
+	}
+}
+
+// Tablet Large / Desktop Small (769px - 1024px)
+@media (min-width: 769px) {
+	.landing-2000s-window {
+		width: 672px;
+	}
+
+	.fieldset-content {
+		&.tech-stack {
+			// En desktop, permitir más columnas
+			grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+		}
+	}
+
+	.tech-button,
+	.social-link {
+		width: auto;
+	}
+}
+
+// Desktop Medium (1025px+)
+@media (min-width: 1025px) {
+	.landing-2000s-wrapper {
+		padding: 20px 20px 50px 20px;
+	}
+
+	.window-content {
+		padding: 16px;
+		gap: 12px;
+	}
+}
+
+// Ajustes específicos para móviles pequeños (hasta 480px)
+@media (max-width: 480px) {
 	.landing-2000s-window {
 		width: 100%;
-		max-width: 672px;
+		margin: 0;
 	}
 
-	.tech-stack {
-		flex-direction: column;
+	.window-title-text {
+		// Texto más pequeño en móviles muy pequeños
+		font-size: clamp(9px, 2.5vw, 11px);
 	}
 
-	.tech-button {
+	.menu-item {
+		// Menú más compacto
+		padding: 4px clamp(6px, 2vw, 12px);
+		font-size: clamp(9px, 2.5vw, 11px);
+	}
+
+	.tech-button,
+	.social-link,
+	.shortcut-button {
 		width: 100%;
+		// Texto más legible en móviles
+		font-size: clamp(10px, 2.5vw, 11px);
+		padding: clamp(6px, 1.5vw, 8px) clamp(10px, 3vw, 12px);
 	}
 
-	.social-link {
-		width: 100%;
+	.popup-window {
+		width: calc(100% - clamp(20px, 5vw, 40px));
+		max-width: calc(100% - clamp(20px, 5vw, 40px));
 	}
+
+	.start-menu {
+		width: min(90vw, 200px);
+	}
+}
+
+// Ajustes para orientación landscape en móviles
+@media (max-width: 768px) and (orientation: landscape) {
+	.landing-2000s-wrapper {
+		padding: clamp(8px, 2vw, 12px) clamp(8px, 2vw, 12px) clamp(40px, 10vw, 50px) clamp(8px, 2vw, 12px);
+	}
+
+	.landing-2000s-window {
+		max-height: calc(100vh - clamp(40px, 10vw, 50px));
+	}
+
+	.window-content {
+		overflow-y: auto;
+		max-height: calc(100vh - 120px);
+	}
+}
+
+// Ajustes para pantallas muy grandes (1440px+)
+@media (min-width: 1440px) {
+	.landing-2000s-window {
+		width: 672px;
+		// Mantener tamaño fijo en pantallas muy grandes para mantener el estilo retro
+	}
+}
+
+// Windows 98 Alert Dialog
+.win98-alert-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 10000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.win98-alert-dialog {
+	background: #C0C0C0;
+	border: 2px outset #C0C0C0;
+	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	box-shadow: 
+		2px 2px 0px 0px #000000,
+		3px 3px 0px 0px #808080;
+	padding: 0;
+	// Ancho responsivo
+	min-width: min(90vw, 300px);
+	max-width: min(90vw, 400px);
+	font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
+	z-index: 10001;
+}
+
+.win98-alert-title {
+	background: linear-gradient(to bottom, #000080 0%, #1084D0 100%);
+	border-bottom: 2px solid #000000;
+	padding: 2px 4px;
+	height: 18px;
+	display: flex;
+	align-items: center;
+	color: #FFFFFF;
+	font-weight: 700;
+	font-size: 11px;
+	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+}
+
+.win98-alert-content {
+	padding: 16px;
+	background: #C0C0C0;
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+}
+
+.win98-alert-buttons {
+	padding: 8px 16px 16px;
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	background: #C0C0C0;
+}
+
+.win98-alert-button {
+	background: #C0C0C0;
+	border: 2px outset #C0C0C0;
+	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	color: #000000;
+	font-family: 'MS Sans Serif', Tahoma;
+	font-weight: 400;
+	font-size: 11px;
+	padding: 4px 20px;
+	cursor: pointer;
+	min-width: 75px;
+	user-select: none;
+
+	&:hover {
+		background: #D4D4D4;
+	}
+
+	&:active {
+		background: #C0C0C0;
+		border: 2px inset #C0C0C0;
+		border-color: #808080 #FFFFFF #FFFFFF #808080;
+	}
+
+	&:focus {
+		outline: 1px dotted #000000;
+		outline-offset: -4px;
+	}
+}
+
+// Botón de control de sonido
+.sound-toggle-button {
+	position: fixed;
+	// Posición responsiva
+	bottom: clamp(40px, 10vw, 40px);
+	right: clamp(12px, 3vw, 20px);
+	// Tamaño responsivo
+	width: clamp(40px, 10vw, 48px);
+	height: clamp(40px, 10vw, 48px);
+	background: #C0C0C0;
+	border: 2px outset #C0C0C0;
+	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	color: #000000;
+	font-size: clamp(20px, 5vw, 24px);
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
+	user-select: none;
+	box-shadow: 
+		2px 2px 0px 0px #000000,
+		3px 3px 0px 0px #808080;
+
+	&:hover {
+		background: #D4D4D4;
+	}
+
+	&:active {
+		background: #C0C0C0;
+		border: 2px inset #C0C0C0;
+		border-color: #808080 #FFFFFF #FFFFFF #808080;
+	}
+
+	&.disabled {
+		opacity: 0.7;
+	}
+
+	&:focus {
+		outline: 1px dotted #000000;
+		outline-offset: -4px;
+	}
+}
+
+// Barra de inicio estilo Windows 98
+.win98-taskbar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 30px;
+	background: #C0C0C0;
+	border-top: 2px outset #C0C0C0;
+	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 2px;
+	z-index: 10000;
+	box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+	font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
+}
+
+.start-button {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	height: 26px;
+	padding: 0 12px;
+	background: #C0C0C0;
+	border: 2px outset #C0C0C0;
+	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	color: #000000;
+	font-family: 'MS Sans Serif', Tahoma;
+	font-weight: 700;
+	font-size: 11px;
+	cursor: pointer;
+	user-select: none;
+	white-space: nowrap;
+
+	&:hover {
+		background: #D4D4D4;
+	}
+
+	&:active,
+	&.active {
+		background: #C0C0C0;
+		border: 2px inset #C0C0C0;
+		border-color: #808080 #FFFFFF #FFFFFF #808080;
+	}
+
+	&:focus {
+		outline: 1px dotted #000000;
+		outline-offset: -4px;
+	}
+}
+
+.start-button-icon {
+	font-size: 16px;
+	line-height: 1;
+}
+
+.start-button-text {
+	line-height: 1;
+}
+
+.taskbar-tray {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 0 4px;
+	height: 100%;
+}
+
+.taskbar-clock {
+	color: #000000;
+	font-family: 'MS Sans Serif', Tahoma;
+	font-weight: 400;
+	font-size: 11px;
+	padding: 2px 8px;
+	background: #C0C0C0;
+	border: 1px inset #C0C0C0;
+	border-color: #808080 #FFFFFF #FFFFFF #808080;
+	user-select: none;
+}
+
+// Menú de inicio
+.start-menu {
+	position: fixed;
+	bottom: 30px;
+	left: 2px;
+	// Ancho responsivo
+	width: min(90vw, 200px);
+	max-width: 200px;
+	background: #C0C0C0;
+	border: 2px outset #C0C0C0;
+	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	box-shadow: 
+		2px -2px 0px 0px #000000,
+		3px -3px 0px 0px #808080;
+	z-index: 10001;
+	display: none;
+	font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
+
+	&.open {
+		display: block;
+	}
+
+	&[aria-hidden="false"] {
+		display: block;
+	}
+}
+
+.start-menu-header {
+	background: linear-gradient(to bottom, #000080 0%, #1084D0 100%);
+	border-bottom: 2px solid #000000;
+	padding: 4px 8px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+}
+
+.start-menu-title {
+	color: #FFFFFF;
+	font-weight: 700;
+	font-size: 11px;
+	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+}
+
+.start-menu-content {
+	padding: 4px 0;
+	background: #C0C0C0;
+}
+
+.start-menu-section {
+	display: flex;
+	flex-direction: column;
+}
+
+.start-menu-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 4px 8px 4px 24px;
+	color: #000000;
+	font-size: 11px;
+	cursor: pointer;
+	user-select: none;
+	position: relative;
+
+	&:hover {
+		background: #000080;
+		color: #FFFFFF;
+	}
+
+	&:active {
+		background: #000080;
+		color: #FFFFFF;
+	}
+
+	&:focus {
+		outline: 1px dotted #000000;
+		outline-offset: -2px;
+	}
+}
+
+.start-menu-icon {
+	font-size: 16px;
+	line-height: 1;
+	width: 16px;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.start-menu-label {
+	line-height: 1.5;
+	flex: 1;
+}
+
+.start-menu-divider {
+	height: 1px;
+	background: #808080;
+	margin: 2px 0;
+	border-top: 1px solid #FFFFFF;
 }

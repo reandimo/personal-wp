@@ -1,11 +1,59 @@
-<!-- wp:group {"layout":{"type":"constrained"}} -->
-<div class="wp-block-group">
-	<!-- wp:group {"align":"wide","layout":{"type":"flex","justifyContent":"space-between"}} -->
-	<div class="wp-block-group alignwide">
-		<!-- wp:site-title /-->
-
-		<!-- wp:navigation {"layout":{"type":"flex","setCascadingProperties":true,"justifyContent":"right"}} /-->
+<!-- wp:html -->
+<!-- Barra de inicio estilo Windows 98 -->
+<header class="win98-header">
+<div class="win98-taskbar">
+	<button class="start-button" id="start-button" aria-label="Inicio" aria-expanded="false">
+		<span class="start-button-icon">🪟</span>
+		<span class="start-button-text">Inicio</span>
+	</button>
+	<div class="taskbar-tray">
+		<div class="taskbar-clock" id="taskbar-clock">00:00</div>
 	</div>
-	<!-- /wp:group -->
 </div>
-<!-- /wp:group -->
+
+<!-- Menú de inicio -->
+<div class="start-menu" id="start-menu" aria-hidden="true">
+	<div class="start-menu-header">
+		<span class="start-menu-title">Windows 98</span>
+	</div>
+	<div class="start-menu-content">
+		<div class="start-menu-section">
+			<div class="start-menu-item" data-action="portfolio">
+				<span class="start-menu-icon">📂</span>
+				<span class="start-menu-label">Portfolio</span>
+			</div>
+			<div class="start-menu-item" data-action="contact">
+				<span class="start-menu-icon">✉️</span>
+				<span class="start-menu-label">Contacto</span>
+			</div>
+			<div class="start-menu-item" data-action="blog">
+				<span class="start-menu-icon">📝</span>
+				<span class="start-menu-label">Blog</span>
+			</div>
+		</div>
+		<div class="start-menu-divider"></div>
+		<div class="start-menu-section">
+			<div class="start-menu-item" data-action="github">
+				<span class="start-menu-icon">🐙</span>
+				<span class="start-menu-label">GitHub</span>
+			</div>
+			<div class="start-menu-item" data-action="linkedin">
+				<span class="start-menu-icon">💼</span>
+				<span class="start-menu-label">LinkedIn</span>
+			</div>
+			<div class="start-menu-item" data-action="email">
+				<span class="start-menu-icon">📧</span>
+				<span class="start-menu-label">Email</span>
+			</div>
+		</div>
+		<div class="start-menu-divider"></div>
+		<div class="start-menu-section">
+			<div class="start-menu-item" data-action="shutdown">
+				<span class="start-menu-icon">⏻</span>
+				<span class="start-menu-label">Apagar...</span>
+			</div>
+		</div>
+	</div>
+</div>
+</header>
+<!-- /wp:html -->
