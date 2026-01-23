@@ -1,5 +1,5 @@
 /**
- * Main JavaScript entry point
+ * Main TypeScript entry point
  * Import styles here
  */
 
@@ -7,7 +7,7 @@
 import '../../styles/frontend/main.scss';
 
 // Import window drag functionality
-import { initWindowDrag } from './window-drag.js';
+import { initWindowDrag } from '../templates/index';
 
 // Initialize window drag when DOM is ready
 if (document.readyState === 'loading') {

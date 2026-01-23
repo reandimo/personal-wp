@@ -10,7 +10,7 @@ export default defineConfig({
 		manifest: 'manifest.json',
 		rollupOptions: {
 			input: {
-				main: resolve(__dirname, 'resources/scripts/frontend/main.js'),
+				main: resolve(__dirname, 'resources/scripts/frontend/main.ts'),
 			},
 			output: {
 				entryFileNames: 'js/[name].js',
