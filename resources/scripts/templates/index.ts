@@ -48,7 +48,7 @@ function showWindows98Alert(message: string): void {
 		font-size: 11px;
 		text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
 	`;
-	titleBar.textContent = '⚠️ Advertencia';
+	titleBar.textContent = '⚠️ Warning';
 
 	// Crear contenido
 	const content = document.createElement('div');
@@ -109,7 +109,7 @@ function showWindows98Alert(message: string): void {
 		min-width: 75px;
 		user-select: none;
 	`;
-	okButton.textContent = 'Aceptar';
+	okButton.textContent = 'OK';
 
 	okButton.addEventListener('mouseenter', () => {
 		okButton.style.background = '#D4D4D4';
@@ -201,7 +201,7 @@ export function initWindowDrag(): void {
 	const closeBtn = window.querySelector<HTMLButtonElement>('.window-button.close');
 	if (closeBtn) {
 		closeBtn.addEventListener('click', () => {
-			showWindows98Alert('¿Estás seguro de que quieres cerrar esta ventana?');
+			showWindows98Alert('Are you sure you want to close this window?');
 		});
 	}
 
@@ -312,32 +312,38 @@ export class WindowManager {
 			portfolio: `
 				<div class="window-content">
 					<div class="content-section">
-						<h2>Mi Portfolio</h2>
-						<p>Aquí puedes ver mis proyectos más destacados:</p>
-						<ul style="margin: 10px 0; padding-left: 20px;">
-							<li>Proyecto 1 - Descripción del proyecto</li>
-							<li>Proyecto 2 - Descripción del proyecto</li>
-							<li>Proyecto 3 - Descripción del proyecto</li>
-						</ul>
+						<h2>My Portfolio</h2>
+						<p>My current work:</p>
+						<div style="margin: 10px 0; line-height: 1.8;">
+							<p><strong>Lucyd</strong> - Wordpress/Woocommerce Developer - Shopify Developer<br>
+							<em>March 2023 - Present (United States)</em></p>
+						</div>
+						<p style="margin-top: 12px;"><strong>Links:</strong></p>
+						<div style="margin: 10px 0;">
+							<p><a href="https://www.linkedin.com/in/reandimo" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a></p>
+						</div>
 					</div>
 				</div>
 			`,
 			contact: `
 				<div class="window-content">
 					<div class="content-section">
-						<h2>Contacto</h2>
-						<p>Puedes contactarme a través de:</p>
-						<div style="margin: 10px 0;">
-							<p><strong>Email:</strong> alex@example.com</p>
-							<p><strong>Teléfono:</strong> +1 234 567 890</p>
-							<p><strong>Ubicación:</strong> Ciudad, País</p>
+						<h2>Contact</h2>
+						<p>You can contact me through:</p>
+						<div style="margin: 10px 0; line-height: 1.8;">
+							<p><strong>📧 Email:</strong> <a href="mailto:reandimo2@hotmail.com">reandimo2@hotmail.com</a></p>
+							<p><strong>💼 LinkedIn:</strong> <a href="https://www.linkedin.com/in/reandimo" target="_blank" rel="noopener noreferrer">linkedin.com/in/reandimo</a></p>
+							<p><strong>🐙 GitHub:</strong> <a href="https://github.com/reandimo" target="_blank" rel="noopener noreferrer">github.com/reandimo</a></p>
+							<p><strong>🌐 Personal Website:</strong> <a href="https://reandimo.dev" target="_blank" rel="noopener noreferrer">reandimo.dev</a></p>
+							<p><strong>👥 Nativo Team:</strong> <a href="https://nativo.team" target="_blank" rel="noopener noreferrer">nativo.team</a></p>
+							<p><strong>📍 Location:</strong> Buenos Aires, Buenos Aires Province, Argentina</p>
 						</div>
 					</div>
 				</div>
 			`,
 		};
 
-		return contentMap[windowId] || '<div class="window-content"><p>Contenido de la ventana</p></div>';
+		return contentMap[windowId] || '<div class="window-content"><p>Window content</p></div>';
 	}
 
 	public openWindow(config: WindowConfig): void {
@@ -367,16 +373,16 @@ export class WindowManager {
 					<div class="window-title-text">${config.title}</div>
 				</div>
 				<div class="title-bar-right">
-					<button class="window-button minimize" aria-label="Minimizar">_</button>
-					<button class="window-button maximize" aria-label="Maximizar">□</button>
-					<button class="window-button close" aria-label="Cerrar">×</button>
+					<button class="window-button minimize" aria-label="Minimize">_</button>
+					<button class="window-button maximize" aria-label="Maximize">□</button>
+					<button class="window-button close" aria-label="Close">×</button>
 				</div>
 			</div>
 			<div class="window-menu-bar">
-				<div class="menu-item">Archivo</div>
-				<div class="menu-item">Edición</div>
-				<div class="menu-item">Ver</div>
-				<div class="menu-item">Ayuda</div>
+				<div class="menu-item">File</div>
+				<div class="menu-item">Edit</div>
+				<div class="menu-item">View</div>
+				<div class="menu-item">Help</div>
 			</div>
 			${config.content}
 		`;
@@ -667,7 +673,7 @@ export class StartMenuManager {
 				this.openWindow('portfolio', 'Portfolio', '📂');
 				break;
 			case 'contact':
-				this.openWindow('contact', 'Contacto', '✉️');
+				this.openWindow('contact', 'Contact', '✉️');
 				break;
 			case 'blog':
 				window.location.href = '/blog/';
@@ -679,10 +685,10 @@ export class StartMenuManager {
 				window.open('https://www.linkedin.com/in/reandimo', '_blank', 'noopener,noreferrer');
 				break;
 			case 'email':
-				window.location.href = 'mailto:reandimo23@gmail.com';
+				window.location.href = 'mailto:reandimo2@hotmail.com';
 				break;
 			case 'shutdown':
-				showWindows98Alert('¿Estás seguro de que quieres cerrar esta sesión?');
+				showWindows98Alert('Are you sure you want to close this session?');
 				break;
 		}
 	}
@@ -712,32 +718,38 @@ export class StartMenuManager {
 			portfolio: `
 				<div class="window-content">
 					<div class="content-section">
-						<h2>Mi Portfolio</h2>
-						<p>Aquí puedes ver mis proyectos más destacados:</p>
-						<ul style="margin: 10px 0; padding-left: 20px;">
-							<li>Proyecto 1 - Descripción del proyecto</li>
-							<li>Proyecto 2 - Descripción del proyecto</li>
-							<li>Proyecto 3 - Descripción del proyecto</li>
-						</ul>
+						<h2>My Portfolio</h2>
+						<p>My current work:</p>
+						<div style="margin: 10px 0; line-height: 1.8;">
+							<p><strong>Lucyd</strong> - Wordpress/Woocommerce Developer - Shopify Developer<br>
+							<em>March 2023 - Present (United States)</em></p>
+						</div>
+						<p style="margin-top: 12px;"><strong>Links:</strong></p>
+						<div style="margin: 10px 0;">
+							<p><a href="https://www.linkedin.com/in/reandimo" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a></p>
+						</div>
 					</div>
 				</div>
 			`,
 			contact: `
 				<div class="window-content">
 					<div class="content-section">
-						<h2>Contacto</h2>
-						<p>Puedes contactarme a través de:</p>
-						<div style="margin: 10px 0;">
-							<p><strong>Email:</strong> reandimo23@gmail.com</p>
-							<p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/reandimo" target="_blank">linkedin.com/in/reandimo</a></p>
-							<p><strong>GitHub:</strong> <a href="https://github.com/reandimo" target="_blank">github.com/reandimo</a></p>
+						<h2>Contact</h2>
+						<p>You can contact me through:</p>
+						<div style="margin: 10px 0; line-height: 1.8;">
+							<p><strong>📧 Email:</strong> <a href="mailto:reandimo2@hotmail.com">reandimo2@hotmail.com</a></p>
+							<p><strong>💼 LinkedIn:</strong> <a href="https://www.linkedin.com/in/reandimo" target="_blank" rel="noopener noreferrer">linkedin.com/in/reandimo</a></p>
+							<p><strong>🐙 GitHub:</strong> <a href="https://github.com/reandimo" target="_blank" rel="noopener noreferrer">github.com/reandimo</a></p>
+							<p><strong>🌐 Personal Website:</strong> <a href="https://reandimo.dev" target="_blank" rel="noopener noreferrer">reandimo.dev</a></p>
+							<p><strong>👥 Nativo Team:</strong> <a href="https://nativo.team" target="_blank" rel="noopener noreferrer">nativo.team</a></p>
+							<p><strong>📍 Location:</strong> Buenos Aires, Buenos Aires Province, Argentina</p>
 						</div>
 					</div>
 				</div>
 			`,
 		};
 
-		return contentMap[windowId] || '<div class="window-content"><p>Contenido de la ventana</p></div>';
+		return contentMap[windowId] || '<div class="window-content"><p>Window content</p></div>';
 	}
 
 	private initClock(): void {

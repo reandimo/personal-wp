@@ -155,7 +155,7 @@ if (document.readyState === 'loading') {
 		// Get the window manager instance from the static method
 		// We'll need to modify StartMenuManager to find it or pass it differently
 		StartMenuManager.initializeAll();
-		// Reproducir sonido de inicio después de que el DOM esté listo
+		// Play startup sound after DOM is ready
 		playWindows98StartupSound();
 	});
 } else {
@@ -163,6 +163,6 @@ if (document.readyState === 'loading') {
 	WindowManager.initializeAll();
 	// Initialize start menu
 	StartMenuManager.initializeAll();
-	// Reproducir sonido de inicio inmediatamente
+	// Play startup sound immediately
 	playWindows98StartupSound();
 }
