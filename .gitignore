@@ -3,11 +3,8 @@ node_modules/
 vendor/
 
 # Vite build output
-public/js/
-public/css/
 public/manifest.json
 public/.vite/
-public/assets/
 
 # Environment
 .env
