@@ -1,0 +1,307 @@
+// Landing Page Windows 98 Style
+// Estilos para el template landing-2000s.html
+
+.landing-2000s-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: #008080;
+	background-image: 
+		repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px),
+		repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
+	padding: 20px;
+	font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
+}
+
+.landing-2000s-window {
+	width: 672px;
+	max-width: 100%;
+	background: #C0C0C0;
+	border: 2px outset #C0C0C0;
+	box-shadow: 
+		2px 2px 0px 0px #000000,
+		3px 3px 0px 0px #808080;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	transition: transform 0s;
+}
+
+.window-title-bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: linear-gradient(to bottom, #000080 0%, #1084D0 100%);
+	border-bottom: 2px solid #000000;
+	padding: 2px 4px;
+	gap: 4px;
+	height: 18px;
+	cursor: move;
+	user-select: none;
+}
+
+.title-bar-left {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.window-icon {
+	width: 16px;
+	height: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #C0C0C0;
+	border: 1px inset #C0C0C0;
+	border-color: #808080 #FFFFFF #FFFFFF #808080;
+	font-size: 10px;
+	line-height: 1.5em;
+	flex-shrink: 0;
+}
+
+.window-title-text {
+	color: #FFFFFF;
+	font-family: 'MS Sans Serif', Tahoma;
+	font-weight: 700;
+	font-size: 11px;
+	line-height: 1.5em;
+	padding: 0 4px;
+	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.title-bar-right {
+	display: flex;
+	gap: 2px;
+}
+
+.window-button {
+	width: 16px;
+	height: 14px;
+	background: #C0C0C0;
+	border: 1px outset #C0C0C0;
+	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	color: #000000;
+	font-family: 'MS Sans Serif', Tahoma;
+	font-size: 8px;
+	line-height: 1.5em;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+	flex-shrink: 0;
+
+	&.close {
+		flex: 1;
+		font-size: 10px;
+		min-width: 16px;
+	}
+
+	&:hover {
+		background: #D4D4D4;
+	}
+
+	&:active {
+		background: #C0C0C0;
+		border: 1px inset #C0C0C0;
+		border-color: #808080 #FFFFFF #FFFFFF #808080;
+	}
+}
+
+.window-menu-bar {
+	display: flex;
+	gap: 0;
+	padding: 0;
+	border-bottom: 1px solid #808080;
+	background: #C0C0C0;
+	height: 22px;
+}
+
+.menu-item {
+	color: #000000;
+	font-family: 'MS Sans Serif', Tahoma;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 1.5em;
+	padding: 4px 12px;
+	cursor: pointer;
+	border: 1px solid transparent;
+	user-select: none;
+
+	&:hover {
+		background: #C0C0C0;
+		border: 1px outset #C0C0C0;
+		border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	}
+
+	&:active {
+		border: 1px inset #C0C0C0;
+		border-color: #808080 #FFFFFF #FFFFFF #808080;
+		background: #C0C0C0;
+	}
+}
+
+.window-content {
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.content-section {
+	&.intro-section {
+		background: #FFFFFF;
+		border: 2px inset #C0C0C0;
+		border-color: #808080 #FFFFFF #FFFFFF #808080;
+		padding: 18px;
+		text-align: center;
+	}
+}
+
+.main-title {
+	font-family: Arial, 'MS Sans Serif';
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 1.5em;
+	color: #000080;
+	margin: 0 0 8px 0;
+	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+	font-family: 'MS Sans Serif', Tahoma;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 1.5em;
+	color: #000000;
+	margin: 0;
+}
+
+.content-fieldset {
+	border: 2px groove #C0C0C0;
+	border-color: #808080 #FFFFFF #FFFFFF #808080;
+	background: #C0C0C0;
+	margin: 0;
+	padding: 0;
+
+	legend {
+		font-family: 'MS Sans Serif', Tahoma;
+		font-weight: 700;
+		font-size: 11px;
+		line-height: 1.5em;
+		color: #000000;
+		padding: 0 4px;
+		margin-left: 14px;
+	}
+}
+
+.fieldset-content {
+	padding: 14px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+
+	&.tech-stack {
+		justify-content: flex-start;
+	}
+
+	&.social-links {
+		flex-direction: column;
+		gap: 0;
+	}
+}
+
+.tech-button {
+	background: #C0C0C0;
+	border: 2px outset #C0C0C0;
+	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	color: #000000;
+	font-family: 'MS Sans Serif', Tahoma;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 1.5em;
+	padding: 4px 12px;
+	cursor: pointer;
+	text-align: center;
+	user-select: none;
+
+	&:hover {
+		background: #D4D4D4;
+	}
+
+	&:active {
+		background: #C0C0C0;
+		border: 2px inset #C0C0C0;
+		border-color: #808080 #FFFFFF #FFFFFF #808080;
+	}
+}
+
+.social-link {
+	display: block;
+	background: #C0C0C0;
+	border: 2px outset #C0C0C0;
+	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	color: #000000;
+	font-family: 'MS Sans Serif', Tahoma;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 1.5em;
+	padding: 8px;
+	text-align: center;
+	text-decoration: none;
+	margin-bottom: 2px;
+	user-select: none;
+
+	&:hover {
+		background: #D4D4D4;
+	}
+
+	&:active {
+		background: #C0C0C0;
+		border: 2px inset #C0C0C0;
+		border-color: #808080 #FFFFFF #FFFFFF #808080;
+	}
+}
+
+.status-bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2px 8px;
+	border-top: 1px solid #808080;
+	margin-top: auto;
+	background: #C0C0C0;
+	height: 22px;
+}
+
+.status-item {
+	color: #000000;
+	font-family: 'MS Sans Serif', Tahoma;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 1.5em;
+}
+
+@media (max-width: 768px) {
+	.landing-2000s-window {
+		width: 100%;
+		max-width: 672px;
+	}
+
+	.tech-stack {
+		flex-direction: column;
+	}
+
+	.tech-button {
+		width: 100%;
+	}
+
+	.social-link {
+		width: 100%;
+	}
+}

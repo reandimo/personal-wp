@@ -1,0 +1,16 @@
+{
+	"name": "personal-block-theme",
+	"version": "1.0.0",
+	"description": "Personal WordPress Block Theme",
+	"type": "module",
+	"scripts": {
+		"dev": "vite build",
+		"watch": "vite build --watch",
+		"production": "vite build --mode production",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"vite": "^5.4.0",
+		"sass": "^1.80.0"
+	}
+}
