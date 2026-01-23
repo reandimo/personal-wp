@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "wordpress-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@automattic/mcp-wordpress-remote@latest"
+      ],
+      "env": {
+        "WP_API_URL": "https://conquistador-wp-bedrock.local/",
+        "JWT_TOKEN": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2NvbnF1aXN0YWRvci13cC1iZWRyb2NrLmxvY2FsIiwiaWF0IjoxNzYzNTkyODE1LCJleHAiOjE3NjM1OTY0MTUsInVzZXJfaWQiOjMsImp0aSI6ImhuU2lOWFh4Zno2WUVzZ2dsY1Z5YkdwVkdIMVlWZTduIn0.-IAFEur7XxeHRvqTSs0rwVZjVgcwdfh04mB9WklxB8A",
+        "LOG_FILE": "C:/Users/reand/Local Sites/conquistador-wp-bedrock/app/conquistador-cl/logs/mcp-adapter.log",
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0"
+      }
+    },
+    "@microsoft/clarity-mcp-server": {
+      "command": "npx",
+      "args": [
+        "@microsoft/clarity-mcp-server",
+        "--clarity_api_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjQ4M0FCMDhFNUYwRDMxNjdEOTRFMTQ3M0FEQTk2RTcyRDkwRUYwRkYiLCJ0eXAiOiJKV1QifQ.eyJqdGkiOiI5MmU0ZDA3ZC02MWNhLTRiZDgtYTA0Zi1mODAxYzQ1NmJhY2UiLCJzdWIiOiIyMzQ5MDc3NTc1MDA2MDMxIiwic2NvcGUiOiJEYXRhLkV4cG9ydCIsIm5iZiI6MTc2NjA5MTkxOCwiZXhwIjo0OTE5NjkxOTE4LCJpYXQiOjE3NjYwOTE5MTgsImlzcyI6ImNsYXJpdHkiLCJhdWQiOiJjbGFyaXR5LmRhdGEtZXhwb3J0ZXIifQ.ASWBUnL4ccsl7O6uGcZvisyDP1B8L4DipP9TWZRcGNDah8YbuTeEVMnv_d7rLjajJ_RyyvmSiORWmwwVoTldrKP5TC-am5ObWehRlJugnk-P3EjSYnKcYlBO7JByxIHDcauOAnlSPLTa3l54fcLxynu4JkmutXM2hfEhBPC3kr0APRx-lqkksaMAPJgrqHc9F9ldBtxDVyAgggccJiDhMwE-JGBnVUd4e2aWQsgHKqlgjYfcGyIzO4j7_EVyEdKlzmmintRseiMUTktY_cXQiJe-DxZ1EguwDBlPqvZqrTmhakTtxwVdEmjY5QCOajdLmgKIEIgNh1Qj0aIhrx2Gbw"
+      ]
+    }
+  }
+}

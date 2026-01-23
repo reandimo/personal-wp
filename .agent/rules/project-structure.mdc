@@ -1,0 +1,170 @@
+---
+description: Estructura del proyecto WordPress Bedrock y organización de directorios 2026
+alwaysApply: true
+---
+
+# Estructura del Proyecto
+
+Este es un proyecto WordPress basado en **Roots Bedrock** con un tema personalizado `nativo-theme`.
+
+## Estructura de Directorios
+
+- **Raíz del proyecto**: Contiene configuración de Bedrock (composer.json, config/, .env)
+- **web/app/themes/nativo-theme/**: Tema principal de WordPress
+- **web/app/plugins/**: Plugins de WordPress (gestionados por Composer)
+- **web/wp/**: Core de WordPress (gestionado por Composer)
+- **vendor/**: Dependencias PHP (Composer)
+- **node_modules/**: Dependencias JavaScript/TypeScript (npm)
+
+## Estructura del Tema
+
+```
+nativo-theme/
+├── includes/          # Clases PHP y helpers
+│   ├── Helpers/      # Clases helper
+│   ├── Services/     # Servicios y lógica de negocio
+│   ├── Models/       # Modelos de datos
+│   └── Integrations/ # Integraciones (WooCommerce, ACF, etc.)
+├── resources/         # Archivos fuente (SCSS, JS, TS)
+│   ├── styles/       # Archivos SCSS fuente
+│   │   ├── admin/    # Estilos del admin
+│   │   ├── frontend/ # Estilos del frontend
+│   │   ├── base/     # Reset, variables, mixins
+│   │   ├── components/ # Componentes reutilizables
+│   │   └── layouts/  # Layouts de página
+│   ├── scripts/      # Archivos JavaScript/TypeScript fuente
+│   │   ├── admin/    # Scripts del admin
+│   │   ├── frontend/ # Scripts del frontend
+│   │   ├── types/    # Definiciones de tipos TypeScript (si se usa)
+│   │   └── utils/    # Utilidades compartidas
+│   └── images/       # Imágenes fuente (antes de optimización)
+├── public/           # Archivos compilados (generados por build tool)
+│   ├── css/         # CSS compilado
+│   ├── js/          # JS compilado
+│   ├── fonts/       # Fuentes
+│   └── images/      # Imágenes optimizadas
+├── templates/       # Plantillas personalizadas de WordPress
+│   ├── parts/       # Template parts
+│   └── pages/       # Page templates
+├── tests/           # Tests (PHPUnit, Pest, Jest)
+│   ├── Unit/        # Tests unitarios
+│   └── Integration/ # Tests de integración
+├── .agent/          # Configuración del agente AI
+│   └── rules/       # Reglas de código del proyecto
+├── functions.php    # Archivo principal del tema
+├── composer.json    # Dependencias PHP
+├── package.json     # Dependencias JavaScript/TypeScript
+├── webpack.mix.js   # Configuración Laravel Mix (o vite.config.js)
+├── tsconfig.json    # Configuración TypeScript (si se usa)
+├── phpcs.xml        # Configuración PHP_CodeSniffer
+├── phpstan.neon     # Configuración PHPStan
+├── .eslintrc.js     # Configuración ESLint
+└── .prettierrc      # Configuración Prettier
+```
+
+## Archivos de Configuración
+
+### PHP
+- **composer.json**: Dependencias PHP y autoloading PSR-4
+- **phpcs.xml**: Estándares de código (PSR-12)
+- **phpstan.neon**: Análisis estático de código
+- **phpunit.xml**: Configuración de tests
+
+### JavaScript/TypeScript
+- **package.json**: Dependencias y scripts npm
+- **tsconfig.json**: Configuración TypeScript (si se usa)
+- **eslint.config.js** o **.eslintrc.js**: Linting de JavaScript/TypeScript
+- **.prettierrc**: Formateo de código
+- **jest.config.js**: Configuración de tests (si se usa Jest)
+
+### Build Tools
+- **webpack.mix.js**: Laravel Mix (actual)
+- **vite.config.js**: Vite (alternativa moderna)
+
+### Entorno
+- **.env**: Variables de entorno (no committear)
+- **.env.example**: Ejemplo de variables de entorno
+- **.gitignore**: Archivos ignorados por Git
+
+## Convenciones de Nombres
+
+### PHP
+- **Clases**: PascalCase (ej: `UserService`, `CommonHelper`)
+- **Funciones**: snake_case (ej: `get_user_data`, `process_order`)
+- **Archivos de clases**: PascalCase.php (ej: `UserService.php`)
+- **Namespace**: `MyTheme\Namespace\SubNamespace`
+
+### JavaScript/TypeScript
+- **Archivos**: kebab-case.js/ts (ej: `user-service.ts`, `form-validator.js`)
+- **Clases**: PascalCase (ej: `UserService`, `FormValidator`)
+- **Funciones/Variables**: camelCase (ej: `getUserData`, `isValid`)
+- **Constantes**: UPPER_SNAKE_CASE (ej: `API_URL`, `MAX_RETRIES`)
+
+### SCSS/CSS
+- **Archivos**: kebab-case.scss (ej: `button-styles.scss`, `card-component.scss`)
+- **Clases**: BEM (ej: `.card`, `.card__title`, `.card--featured`)
+- **Variables**: kebab-case con prefijo (ej: `$color-primary`, `$spacing-md`)
+
+## Flujo de Archivos
+
+### Desarrollo
+1. **Editar** archivos en `resources/`
+2. **Compilar** con `npm run dev` o `npm run watch`
+3. **Archivos generados** en `public/`
+
+### Producción
+1. **Compilar** con `npm run production`
+2. **Optimización** automática (minificación, tree-shaking, etc.)
+3. **Deploy** solo archivos necesarios
+
+## Archivos que NO se Committean
+
+```gitignore
+# Dependencias
+/vendor/
+/node_modules/
+
+# Compilados (opcional, depende del proyecto)
+/public/css/
+/public/js/
+/public/mix-manifest.json
+
+# WordPress
+/web/wp/
+/web/app/uploads/
+/web/app/upgrade/
+
+# Entorno
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Cache
+.phpunit.result.cache
+.eslintcache
+```
+
+## Notas Importantes
+
+- El proyecto usa **Bedrock** que separa el web root (`web/`) del código fuente
+- WordPress está en `web/wp/` en lugar de la raíz
+- Los plugins se instalan en `web/app/plugins/` vía Composer
+- El tema está en `web/app/themes/conquistador-cl/`
+- Usar rutas relativas a `THEME_DIR` para archivos del tema
+- **No editar** archivos en `public/` directamente (se sobrescriben en compilación)
+- **TypeScript** es opcional - puede usarse gradualmente
+- Seguir **PSR-4** para autoloading de clases PHP
+- Usar **namespaces** para organizar código PHP
+
+## Migración a TypeScript (Opcional)
+
+Si decides adoptar TypeScript gradualmente:
+
+1. **Renombrar** archivos `.js` a `.ts` uno por uno
+2. **Agregar** tipos progresivamente
+3. **Configurar** tsconfig.json con `allowJs: true` para compatibilidad
+4. **Actualizar** build tool para compilar TypeScript
+5. **Mantener** JavaScript existente funcionando durante la migración

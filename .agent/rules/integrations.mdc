@@ -1,0 +1,272 @@
+---
+description: Integraciones y dependencias del proyecto 2026
+alwaysApply: true
+---
+
+# Integraciones y Dependencias
+
+## Integraciones Principales
+
+- **ACF (Advanced Custom Fields)**: Campos personalizados, usar `includes/acf/`
+- **WooCommerce**: Funcionalidad e-commerce (si aplica)
+- **WordPress REST API**: Endpoints personalizados para aplicaciones modernas
+
+## Composer (PHP)
+
+- **Dependencias PHP**: Gestionadas por Composer en `composer.json`
+- **Autoload PSR-4**: Configurado para `MyTheme\` namespace
+- **Autoload de terceros**: Usar `vendor/autoload.php`
+- **Plugins WordPress**: Instalados vía wpackagist en `web/app/plugins/`
+
+### Dependencias Recomendadas
+
+```json
+{
+  "require": {
+    "php": "^8.2",
+    "composer/installers": "^2.0",
+    "vlucas/phpdotenv": "^5.5",
+    "oscarotero/env": "^2.1",
+    "roots/bedrock-autoloader": "^1.0",
+    "roots/bedrock-disallow-indexing": "^2.0",
+    "roots/wordpress": "^6.4",
+    "roots/wp-config": "^1.0",
+    "roots/wp-password-bcrypt": "^1.1",
+    "wpackagist-plugin/advanced-custom-fields": "^6.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.7",
+    "phpstan/phpstan": "^1.10",
+    "phpunit/phpunit": "^10.0"
+  }
+}
+```
+
+## NPM (JavaScript/TypeScript)
+
+- **Dependencias JS/TS**: Gestionadas por npm en `package.json`
+- **Build Tool**: Laravel Mix o Vite
+- **Scripts**: Ver `package.json` para comandos disponibles
+
+### Dependencias Recomendadas
+
+```json
+{
+  "devDependencies": {
+    "laravel-mix": "^6.0",
+    "sass": "^1.69",
+    "postcss": "^8.4",
+    "autoprefixer": "^10.4",
+    "eslint": "^8.55",
+    "prettier": "^3.1",
+    "@typescript-eslint/parser": "^6.15",
+    "@typescript-eslint/eslint-plugin": "^6.15",
+    "typescript": "^5.3"
+  },
+  "dependencies": {
+    "jquery": "^3.7"
+  }
+}
+```
+
+## Laravel Mix
+
+- **Configuración**: `webpack.mix.js` en la raíz del tema
+- **Public path**: `./public`
+- **Resource root**: `../../resources`
+- **Hot Module Replacement**: Disponible con `npm run hot`
+
+### Configuración Básica
+
+```javascript
+const mix = require('laravel-mix');
+
+mix
+  .setPublicPath('./public')
+  .js('resources/scripts/frontend/main.js', 'public/js')
+  .js('resources/scripts/admin/admin.js', 'public/js')
+  .sass('resources/styles/frontend/main.scss', 'public/css')
+  .sass('resources/styles/admin/admin.scss', 'public/css')
+  .sourceMaps()
+  .version();
+
+// TypeScript support (opcional)
+if (mix.inProduction()) {
+  mix.version();
+} else {
+  mix.sourceMaps();
+}
+```
+
+## Vite (Alternativa Moderna)
+
+Si prefieres usar Vite en lugar de Laravel Mix:
+
+```javascript
+// vite.config.js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    outDir: 'public',
+    rollupOptions: {
+      input: {
+        main: 'resources/scripts/frontend/main.js',
+        admin: 'resources/scripts/admin/admin.js',
+      },
+    },
+  },
+});
+```
+
+## TypeScript (Opcional)
+
+Si decides usar TypeScript:
+
+### tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM"],
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./public/js",
+    "rootDir": "./resources/scripts",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["resources/scripts/*"]
+    }
+  },
+  "include": ["resources/scripts/**/*"],
+  "exclude": ["node_modules", "public"]
+}
+```
+
+## Linting y Formatting
+
+### ESLint
+
+```javascript
+// eslint.config.js
+module.exports = {
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  rules: {
+    'no-console': 'warn',
+    '@typescript-eslint/no-explicit-any': 'error',
+  },
+};
+```
+
+### Prettier
+
+```json
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "printWidth": 100,
+  "tabWidth": 2
+}
+```
+
+## WordPress Coding Standards
+
+### PHP_CodeSniffer
+
+```xml
+<!-- phpcs.xml -->
+<?xml version="1.0"?>
+<ruleset name="Theme Coding Standards">
+    <description>Coding standards for the theme</description>
+    
+    <file>includes</file>
+    
+    <rule ref="PSR12"/>
+    
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+</ruleset>
+```
+
+### PHPStan
+
+```neon
+# phpstan.neon
+parameters:
+    level: 8
+    paths:
+        - includes
+    excludePaths:
+        - vendor
+```
+
+## Buenas Prácticas
+
+### General
+1. **No committear** archivos compilados en `public/` (excepto si es necesario para deployment)
+2. **No committear** `vendor/`, `node_modules/`, `.env`
+3. **Versionar** archivos de configuración (`.env.example`, `composer.json`, `package.json`)
+4. **Documentar** dependencias y sus propósitos en README.md
+
+### Seguridad
+1. **Siempre** verificar permisos y seguridad en funciones que acceden a datos
+2. **Usar** funciones de WordPress para sanitización (`sanitize_*`) y escape (`esc_*`)
+3. **Verificar nonces** en formularios y AJAX
+4. **Validar capabilities** con `current_user_can()`
+5. **Mantener** dependencias actualizadas para parches de seguridad
+
+### Código
+1. **Documentar** funciones complejas con PHPDoc y JSDoc
+2. **Separar** lógica de presentación (templates vs includes)
+3. **Mantener** consistencia con la estructura existente del proyecto
+4. **Usar** type hints en PHP y TypeScript para mejor IDE support
+5. **Escribir** tests para lógica crítica
+
+### Performance
+1. **Minimizar** dependencias innecesarias
+2. **Usar** tree-shaking en build process
+3. **Lazy load** scripts y estilos cuando sea apropiado
+4. **Optimizar** imágenes antes de deployment
+5. **Habilitar** caching en producción
+
+### Mantenimiento
+1. **Revisar** dependencias regularmente con `composer outdated` y `npm outdated`
+2. **Actualizar** dependencias de forma controlada
+3. **Probar** después de actualizar dependencias
+4. **Documentar** breaking changes en CHANGELOG.md
+5. **Usar** semantic versioning para releases
+
+## Comandos Útiles
+
+```bash
+# Composer
+composer install              # Instalar dependencias
+composer update               # Actualizar dependencias
+composer outdated             # Ver dependencias desactualizadas
+composer require package/name # Agregar dependencia
+
+# NPM
+npm install                   # Instalar dependencias
+npm update                    # Actualizar dependencias
+npm outdated                  # Ver dependencias desactualizadas
+npm install package-name      # Agregar dependencia
+
+# Code Quality
+./vendor/bin/phpcs            # Verificar código PHP
+./vendor/bin/phpcbf           # Auto-fix código PHP
+./vendor/bin/phpstan analyse  # Análisis estático PHP
+npm run lint                  # Verificar código JS/TS
+npm run lint:fix              # Auto-fix código JS/TS
+npm run format                # Formatear con Prettier
+```

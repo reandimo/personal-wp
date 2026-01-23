@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset name="PersonalTheme">
+    <description>PHP_CodeSniffer ruleset for Personal Theme.</description>
+
+    <!-- Use PSR-12 as base -->
+    <rule ref="PSR12"/>
+
+    <!-- Exclude vendor and node_modules -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+
+    <!-- Additional PHP 8.2+ checks -->
+    <rule ref="PSR12.Files.FileDeclaration.NamespacedAfterDeclare">
+        <type>error</type>
+    </rule>
+
+    <!-- File extensions to check -->
+    <arg name="extensions" value="php"/>
+</ruleset>
