@@ -87,9 +87,7 @@ var E=Object.defineProperty;var _=(l,t,n)=>t in l?E(l,t,{enumerable:!0,configura
 							<p><strong>📧 Email:</strong> <a href="mailto:reandimo2@hotmail.com">reandimo2@hotmail.com</a></p>
 							<p><strong>💼 LinkedIn:</strong> <a href="https://www.linkedin.com/in/reandimo" target="_blank" rel="noopener noreferrer">linkedin.com/in/reandimo</a></p>
 							<p><strong>🐙 GitHub:</strong> <a href="https://github.com/reandimo" target="_blank" rel="noopener noreferrer">github.com/reandimo</a></p>
-							<p><strong>🌐 Personal Website:</strong> <a href="https://reandimo.dev" target="_blank" rel="noopener noreferrer">reandimo.dev</a></p>
 							<p><strong>👥 Nativo Team:</strong> <a href="https://nativo.team" target="_blank" rel="noopener noreferrer">nativo.team</a></p>
-							<p><strong>📍 Location:</strong> Buenos Aires, Buenos Aires Province, Argentina</p>
 						</div>
 					</div>
 				</div>
