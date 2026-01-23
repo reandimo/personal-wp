@@ -108,7 +108,7 @@ final readonly class ThemeSetup
                             'personal-theme-main',
                             $js_url,
                             [],
-                            defined('THEME_VERSION') ? THEME_VERSION : '1.0.0',
+                            filemtime($js_path),
                             true
                         );
                     }
@@ -125,7 +125,7 @@ final readonly class ThemeSetup
                             'personal-theme-main',
                             $css_url,
                             ['personal-block-theme-style'],
-                            defined('THEME_VERSION') ? THEME_VERSION : '1.0.0'
+                            filemtime($css_path)
                         );
                     }
                 }
@@ -141,7 +141,7 @@ final readonly class ThemeSetup
                         'personal-theme-main',
                         get_stylesheet_directory_uri() . '/public/js/main.js',
                         [],
-                        defined('THEME_VERSION') ? THEME_VERSION : '1.0.0',
+                        filemtime($js_path),
                         true
                     );
                 }
@@ -157,7 +157,7 @@ final readonly class ThemeSetup
                         'personal-theme-main',
                         $css_uri,
                         ['personal-block-theme-style'],
-                        defined('THEME_VERSION') ? THEME_VERSION : '1.0.0'
+                        filemtime($css_path)
                     );
                 }
             }
