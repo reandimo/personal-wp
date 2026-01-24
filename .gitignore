@@ -21,3 +21,4 @@ public/.vite/
 .DS_Store
 Thumbs.db
 .cursor/mcp.json
+.agent/mcp.json
