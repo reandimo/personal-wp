@@ -56,7 +56,7 @@ final readonly class ThemeSetup
             'personal-block-theme-style',
             get_stylesheet_directory_uri() . '/style.css',
             [],
-            defined('THEME_VERSION') ? THEME_VERSION : '1.0.0'
+            filemtime(get_stylesheet_directory() . '/style.css')
         );
 
         // Enqueue theme stylesheet.
