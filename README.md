@@ -22,8 +22,9 @@ This is a production-ready WordPress block theme built with modern development p
 - **WordPress Block Theme** - Modern, FSE (Full Site Editing) compatible theme structure
 - **Vite 5** for fast asset compilation and HMR
 - **TypeScript 5.9** for type-safe development (optional)
-- **SCSS** for maintainable CSS architecture
-- **Modular JavaScript** with page-specific initialization
+- **SCSS** for maintainable CSS architecture with template-specific style separation
+- **Modular JavaScript/TypeScript** - Components organized in separate files for better maintainability
+- **Template-Specific Styles** - SCSS files separated by template (`_base.scss`, `_home.scss`, `_archive.scss`, `_single.scss`)
 - **Responsive design** with mobile-first approach
 - **PSR-4 Autoloading** for PHP classes
 - **Custom Component System** - Project-specific prefixed components for easy maintenance
@@ -360,30 +361,58 @@ resources/
 │   ├── base/                # Base styles (reset, variables, mixins)
 │   ├── components/          # Reusable component styles
 │   ├── sections/            # Section-specific styles
-│   ├── templates/           # Template-specific styles
+│   ├── templates/          # Template-specific styles
+│   │   ├── _base.scss      # Common shared styles
+│   │   ├── _home.scss      # Index template styles
+│   │   ├── _archive.scss   # Archive template styles
+│   │   ├── _single.scss    # Single post template styles
+│   │   └── index.scss      # Main entry point (imports all)
 │   ├── frontend/            # Frontend entry points
 │   │   └── main.scss        # Main frontend stylesheet
 │   └── admin/               # WordPress admin styles
 │       └── main.scss        # Main admin stylesheet
 └── scripts/                 # JavaScript/TypeScript modules
     ├── components/          # Reusable components
+    │   ├── window-drag.ts  # Window drag functionality
+    │   ├── window-manager.ts # Window management
+    │   ├── start-menu-manager.ts # Start menu management
+    │   └── window-content.ts # Shared window content
     ├── sections/            # Section-specific scripts
     ├── templates/           # Template-specific scripts
+    │   └── index.ts        # Main template entry point
     ├── types/               # TypeScript type definitions
     ├── frontend/            # Frontend entry points
-    │   └── main.js          # Main frontend JavaScript entry point
+    │   └── main.ts          # Main frontend JavaScript entry point
     └── admin/               # WordPress admin scripts
         └── main.js          # Main admin JavaScript entry point
 ```
 
 ### JavaScript Architecture
 
-The theme uses a **unified initialization system** with TypeScript classes that have static `initializeAll()` methods. All components are centrally managed through `main.js`.
+The theme uses a **modular component system** with TypeScript classes organized in separate files. Components are separated by functionality for better maintainability.
 
-#### Unified Initialization System
+#### Component Organization
 
-**Entry Point (`resources/scripts/frontend/main.js`):**
-```javascript
+**Component Files (`resources/scripts/components/`):**
+- `window-drag.ts` - Window drag functionality and Windows 98 alert dialogs
+- `window-manager.ts` - Window management system for multiple windows
+- `start-menu-manager.ts` - Start menu and taskbar management
+- `window-content.ts` - Shared window content templates
+
+**Template Entry Point (`resources/scripts/templates/index.ts`):**
+```typescript
+// Utility functions
+export function getThemeUrl(): string { /* ... */ }
+export function loadIcons(): void { /* ... */ }
+
+// Export components
+export { initWindowDrag, showWindows98Alert } from '../components/window-drag';
+export { WindowManager, WindowConfig } from '../components/window-manager';
+export { StartMenuManager } from '../components/start-menu-manager';
+```
+
+**Main Entry Point (`resources/scripts/frontend/main.ts`):**
+```typescript
 import { MyHeader } from '../sections/my-header';
 import { MyComponent } from '../components/my-component';
 import { MyTemplate } from '../templates/my-template';
@@ -482,18 +511,33 @@ if (isArchivePage) {
 
 ### SCSS Architecture
 
-Organize your styles following this pattern:
+Organize your styles following this pattern. Template styles are separated into individual files for better maintainability:
 
+**Template Styles Structure (`resources/styles/templates/`):**
 ```scss
-// resources/styles/frontend/main.scss
-@import '../base/variables';
-@import '../base/mixins';
-@import '../components/button';
-@import '../sections/header';
-@import '../templates/home';
+// index.scss - Main entry point
+@import 'base';    // Common shared styles
+@import 'home';    // Index template styles
+@import 'archive'; // Archive template styles
+@import 'single';  // Single post template styles
+```
+
+**Main Stylesheet (`resources/styles/frontend/main.scss`):**
+```scss
+// Import 98.css library
+@import '98.css/style.css';
+
+// Import template styles
+@import '../templates/index.scss';
 
 // Add your custom styles here
 ```
+
+**Template-Specific Files:**
+- `_base.scss` - Common styles (window structure, menu bar, popups, taskbar, alerts)
+- `_home.scss` - Styles specific to `templates/index.html`
+- `_archive.scss` - Styles specific to `templates/archive.html` (blog listing)
+- `_single.scss` - Styles specific to `templates/single.html` (single post)
 
 **Consistent Naming Structure:**
 - **PHP/Template files**: `header.php`, `footer.php`
@@ -546,24 +590,35 @@ personal-wp/
 │   │   ├── components/     # Component library
 │   │   ├── sections/       # Section-specific styles
 │   │   ├── templates/      # Template-specific styles
+│   │   │   ├── _base.scss  # Common shared styles
+│   │   │   ├── _home.scss  # Index template styles
+│   │   │   ├── _archive.scss # Archive template styles
+│   │   │   ├── _single.scss # Single post template styles
+│   │   │   └── index.scss  # Main entry point (imports all)
 │   │   ├── frontend/       # Frontend entry points
 │   │   │   └── main.scss   # Main frontend stylesheet
 │   │   └── admin/          # WordPress admin styles
 │   │       └── main.scss   # Main admin stylesheet
 │   └── scripts/            # JavaScript/TypeScript files
 │       ├── types/          # TypeScript type definitions
-│       ├── components/     # TypeScript components
+│       ├── components/     # Reusable TypeScript components
+│       │   ├── window-drag.ts      # Window drag functionality
+│       │   ├── window-manager.ts   # Window management
+│       │   ├── start-menu-manager.ts # Start menu management
+│       │   └── window-content.ts  # Shared window content
 │       ├── sections/        # Section-specific JS/TS
 │       ├── templates/       # Template-specific JS/TS
+│       │   └── index.ts    # Main template entry point
+│       │   └── index.ts    # Main template entry point
 │       ├── frontend/       # Frontend entry points
-│       │   └── main.js     # Main frontend JavaScript entry point
+│       │   └── main.ts     # Main frontend JavaScript entry point
 │       └── admin/          # WordPress admin scripts
 │           └── main.js     # Main admin JavaScript entry point
 ├── templates/              # WordPress templates
-│   ├── index.html          # Main template
+│   ├── index.html          # Home/Landing page template
 │   ├── single.html         # Single post template
 │   ├── page.html           # Page template
-│   ├── archive.html        # Archive template
+│   ├── archive.html        # Archive/Blog listing template
 │   └── 404.html            # 404 template
 ├── functions.php           # Theme functions
 ├── style.css               # Theme stylesheet header
@@ -889,20 +944,27 @@ resources/
 │   ├── sections/
 │   │   └── _header.scss
 │   ├── templates/
-│   │   └── _landing-2000s.scss
+│   │   ├── _base.scss      # Common shared styles
+│   │   ├── _home.scss      # Index template styles
+│   │   ├── _archive.scss  # Archive template styles
+│   │   ├── _single.scss   # Single post template styles
+│   │   └── index.scss      # Main entry point
 │   ├── frontend/
 │   │   └── main.scss
 │   └── admin/
 │       └── main.scss
 └── scripts/
     ├── components/
-    │   └── button.js
+    │   ├── window-drag.ts
+    │   ├── window-manager.ts
+    │   ├── start-menu-manager.ts
+    │   └── window-content.ts
     ├── sections/
-    │   └── header.js
+    │   └── header.ts
     ├── templates/
-    │   └── landing-2000s.js
+    │   └── index.ts        # Main template entry point
     ├── frontend/
-    │   └── main.js
+    │   └── main.ts
     └── admin/
         └── main.js
 ```
