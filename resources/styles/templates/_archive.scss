@@ -1,0 +1,64 @@
+// Archive Template Styles
+// Estilos específicos para templates/archive.html (Blog)
+
+// Blog Posts Styles
+.blog-posts {
+	flex-direction: column;
+	gap: clamp(12px, 3vw, 16px);
+}
+
+.blog-post-item {
+	margin-bottom: clamp(12px, 3vw, 16px);
+	padding: clamp(10px, 2.5vw, 14px);
+	background: #FFFFFF;
+	border: 2px inset #C0C0C0;
+	border-color: #808080 #FFFFFF #FFFFFF #808080;
+
+	h3 {
+		margin: 0 0 clamp(6px, 1.5vw, 8px) 0;
+		font-size: clamp(14px, 3vw, 18px);
+		color: #000080;
+	}
+
+	.wp-block-post-date {
+		font-size: clamp(10px, 2vw, 11px);
+		color: #808080;
+		margin-bottom: clamp(6px, 1.5vw, 8px);
+	}
+
+	.wp-block-post-excerpt {
+		font-size: clamp(11px, 2.5vw, 13px);
+		line-height: 1.6;
+		margin-bottom: clamp(8px, 2vw, 10px);
+	}
+
+	.wp-block-separator {
+		margin: clamp(8px, 2vw, 12px) 0;
+		border-color: #808080;
+	}
+}
+
+.blog-pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: clamp(4px, 1vw, 8px);
+	margin-top: clamp(12px, 3vw, 16px);
+	padding: clamp(8px, 2vw, 12px);
+
+	.wp-block-query-pagination-previous,
+	.wp-block-query-pagination-next,
+	.wp-block-query-pagination-numbers {
+		button,
+		a {
+			padding: clamp(4px, 1vw, 6px) clamp(8px, 2vw, 12px);
+			font-size: clamp(10px, 2vw, 11px);
+		}
+	}
+}
+
+.blog-no-results {
+	padding: clamp(16px, 4vw, 24px);
+	text-align: center;
+	font-size: clamp(12px, 3vw, 14px);
+}
