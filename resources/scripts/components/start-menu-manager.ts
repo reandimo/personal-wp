@@ -108,7 +108,7 @@ export class StartMenuManager {
 				window.open('https://www.linkedin.com/in/reandimo', '_blank', 'noopener,noreferrer');
 				break;
 			case 'email':
-				window.location.href = 'mailto:reandimo2@hotmail.com';
+				window.location.href = 'mailto:reandimo23@gmail.com';
 				break;
 			case 'shutdown':
 				showWindows98Alert('Are you sure you want to close this session?');

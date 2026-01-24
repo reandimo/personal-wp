@@ -30,7 +30,7 @@ export function getWindowContent(windowId: string): string {
 					<h2>Contact</h2>
 					<p>You can contact me through:</p>
 					<div style="margin: 10px 0; line-height: 1.8;">
-						<p><strong><img src="" data-icon="mailbox_world-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;"> Email:</strong> <a href="mailto:reandimo2@hotmail.com">reandimo2@hotmail.com</a></p>
+						<p><strong><img src="" data-icon="mailbox_world-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;"> Email:</strong> <a href="mailto:reandimo23@gmail.com">reandimo23@gmail.com</a></p>
 						<p><strong><img src="" data-icon="network-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;"> LinkedIn:</strong> <a href="https://www.linkedin.com/in/reandimo" target="_blank" rel="noopener noreferrer">linkedin.com/in/reandimo</a></p>
 						<p><strong><img src="" data-icon="web_file-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;"> GitHub:</strong> <a href="https://github.com/reandimo" target="_blank" rel="noopener noreferrer">github.com/reandimo</a></p>
 						<p><strong><img src="" data-icon="web_file-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;"> Nativo Team:</strong> <a href="https://nativo.team" target="_blank" rel="noopener noreferrer">nativo.team</a></p>
