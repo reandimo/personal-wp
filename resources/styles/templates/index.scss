@@ -116,6 +116,15 @@
 	}
 }
 
+// Single post title - tamaño reducido
+.single-post-window .content-section.intro-section {
+	h1,
+	.wp-block-post-title {
+		font-size: clamp(16px, 3.5vw, 20px) !important;
+		margin-bottom: clamp(6px, 1.5vw, 8px) !important;
+	}
+}
+
 .main-title {
 	font-family: Arial, 'MS Sans Serif';
 	font-weight: 700;
@@ -771,5 +780,61 @@
 			font-size: clamp(10px, 2vw, 11px);
 			text-decoration: none;
 		}
+	}
+}
+
+// Post title inline in title bar
+.title-bar-text .post-title-inline {
+	display: inline;
+
+	.wp-block-post-title,
+	p,
+	span,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		display: inline;
+		margin: 0;
+		padding: 0;
+		font-size: inherit;
+		font-weight: inherit;
+		line-height: inherit;
+	}
+}
+
+// Single post window - más grande
+.single-post-window {
+	width: min(100%, 900px) !important;
+	max-width: 100% !important;
+}
+
+// Tablet (481px - 768px)
+@media (min-width: 481px) {
+	.single-post-window {
+		width: min(90vw, 900px) !important;
+	}
+}
+
+// Tablet Large / Desktop Small (769px - 1024px)
+@media (min-width: 769px) {
+	.single-post-window {
+		width: 900px !important;
+	}
+}
+
+// Desktop Medium (1025px+)
+@media (min-width: 1025px) {
+	.single-post-window {
+		width: 900px !important;
+	}
+}
+
+// Ajustes para pantallas muy grandes (1440px+)
+@media (min-width: 1440px) {
+	.single-post-window {
+		width: 900px !important;
 	}
 }
