@@ -1,5 +1,5 @@
 // Landing Page Windows 98 Style
-// Estilos para el template landing-2000s.html
+// Estilos complementarios para 98.css
 
 .landing-2000s-wrapper {
 	display: flex;
@@ -12,7 +12,6 @@
 		repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
 	// Mobile-first: padding más pequeño en móviles
 	padding: clamp(12px, 3vw, 20px) clamp(12px, 3vw, 20px) clamp(50px, 12vw, 50px) clamp(12px, 3vw, 20px);
-	font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
 	margin-block-start: 0;
 }
 
@@ -20,102 +19,52 @@
 	// Mobile-first: ancho responsivo con clamp
 	width: min(100%, 672px);
 	max-width: 100%;
-	background: #C0C0C0;
-	border: 2px outset #C0C0C0;
-	box-shadow: 
-		2px 2px 0px 0px #000000,
-		3px 3px 0px 0px #808080;
-	display: flex;
-	flex-direction: column;
 	position: relative;
 	transition: transform 0s;
-}
-
-.window-title-bar {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	background: linear-gradient(to bottom, #000080 0%, #1084D0 100%);
-	border-bottom: 2px solid #000000;
-	padding: 2px 4px;
-	gap: 4px;
-	height: 18px;
-	cursor: move;
-	user-select: none;
-}
-
-.title-bar-left {
-	display: flex;
-	align-items: center;
-	gap: 4px;
-}
-
-.window-icon {
-	width: 16px;
-	height: 16px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: #C0C0C0;
-	border: 1px inset #C0C0C0;
-	border-color: #808080 #FFFFFF #FFFFFF #808080;
-	font-size: 10px;
-	line-height: 1.5em;
-	flex-shrink: 0;
-}
-
-.window-title-text {
-	color: #FFFFFF;
-	font-family: 'MS Sans Serif', Tahoma;
-	font-weight: 700;
-	font-size: 11px;
-	line-height: 1.5em;
-	padding: 0 4px;
-	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.title-bar-right {
-	display: flex;
-	gap: 2px;
-}
-
-.window-button {
-	width: 16px;
-	height: 14px;
-	background: #C0C0C0;
-	border: 1px outset #C0C0C0;
-	border-color: #FFFFFF #808080 #808080 #FFFFFF;
-	color: #000000;
-	font-family: 'MS Sans Serif', Tahoma;
-	font-size: 8px;
-	line-height: 1.5em;
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0;
-	flex-shrink: 0;
-
-	&.close {
-		flex: 1;
-		font-size: 10px;
-		min-width: 16px;
-	}
-
-	&:hover {
-		background: #D4D4D4;
-	}
-
-	&:active {
-		background: #C0C0C0;
-		border: 1px inset #C0C0C0;
-		border-color: #808080 #FFFFFF #FFFFFF #808080;
+	
+	// Estilos para los controles de ventana
+	.title-bar-controls {
+		button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 16px;
+			height: 14px;
+			padding: 0;
+			font-size: 0;
+			line-height: 0;
+			
+			.window-control-icon {
+				display: block;
+				font-size: 11px;
+				line-height: 1;
+				font-weight: 700;
+				color: #000000;
+				text-align: center;
+				user-select: none;
+			}
+			
+			&.window-minimize .window-control-icon {
+				font-size: 8px;
+				line-height: 1;
+				margin-top: -2px;
+			}
+			
+			&.window-maximize .window-control-icon {
+				font-size: 10px;
+				line-height: 1;
+			}
+			
+			&.window-close .window-control-icon {
+				font-size: 12px;
+				line-height: 1;
+				font-weight: 400;
+			}
+		}
 	}
 }
 
+// Menu bar personalizado (no está en 98.css)
 .window-menu-bar {
 	display: flex;
 	gap: 0;
@@ -126,11 +75,6 @@
 }
 
 .menu-item {
-	color: #000000;
-	font-family: 'MS Sans Serif', Tahoma;
-	font-weight: 400;
-	font-size: 11px;
-	line-height: 1.5em;
 	padding: 4px 12px;
 	cursor: pointer;
 	border: 1px solid transparent;
@@ -149,8 +93,9 @@
 	}
 }
 
-.window-content {
-	// Padding responsivo
+// window-body viene de 98.css, solo agregamos estilos complementarios
+.landing-2000s-window .window-body {
+	// Padding responsivo adicional
 	padding: clamp(12px, 3vw, 16px);
 	display: flex;
 	flex-direction: column;
@@ -165,6 +110,9 @@
 		// Padding responsivo
 		padding: clamp(12px, 4vw, 18px);
 		text-align: center;
+		h1{
+			margin: 0 !important;
+		}
 	}
 }
 
@@ -189,19 +137,12 @@
 	margin: 0;
 }
 
+// Fieldset - 98.css ya proporciona estilos base, solo personalizamos
 .content-fieldset {
-	border: 2px groove #C0C0C0;
-	border-color: #808080 #FFFFFF #FFFFFF #808080;
-	background: #C0C0C0;
 	margin: 0;
 	padding: 0;
 
 	legend {
-		font-family: 'MS Sans Serif', Tahoma;
-		font-weight: 700;
-		font-size: 11px;
-		line-height: 1.5em;
-		color: #000000;
 		padding: 0 4px;
 		margin-left: 14px;
 	}
@@ -224,74 +165,29 @@
 	}
 }
 
-.tech-button {
-	background: #C0C0C0;
-	border: 2px outset #C0C0C0;
-	border-color: #FFFFFF #808080 #808080 #FFFFFF;
-	color: #000000;
-	font-family: 'MS Sans Serif', Tahoma;
-	font-weight: 400;
-	font-size: 11px;
-	line-height: 1.5em;
-	padding: 4px 12px;
-	cursor: pointer;
-	text-align: center;
-	user-select: none;
-
-	&:hover {
-		background: #D4D4D4;
+// Los botones y enlaces ya tienen estilos de 98.css
+.fieldset-content {
+	a {
+		text-decoration: none;
 	}
-
-	&:active {
-		background: #C0C0C0;
-		border: 2px inset #C0C0C0;
-		border-color: #808080 #FFFFFF #FFFFFF #808080;
+	
+	// Estilos para enlaces de redes sociales con iconos
+	.social-link-item {
+		display: inline-flex;
+		align-items: center;
+		text-decoration: none;
+		
+		img {
+			flex-shrink: 0;
+		}
 	}
 }
 
-.social-link {
-	display: inline-block;
-	background: #C0C0C0;
-	border: 2px outset #C0C0C0;
-	border-color: #FFFFFF #808080 #808080 #FFFFFF;
-	color: #000000;
-	font-family: 'MS Sans Serif', Tahoma;
-	font-weight: 400;
-	font-size: 11px;
-	line-height: 1.5em;
-	padding: 4px 12px;
-	text-align: center;
-	text-decoration: none;
-	user-select: none;
-
-	&:hover {
-		background: #D4D4D4;
-	}
-
-	&:active {
-		background: #C0C0C0;
-		border: 2px inset #C0C0C0;
-		border-color: #808080 #FFFFFF #FFFFFF #808080;
-	}
-}
-
+// Status bar - 98.css ya proporciona estilos base
+// Solo agregamos estilos complementarios si es necesario
 .status-bar {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 2px 8px;
-	border-top: 1px solid #808080;
 	margin-top: auto;
-	background: #C0C0C0;
-	height: 22px;
-}
-
-.status-item {
-	color: #000000;
-	font-family: 'MS Sans Serif', Tahoma;
-	font-weight: 400;
-	font-size: 11px;
-	line-height: 1.5em;
+	// 98.css ya proporciona estilos base para .status-bar y .status-bar-field
 }
 
 // Accesos Directos
@@ -301,33 +197,14 @@
 	gap: 8px;
 }
 
+// Shortcut button - usa estilos base de 98.css para botones
 .shortcut-button {
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	background: #C0C0C0;
-	border: 2px outset #C0C0C0;
-	border-color: #FFFFFF #808080 #808080 #FFFFFF;
-	color: #000000;
-	font-family: 'MS Sans Serif', Tahoma;
-	font-weight: 400;
-	font-size: 11px;
-	line-height: 1.5em;
 	padding: 8px 12px;
-	cursor: pointer;
 	text-align: left;
-	user-select: none;
-	transition: all 0.1s;
-
-	&:hover {
-		background: #D4D4D4;
-	}
-
-	&:active {
-		background: #C0C0C0;
-		border: 2px inset #C0C0C0;
-		border-color: #808080 #FFFFFF #FFFFFF #808080;
-	}
+	// 98.css ya proporciona estilos de botón (background, border, hover, active)
 }
 
 .shortcut-icon {
@@ -357,37 +234,26 @@
 		max-height: none;
 	}
 
-	.window-content {
+	.window-body {
 		overflow-y: auto;
 		flex: 1;
 		min-height: 0;
 	}
 
+	// 98.css ya proporciona estilos base para h2, p, ul
 	h2 {
-		font-family: Arial, 'MS Sans Serif';
-		font-weight: 700;
 		// Tamaño de fuente responsivo
 		font-size: clamp(16px, 3.5vw, 18px);
-		line-height: 1.5em;
-		color: #000080;
 		margin: 0 0 clamp(8px, 2vw, 12px) 0;
 	}
 
 	p {
-		font-family: 'MS Sans Serif', Tahoma;
-		font-weight: 400;
 		font-size: clamp(10px, 2.5vw, 11px);
-		line-height: 1.5em;
-		color: #000000;
 		margin: 0 0 clamp(6px, 1.5vw, 8px) 0;
 	}
 
 	ul {
-		font-family: 'MS Sans Serif', Tahoma;
-		font-weight: 400;
 		font-size: clamp(10px, 2.5vw, 11px);
-		line-height: 1.6em;
-		color: #000000;
 	}
 }
 
@@ -412,9 +278,9 @@
 		}
 	}
 
-	.tech-button,
-	.social-link {
-		// En tablets, no ocupar todo el ancho
+	// Botones y enlaces ya tienen estilos de 98.css
+	.fieldset-content button,
+	.fieldset-content a {
 		width: auto;
 		min-width: 120px;
 	}
@@ -424,6 +290,16 @@
 @media (min-width: 769px) {
 	.landing-2000s-window {
 		width: 672px;
+		max-height: 80vh;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	.landing-2000s-window .window-body {
+		overflow-y: auto;
+		flex: 1;
+		min-height: 0;
 	}
 
 	.fieldset-content {
@@ -433,8 +309,8 @@
 		}
 	}
 
-	.tech-button,
-	.social-link {
+	.fieldset-content button,
+	.fieldset-content a {
 		width: auto;
 	}
 }
@@ -445,7 +321,7 @@
 		padding: 20px 20px 50px 20px;
 	}
 
-	.window-content {
+	.window-body {
 		padding: 16px;
 		gap: 12px;
 	}
@@ -458,7 +334,7 @@
 		margin: 0;
 	}
 
-	.window-title-text {
+	.title-bar-text {
 		// Texto más pequeño en móviles muy pequeños
 		font-size: clamp(9px, 2.5vw, 11px);
 	}
@@ -469,11 +345,10 @@
 		font-size: clamp(9px, 2.5vw, 11px);
 	}
 
-	.tech-button,
-	.social-link,
+	.fieldset-content button,
+	.fieldset-content a,
 	.shortcut-button {
 		width: 100%;
-		// Texto más legible en móviles
 		font-size: clamp(10px, 2.5vw, 11px);
 		padding: clamp(6px, 1.5vw, 8px) clamp(10px, 3vw, 12px);
 	}
@@ -498,7 +373,7 @@
 		max-height: calc(100vh - clamp(40px, 10vw, 50px));
 	}
 
-	.window-content {
+	.window-body {
 		overflow-y: auto;
 		max-height: calc(100vh - 120px);
 	}
@@ -526,40 +401,26 @@
 	align-items: center;
 }
 
+// Alert dialog - usar clase window de 98.css
 .win98-alert-dialog {
-	background: #C0C0C0;
-	border: 2px outset #C0C0C0;
-	border-color: #FFFFFF #808080 #808080 #FFFFFF;
-	box-shadow: 
-		2px 2px 0px 0px #000000,
-		3px 3px 0px 0px #808080;
-	padding: 0;
-	// Ancho responsivo
+	// 98.css ya proporciona estilos base para .window
 	min-width: min(90vw, 300px);
 	max-width: min(90vw, 400px);
-	font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
 	z-index: 10001;
 }
 
+// Alert title - usar clase title-bar de 98.css
 .win98-alert-title {
-	background: linear-gradient(to bottom, #000080 0%, #1084D0 100%);
-	border-bottom: 2px solid #000000;
-	padding: 2px 4px;
-	height: 18px;
-	display: flex;
-	align-items: center;
-	color: #FFFFFF;
-	font-weight: 700;
-	font-size: 11px;
-	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+	// 98.css ya proporciona estilos base para .title-bar
 }
 
+// Alert content - usar clase window-body de 98.css
 .win98-alert-content {
 	padding: 16px;
-	background: #C0C0C0;
 	display: flex;
 	align-items: flex-start;
 	gap: 12px;
+	// 98.css ya proporciona background para .window-body
 }
 
 .win98-alert-buttons {
@@ -570,76 +431,32 @@
 	background: #C0C0C0;
 }
 
+// Alert button - usar estilos base de 98.css para botones
 .win98-alert-button {
-	background: #C0C0C0;
-	border: 2px outset #C0C0C0;
-	border-color: #FFFFFF #808080 #808080 #FFFFFF;
-	color: #000000;
-	font-family: 'MS Sans Serif', Tahoma;
-	font-weight: 400;
-	font-size: 11px;
 	padding: 4px 20px;
-	cursor: pointer;
 	min-width: 75px;
-	user-select: none;
-
-	&:hover {
-		background: #D4D4D4;
-	}
-
-	&:active {
-		background: #C0C0C0;
-		border: 2px inset #C0C0C0;
-		border-color: #808080 #FFFFFF #FFFFFF #808080;
-	}
-
-	&:focus {
-		outline: 1px dotted #000000;
-		outline-offset: -4px;
-	}
+	// 98.css ya proporciona estilos base para button (background, border, hover, active, focus)
 }
 
 // Botón de control de sonido
+// Sound toggle button - personalizado, pero usa estilos base de 98.css
 .sound-toggle-button {
 	position: fixed;
-	// Posición responsiva
-	bottom: clamp(40px, 10vw, 40px);
+	bottom: clamp(40px, 10vw, 50px);
 	right: clamp(12px, 3vw, 20px);
-	// Tamaño responsivo
 	width: clamp(40px, 10vw, 48px);
 	height: clamp(40px, 10vw, 48px);
-	background: #C0C0C0;
-	border: 2px outset #C0C0C0;
-	border-color: #FFFFFF #808080 #808080 #FFFFFF;
-	color: #000000;
 	font-size: clamp(20px, 5vw, 24px);
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	z-index: 9999;
-	user-select: none;
+	// Box-shadow estilo Windows 98 para efecto 3D elevado
 	box-shadow: 
 		2px 2px 0px 0px #000000,
 		3px 3px 0px 0px #808080;
-
-	&:hover {
-		background: #D4D4D4;
-	}
-
-	&:active {
-		background: #C0C0C0;
-		border: 2px inset #C0C0C0;
-		border-color: #808080 #FFFFFF #FFFFFF #808080;
-	}
-
+	// 98.css ya proporciona estilos base para button (background, border, hover, active, focus)
+	
 	&.disabled {
 		opacity: 0.7;
-	}
-
-	&:focus {
-		outline: 1px dotted #000000;
-		outline-offset: -4px;
+		cursor: not-allowed;
 	}
 }
 
@@ -662,38 +479,16 @@
 	font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
 }
 
+// Start button - personalizado, pero usa estilos base de 98.css
 .start-button {
 	display: flex;
 	align-items: center;
 	gap: 6px;
 	height: 26px;
 	padding: 0 12px;
-	background: #C0C0C0;
-	border: 2px outset #C0C0C0;
-	border-color: #FFFFFF #808080 #808080 #FFFFFF;
-	color: #000000;
-	font-family: 'MS Sans Serif', Tahoma;
 	font-weight: 700;
-	font-size: 11px;
-	cursor: pointer;
-	user-select: none;
 	white-space: nowrap;
-
-	&:hover {
-		background: #D4D4D4;
-	}
-
-	&:active,
-	&.active {
-		background: #C0C0C0;
-		border: 2px inset #C0C0C0;
-		border-color: #808080 #FFFFFF #FFFFFF #808080;
-	}
-
-	&:focus {
-		outline: 1px dotted #000000;
-		outline-offset: -4px;
-	}
+	// 98.css ya proporciona estilos base para button (background, border, hover, active, focus)
 }
 
 .start-button-icon {
@@ -713,61 +508,52 @@
 	height: 100%;
 }
 
+// Taskbar clock - estilos personalizados
 .taskbar-clock {
-	color: #000000;
-	font-family: 'MS Sans Serif', Tahoma;
-	font-weight: 400;
-	font-size: 11px;
 	padding: 2px 8px;
-	background: #C0C0C0;
-	border: 1px inset #C0C0C0;
-	border-color: #808080 #FFFFFF #FFFFFF #808080;
 	user-select: none;
+	// 98.css ya proporciona fuente base
 }
 
 // Menú de inicio
+// Start menu - estilos personalizados (componente único, no está en 98.css)
 .start-menu {
 	position: fixed;
 	bottom: 30px;
 	left: 2px;
-	// Ancho responsivo
 	width: min(90vw, 200px);
 	max-width: 200px;
-	background: #C0C0C0;
-	border: 2px outset #C0C0C0;
-	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	// Box-shadow estilo Windows 98 para efecto 3D
 	box-shadow: 
 		2px -2px 0px 0px #000000,
 		3px -3px 0px 0px #808080;
 	z-index: 10001;
 	display: none;
-	font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
+	// 98.css ya proporciona fuente base para el documento
 
-	&.open {
-		display: block;
-	}
-
+	&.open,
 	&[aria-hidden="false"] {
 		display: block;
 	}
 }
 
+// Start menu header - estilos personalizados (similar a title-bar pero más compacto)
 .start-menu-header {
-	background: linear-gradient(to bottom, #000080 0%, #1084D0 100%);
-	border-bottom: 2px solid #000000;
 	padding: 4px 8px;
 	height: 24px;
 	display: flex;
 	align-items: center;
+	// Background estilo Windows 98 - gradiente azul similar a title-bar activa
+	background: linear-gradient(to bottom, #000080 0%, #1084d0 100%);
+	color: #FFFFFF;
+	// Usar estilos base de 98.css si se agrega clase .title-bar en el HTML
 }
 
 .start-menu-title {
-	color: #FFFFFF;
-	font-weight: 700;
-	font-size: 11px;
-	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+	// 98.css ya proporciona estilos base para .title-bar-text si se usa esa clase
 }
 
+// Start menu content - fondo estándar de Windows 98
 .start-menu-content {
 	padding: 4px 0;
 	background: #C0C0C0;
@@ -778,22 +564,19 @@
 	flex-direction: column;
 }
 
+// Start menu items - estilos de hover/active/focus personalizados
 .start-menu-item {
 	display: flex;
 	align-items: center;
 	gap: 8px;
 	padding: 4px 8px 4px 24px;
-	color: #000000;
+	// color: #000000; // Default, no necesario especificar
 	font-size: 11px;
 	cursor: pointer;
 	user-select: none;
 	position: relative;
 
-	&:hover {
-		background: #000080;
-		color: #FFFFFF;
-	}
-
+	&:hover,
 	&:active {
 		background: #000080;
 		color: #FFFFFF;
@@ -818,6 +601,7 @@
 	flex: 1;
 }
 
+// Start menu divider - estilo Windows 98 para separadores
 .start-menu-divider {
 	height: 1px;
 	background: #808080;

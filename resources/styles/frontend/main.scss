@@ -3,5 +3,8 @@
  * Import all frontend styles here
  */
 
-// Landing 2000s styles
+// Import 98.css library
+@import '98.css/style.css';
+
+// Landing 2000s styles (customizations on top of 98.css)
 @import '../templates/index.scss';

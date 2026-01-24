@@ -7,7 +7,7 @@
 import '../../styles/frontend/main.scss';
 
 // Import window drag functionality
-import { initWindowDrag, WindowManager, StartMenuManager } from '../templates/index';
+import { initWindowDrag, WindowManager, StartMenuManager, loadIcons } from '../templates/index';
 
 // Import cookies-js
 import Cookies from 'cookies-js';
@@ -149,6 +149,7 @@ function playWindows98StartupSound(): void {
 // Initialize window drag when DOM is ready
 if (document.readyState === 'loading') {
 	document.addEventListener('DOMContentLoaded', () => {
+		loadIcons();
 		initWindowDrag();
 		// Initialize window manager and get instance
 		WindowManager.initializeAll();
@@ -159,6 +160,7 @@ if (document.readyState === 'loading') {
 		playWindows98StartupSound();
 	});
 } else {
+	loadIcons();
 	initWindowDrag();
 	WindowManager.initializeAll();
 	// Initialize start menu
