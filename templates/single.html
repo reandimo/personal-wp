@@ -1,11 +1,77 @@
-<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-<!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
-<main class="wp-block-group">
-	<!-- wp:post-title {"level":1} /-->
-	
-	<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
-</main>
-<!-- /wp:group -->
+<!-- wp:html -->
+<div class="landing-2000s-wrapper">
+	<div class="window landing-2000s-window">
+		<!-- Title bar -->
+		<div class="title-bar">
+			<div class="title-bar-text">
+				<img src="" data-icon="notepad_file-2.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
+				<!-- wp:post-title {"level":0} /--> - Blog
+			</div>
+			<div class="title-bar-controls">
+				<button aria-label="Minimize" class="window-minimize">
+					<span class="window-control-icon" aria-hidden="true">_</span>
+				</button>
+				<button aria-label="Maximize" class="window-maximize">
+					<span class="window-control-icon" aria-hidden="true">□</span>
+				</button>
+				<button aria-label="Close" class="window-close">
+					<span class="window-control-icon" aria-hidden="true">×</span>
+				</button>
+			</div>
+		</div>
+		
+		<!-- Menu bar -->
+		<div class="window-menu-bar">
+			<div class="menu-item">File</div>
+			<div class="menu-item">Edit</div>
+			<div class="menu-item">View</div>
+			<div class="menu-item">Help</div>
+		</div>
+		
+		<!-- Main content -->
+		<div class="window-body">
+			<!-- Post Header -->
+			<div class="content-section intro-section">
+				<!-- wp:post-title {"level":1} /-->
+				<!-- wp:post-date /-->
+				<!-- wp:post-author /-->
+			</div>
+			
+			<!-- Post Content -->
+			<fieldset class="content-fieldset">
+				<legend>
+					<img src="" data-icon="directory_open_cool-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
+					Content
+				</legend>
+				<div class="fieldset-content post-content">
+					<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+				</div>
+			</fieldset>
+			
+			<!-- Post Meta -->
+			<fieldset class="content-fieldset">
+				<legend>
+					<img src="" data-icon="directory_admin_tools-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
+					Post Information
+				</legend>
+				<div class="fieldset-content post-meta">
+					<!-- wp:post-terms {"term":"category"} /-->
+					<!-- wp:post-terms {"term":"post_tag"} /-->
+					<!-- wp:post-navigation-link {"type":"previous","label":"← Previous Post"} /-->
+					<!-- wp:post-navigation-link {"type":"next","label":"Next Post →"} /-->
+				</div>
+			</fieldset>
+			
+			<!-- Status bar -->
+			<div class="status-bar">
+				<p class="status-bar-field">● Online</p>
+				<p class="status-bar-field"><!-- wp:post-date /--></p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /wp:html -->
 
 <!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->

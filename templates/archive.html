@@ -1,33 +1,91 @@
-<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-<!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
-<main class="wp-block-group">
-	<!-- wp:query-title {"type":"archive"} /-->
-	
-	<!-- wp:query {"queryId":0,"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true}} -->
-	<div class="wp-block-query">
-		<!-- wp:post-template -->
-			<!-- wp:post-title {"isLink":true} /-->
-			<!-- wp:post-excerpt /-->
-			<!-- wp:separator {"opacity":"css"} -->
-			<hr class="wp-block-separator has-css-opacity" />
-			<!-- /wp:separator -->
-		<!-- /wp:post-template -->
+<!-- wp:html -->
+<div class="landing-2000s-wrapper">
+	<div class="window landing-2000s-window">
+		<!-- Title bar -->
+		<div class="title-bar">
+			<div class="title-bar-text">
+				<img src="" data-icon="notepad_file-2.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
+				Blog - Renan Diaz
+			</div>
+			<div class="title-bar-controls">
+				<button aria-label="Minimize" class="window-minimize">
+					<span class="window-control-icon" aria-hidden="true">_</span>
+				</button>
+				<button aria-label="Maximize" class="window-maximize">
+					<span class="window-control-icon" aria-hidden="true">□</span>
+				</button>
+				<button aria-label="Close" class="window-close">
+					<span class="window-control-icon" aria-hidden="true">×</span>
+				</button>
+			</div>
+		</div>
+		
+		<!-- Menu bar -->
+		<div class="window-menu-bar">
+			<div class="menu-item">File</div>
+			<div class="menu-item">Edit</div>
+			<div class="menu-item">View</div>
+			<div class="menu-item">Help</div>
+		</div>
+		
+		<!-- Main content -->
+		<div class="window-body">
+			<!-- Blog Header -->
+			<div class="content-section intro-section">
+				<h1>Blog</h1>
+				<p>Latest posts and articles</p>
+			</div>
+			
+			<!-- Posts List -->
+			<fieldset class="content-fieldset">
+				<legend>
+					<img src="" data-icon="directory_open_cool-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
+					Posts
+				</legend>
+				<div class="fieldset-content blog-posts">
+					<!-- wp:query {"queryId":0,"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true}} -->
+					<div class="wp-block-query">
+						<!-- wp:post-template -->
+						<div class="blog-post-item">
+							<!-- wp:post-title {"isLink":true,"level":3} /-->
+							<!-- wp:post-date /-->
+							<!-- wp:post-excerpt {"moreText":"Read more","showMoreOnNewLine":false} /-->
+							<!-- wp:separator {"opacity":"css"} -->
+							<hr class="wp-block-separator has-css-opacity" />
+							<!-- /wp:separator -->
+						</div>
+						<!-- /wp:post-template -->
 
-		<!-- wp:query-pagination -->
-			<!-- wp:query-pagination-previous /-->
-			<!-- wp:query-pagination-numbers /-->
-			<!-- wp:query-pagination-next /-->
-		<!-- /wp:query-pagination -->
+						<!-- wp:query-pagination -->
+						<div class="blog-pagination">
+							<!-- wp:query-pagination-previous /-->
+							<!-- wp:query-pagination-numbers /-->
+							<!-- wp:query-pagination-next /-->
+						</div>
+						<!-- /wp:query-pagination -->
 
-		<!-- wp:query-no-results -->
-			<!-- wp:paragraph -->
-			<p>No posts found.</p>
-			<!-- /wp:paragraph -->
-		<!-- /wp:query-no-results -->
+						<!-- wp:query-no-results -->
+						<div class="blog-no-results">
+							<!-- wp:paragraph -->
+							<p>No posts found.</p>
+							<!-- /wp:paragraph -->
+						</div>
+						<!-- /wp:query-no-results -->
+					</div>
+					<!-- /wp:query -->
+				</div>
+			</fieldset>
+			
+			<!-- Status bar -->
+			<div class="status-bar">
+				<p class="status-bar-field">● Online</p>
+				<p class="status-bar-field">Posts: <!-- wp:query-title {"type":"archive","showPrefix":false} /--></p>
+			</div>
+		</div>
 	</div>
-	<!-- /wp:query -->
-</main>
-<!-- /wp:group -->
+</div>
+<!-- /wp:html -->
 
 <!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->
