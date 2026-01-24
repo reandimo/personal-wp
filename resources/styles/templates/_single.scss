@@ -16,6 +16,17 @@
 	max-width: 100% !important;
 }
 
+// Centrar ventana de single post en mobile
+@media (max-width: 768px) {
+	.single-post-window {
+		position: relative !important;
+		margin: 0 auto;
+		left: auto !important;
+		top: auto !important;
+		transform: none !important;
+	}
+}
+
 // Tablet (481px - 768px)
 @media (min-width: 481px) {
 	.single-post-window {

@@ -205,6 +205,10 @@
 		height: calc(100% - clamp(20px, 5vw, 40px)) !important;
 		max-width: none;
 		max-height: none;
+		// Cuando está maximizada, no centrar
+		left: 20px !important;
+		top: 20px !important;
+		transform: none !important;
 	}
 
 	.window-body {
@@ -227,6 +231,24 @@
 
 	ul {
 		font-size: clamp(10px, 2.5vw, 11px);
+	}
+}
+
+// Centrar ventanas popup en mobile (hasta 768px)
+@media (max-width: 768px) {
+	.popup-window:not(.maximized) {
+		left: 50% !important;
+		top: 50% !important;
+		transform: translate(-50%, -50%) !important;
+	}
+
+	// Asegurar que las ventanas principales también estén centradas
+	.landing-2000s-window:not(.popup-window) {
+		position: relative !important;
+		margin: 0 auto;
+		left: auto !important;
+		top: auto !important;
+		transform: none !important;
 	}
 }
 
@@ -548,9 +570,25 @@
 		padding: clamp(6px, 1.5vw, 8px) clamp(10px, 3vw, 12px);
 	}
 
+	// Tech-stack en mobile: botones uno al lado del otro para ocupar menos espacio
+	.fieldset-content.tech-stack {
+		button,
+		a {
+			width: auto;
+			min-width: auto;
+			flex: 0 1 auto;
+			padding: clamp(4px, 1vw, 6px) clamp(8px, 2vw, 10px);
+			font-size: clamp(9px, 2vw, 10px);
+		}
+	}
+
 	.popup-window {
 		width: calc(100% - clamp(20px, 5vw, 40px));
 		max-width: calc(100% - clamp(20px, 5vw, 40px));
+		// Centrar ventanas en mobile
+		left: 50% !important;
+		top: 50% !important;
+		transform: translate(-50%, -50%) !important;
 	}
 
 	.start-menu {
@@ -571,6 +609,13 @@
 	.window-body {
 		overflow-y: auto;
 		max-height: calc(100vh - 120px);
+	}
+
+	// Centrar ventanas popup en landscape mobile
+	.popup-window {
+		left: 50% !important;
+		top: 50% !important;
+		transform: translate(-50%, -50%) !important;
 	}
 }
 
