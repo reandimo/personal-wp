@@ -92,6 +92,9 @@ export class StartMenuManager {
 
 	private handleMenuAction(action: string): void {
 		switch (action) {
+			case 'home':
+				window.location.href = '/';
+				break;
 			case 'portfolio':
 				this.openWindow('portfolio', 'Portfolio', 'briefcase-0.png');
 				break;

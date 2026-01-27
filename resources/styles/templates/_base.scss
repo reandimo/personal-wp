@@ -252,7 +252,7 @@
 	}
 }
 
-// Windows 98 Alert Dialog
+// Windows 98 Alert Dialog — structure uses 98.css .window, .title-bar, .title-bar-text, .window-body, button
 .win98-alert-overlay {
 	position: fixed;
 	top: 0;
@@ -266,26 +266,36 @@
 	align-items: center;
 }
 
-// Alert dialog - usar clase window de 98.css
-.win98-alert-dialog {
-	// 98.css ya proporciona estilos base para .window
+// Alert dialog — extends 98.css .window; only add sizing and z-index
+.window.win98-alert-dialog {
 	min-width: min(90vw, 300px);
 	max-width: min(90vw, 400px);
 	z-index: 10001;
 }
 
-// Alert title - usar clase title-bar de 98.css
-.win98-alert-title {
-	// 98.css ya proporciona estilos base para .title-bar
+// Icon in title bar (98.css .title-bar-text already styles text)
+.win98-alert-title-icon {
+	margin-right: 4px;
+	vertical-align: middle;
 }
 
-// Alert content - usar clase window-body de 98.css
-.win98-alert-content {
+// Alert content — extends 98.css .window-body; add flex layout for icon + message
+.window-body.win98-alert-content {
 	padding: 16px;
 	display: flex;
 	align-items: flex-start;
 	gap: 12px;
-	// 98.css ya proporciona background para .window-body
+}
+
+.win98-alert-message-icon {
+	flex-shrink: 0;
+}
+
+.win98-alert-message {
+	flex: 1;
+	color: var(--text-color);
+	font-size: 11px;
+	line-height: 1.5;
 }
 
 .win98-alert-buttons {
@@ -293,14 +303,19 @@
 	display: flex;
 	justify-content: center;
 	gap: 8px;
-	background: #C0C0C0;
+	background: var(--surface);
 }
 
-// Alert button - usar estilos base de 98.css para botones
-.win98-alert-button {
-	padding: 4px 20px;
-	min-width: 75px;
-	// 98.css ya proporciona estilos base para button (background, border, hover, active, focus)
+// OK button uses 98.css button.default; no extra class needed
+
+// Windows 3.1 shutdown sound — reproduce win31.ogv sin modal (solo audio)
+.win98-audio-only {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	pointer-events: none;
 }
 
 // Botón de control de sonido
