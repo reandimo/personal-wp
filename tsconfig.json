@@ -18,7 +18,8 @@
 	},
 	"include": [
 		"resources/**/*.ts",
-		"resources/**/*.tsx"
+		"resources/**/*.tsx",
+		"resources/**/*.d.ts"
 	],
 	"exclude": [
 		"node_modules",

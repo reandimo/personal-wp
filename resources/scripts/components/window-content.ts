@@ -49,9 +49,9 @@ export function getWindowContent(windowId: string): string {
 							<button id="gif-search-button-WINDOW_ID_PLACEHOLDER">Search</button>
 						</div>
 						<div id="gif-loading-WINDOW_ID_PLACEHOLDER" style="display: none; margin: 12px 0;">
-							<div style="display: flex; align-items: center; gap: 8px;">
-								<img src="" data-icon="application_hourglass-0.png" alt="" width="16" height="16" style="vertical-align: middle;">
-								<span>Searching...</span>
+							<p style="margin: 0 0 8px 0; font-size: 11px;">Searching...</p>
+							<div class="progress-indicator" aria-label="Searching" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+								<span class="progress-indicator-bar gif-search-progress-bar" style="width: 0%;"></span>
 							</div>
 						</div>
 						<div id="gif-results-WINDOW_ID_PLACEHOLDER" style="margin-top: 12px;"></div>

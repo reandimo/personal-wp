@@ -64,6 +64,29 @@ final readonly class ThemeSetup
 
         // Enqueue Vite-compiled assets.
         $this->enqueue_vite_assets();
+
+        // Pass theme options to frontend (e.g. Giphy API key from ACF).
+        $this->localize_theme_data();
+    }
+
+    /**
+     * Localize theme data for use in frontend scripts.
+     */
+    private function localize_theme_data(): void
+    {
+        if (!wp_script_is('personal-theme-main', 'enqueued')) {
+            return;
+        }
+
+        $giphy_api_key = '';
+        if (function_exists('get_field')) {
+            $value = get_field('giphy_api_key', 'option');
+            $giphy_api_key = is_string($value) ? $value : '';
+        }
+
+        wp_localize_script('personal-theme-main', 'personalThemeData', [
+            'giphyApiKey' => $giphy_api_key,
+        ]);
     }
 
     /**

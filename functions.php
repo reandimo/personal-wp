@@ -53,6 +53,12 @@ spl_autoload_register(function (string $class): void {
     }
 });
 
+// Load ACF options (Theme Options page + Giphy API key field).
+$acf_theme_options = THEME_DIR . '/includes/acf/ThemeOptions.php';
+if (file_exists($acf_theme_options)) {
+    require_once $acf_theme_options;
+}
+
 // Initialize the theme.
 if (class_exists('PersonalTheme\Theme\ThemeSetup')) {
     new PersonalTheme\Theme\ThemeSetup();

@@ -328,9 +328,7 @@ export class WindowManager {
 	}
 
 	private initGifSearch(windowElement: HTMLElement): void {
-		// Obtener uniqueId del elemento
 		const uniqueId = windowElement.id || 'gif-search-1';
-		
 		const searchInput = windowElement.querySelector<HTMLInputElement>(`#gif-search-input-${uniqueId}`);
 		const searchButton = windowElement.querySelector<HTMLButtonElement>(`#gif-search-button-${uniqueId}`);
 		const loadingDiv = windowElement.querySelector<HTMLElement>(`#gif-loading-${uniqueId}`);
@@ -340,48 +338,63 @@ export class WindowManager {
 			return;
 		}
 
-		// Cargar icono de loading
-		const loadingIcon = loadingDiv.querySelector<HTMLImageElement>('img[data-icon]');
-		if (loadingIcon) {
-			const themeUrl = getThemeUrl();
-			const iconName = loadingIcon.getAttribute('data-icon');
-			if (iconName) {
-				loadingIcon.src = themeUrl + '/public/misc/windows98-icons/png/' + iconName;
-			}
-		}
+		const progressBar = loadingDiv.querySelector<HTMLElement>('.gif-search-progress-bar');
+		const progressContainer = loadingDiv.querySelector<HTMLElement>('.progress-indicator');
+
+		const RESULT_DELAY_MS = 1500;
+
+		const animateProgress = (durationMs: number): Promise<void> => {
+			return new Promise((resolve) => {
+				if (!progressBar || !progressContainer) {
+					setTimeout(resolve, durationMs);
+					return;
+				}
+				const start = performance.now();
+				const tick = (): void => {
+					const elapsed = performance.now() - start;
+					const pct = Math.min(100, (elapsed / durationMs) * 100);
+					progressBar.style.width = `${pct}%`;
+					progressContainer.setAttribute('aria-valuenow', String(Math.round(pct)));
+					if (pct < 100) {
+						requestAnimationFrame(tick);
+					} else {
+						resolve();
+					}
+				};
+				requestAnimationFrame(tick);
+			});
+		};
 
 		const performSearch = async (): Promise<void> => {
 			const searchTerm = searchInput.value.trim();
-			
 			if (!searchTerm) {
 				resultsDiv.innerHTML = '<p style="color: #000000; margin: 8px 0;">Please enter a search term.</p>';
 				return;
 			}
 
-			// Mostrar loading
 			loadingDiv.style.display = 'block';
 			resultsDiv.innerHTML = '';
 			searchButton.disabled = true;
+			if (progressBar) progressBar.style.width = '0%';
+			if (progressContainer) progressContainer.setAttribute('aria-valuenow', '0');
 
 			try {
-				// Usar Giphy API pública (API key de demostración)
-				// Alternativa: usar Tenor API que también es pública
-				const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${encodeURIComponent(searchTerm)}&limit=1&rating=g`);
-				
-				if (!response.ok) {
-					throw new Error('Failed to fetch GIF');
-				}
+				const apiKey = window.personalThemeData?.giphyApiKey || 'dc6zaTOxFJmzC';
+				const fetchPromise = fetch(
+					`https://api.giphy.com/v1/gifs/search?api_key=${encodeURIComponent(apiKey)}&q=${encodeURIComponent(searchTerm)}&limit=1&rating=g`
+				).then((res) => {
+					if (!res.ok) throw new Error('Failed to fetch GIF');
+					return res.json();
+				});
 
-				const data = await response.json();
+				const [data] = await Promise.all([fetchPromise, animateProgress(RESULT_DELAY_MS)]);
 
-				// Ocultar loading
 				loadingDiv.style.display = 'none';
 				searchButton.disabled = false;
 
 				if (data.data && data.data.length > 0) {
 					const gif = data.data[0];
 					const gifUrl = gif.images.original.url;
-					
 					resultsDiv.innerHTML = `
 						<div style="margin: 12px 0;">
 							<img src="${gifUrl}" alt="${gif.title || searchTerm}" style="max-width: 100%; height: auto; border: 2px inset #C0C0C0; border-color: #808080 #FFFFFF #FFFFFF #808080;" />
@@ -392,10 +405,8 @@ export class WindowManager {
 					resultsDiv.innerHTML = '<p style="color: #000000; margin: 8px 0;">No GIFs found. Try a different search term.</p>';
 				}
 			} catch (error) {
-				// Ocultar loading
 				loadingDiv.style.display = 'none';
 				searchButton.disabled = false;
-				
 				resultsDiv.innerHTML = '<p style="color: #000000; margin: 8px 0;">Error searching for GIFs. Please try again.</p>';
 				console.error('Error searching GIFs:', error);
 			}
