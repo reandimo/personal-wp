@@ -1,22 +1,343 @@
-// Single Post Template Styles
+// Single Post Template Styles - Windows 98 Style (uses 98.css framework)
 // Estilos específicos para templates/single.html
 
-// Single post title - tamaño reducido
-.single-post-window .content-section.intro-section {
-	h1,
-	.wp-block-post-title {
-		font-size: clamp(16px, 3.5vw, 20px) !important;
-		margin-bottom: clamp(6px, 1.5vw, 8px) !important;
-	}
-}
-
-// Single post window - más grande
+// === Single Post Window ===
 .single-post-window {
-	width: min(100%, 900px) !important;
+	width: min(100%, 950px) !important;
 	max-width: 100% !important;
 }
 
-// Centrar ventana de single post en mobile
+// === Toolbar (Win98 style) ===
+.win98-toolbar {
+	background: #C0C0C0;
+	border-bottom: 1px solid #808080;
+	padding: 1px 4px;
+}
+
+.win98-toolbar-row {
+	display: flex;
+	align-items: center;
+	gap: 1px;
+	padding: 1px 0;
+	flex-wrap: wrap;
+}
+
+.win98-toolbar-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 23px;
+	height: 22px;
+	padding: 0;
+	margin: 0;
+	background: transparent;
+	border: 1px solid transparent;
+	cursor: pointer;
+	font-size: 12px;
+	line-height: 1;
+
+	img {
+		width: 16px;
+		height: 16px;
+		image-rendering: pixelated;
+	}
+
+	&--text {
+		font-size: 14px;
+	}
+
+	&:hover {
+		border-color: #FFFFFF #808080 #808080 #FFFFFF;
+		background: #C0C0C0;
+	}
+
+	&:active {
+		border-color: #808080 #FFFFFF #FFFFFF #808080;
+		background: #C0C0C0;
+	}
+}
+
+.win98-fmt-btn {
+	width: 23px;
+	font-size: 12px;
+	font-family: Times New Roman, serif;
+}
+
+.win98-toolbar-separator {
+	display: inline-block;
+	width: 1px;
+	height: 18px;
+	background: #808080;
+	margin: 0 3px;
+	border-right: 1px solid #FFFFFF;
+}
+
+.win98-font-select {
+	height: 20px;
+	width: clamp(100px, 20vw, 150px);
+	font-size: 11px;
+	border: 1px solid;
+	border-color: #808080 #FFFFFF #FFFFFF #808080;
+	background: #FFF;
+	margin-right: 2px;
+	padding: 0 2px;
+}
+
+.win98-size-select {
+	height: 20px;
+	width: 40px;
+	font-size: 11px;
+	border: 1px solid;
+	border-color: #808080 #FFFFFF #FFFFFF #808080;
+	background: #FFF;
+	padding: 0 2px;
+}
+
+// === Ruler (Win98 style) ===
+.win98-ruler {
+	background: #FFF;
+	border-bottom: 1px solid #808080;
+	height: 18px;
+	padding: 0 40px;
+	overflow: hidden;
+	position: relative;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 40px;
+		height: 100%;
+		background: #C0C0C0;
+		border-right: 1px solid #808080;
+	}
+}
+
+.win98-ruler-marks {
+	display: flex;
+	justify-content: space-between;
+	height: 100%;
+	align-items: flex-end;
+	padding-bottom: 1px;
+
+	span {
+		font-size: 8px;
+		color: #808080;
+		position: relative;
+
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: 8px;
+			left: 50%;
+			width: 1px;
+			height: 4px;
+			background: #808080;
+		}
+	}
+}
+
+// === Document area ===
+.single-post-body {
+	background: #808080 !important;
+	padding: 0 !important;
+	flex: 1;
+	overflow-y: auto;
+	min-height: 0;
+	gap: 0 !important;
+}
+
+.single-post-document-area {
+	display: flex;
+	justify-content: center;
+	padding: clamp(16px, 3vw, 30px) clamp(8px, 2vw, 20px);
+	min-height: 100%;
+}
+
+.single-post-page {
+	background: #FFFFFF;
+	width: 100%;
+	max-width: 650px;
+	min-height: 400px;
+	padding: clamp(40px, 8vw, 72px) clamp(30px, 6vw, 72px);
+	box-shadow:
+		2px 2px 4px rgba(0, 0, 0, 0.3),
+		4px 4px 8px rgba(0, 0, 0, 0.15);
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 12pt;
+	line-height: 1.5;
+	color: #000;
+}
+
+// === Document content styles ===
+.single-post-doc-header {
+	margin-bottom: 24px;
+
+	h1,
+	.wp-block-post-title {
+		font-family: 'Times New Roman', Times, serif;
+		font-size: clamp(18pt, 4vw, 24pt);
+		font-weight: bold;
+		color: #000;
+		margin: 0 0 8px 0;
+		line-height: 1.3;
+	}
+}
+
+.single-post-doc-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px;
+	font-size: 10pt;
+	color: #333;
+	margin-bottom: 12px;
+
+	.wp-block-post-date,
+	.wp-block-post-author {
+		display: inline;
+		font-size: 10pt;
+	}
+}
+
+.single-post-meta-sep {
+	color: #999;
+	margin: 0 4px;
+}
+
+.single-post-hr {
+	border: none;
+	border-top: 1px solid #000;
+	margin: 12px 0;
+}
+
+// Post content inside document
+.single-post-page .post-content {
+	padding: 0;
+
+	.wp-block-post-content {
+		font-family: 'Times New Roman', Times, serif;
+		font-size: 12pt;
+		line-height: 1.5;
+		color: #000;
+
+		h2 {
+			font-size: clamp(14pt, 3vw, 18pt);
+			font-weight: bold;
+			color: #000;
+			margin: 18pt 0 6pt 0;
+		}
+
+		h3 {
+			font-size: clamp(12pt, 2.5vw, 14pt);
+			font-weight: bold;
+			color: #000;
+			margin: 12pt 0 6pt 0;
+		}
+
+		p {
+			margin-bottom: 12pt;
+			text-align: justify;
+		}
+
+		ul, ol {
+			margin: 6pt 0 12pt 0;
+			padding-left: 36pt;
+		}
+
+		li {
+			margin-bottom: 3pt;
+		}
+
+		img {
+			max-width: 100%;
+			height: auto;
+			margin: 12pt 0;
+			border: 1px solid #ccc;
+		}
+
+		blockquote {
+			border-left: 3px solid #000;
+			padding-left: 12pt;
+			margin: 12pt 0 12pt 24pt;
+			font-style: italic;
+			color: #333;
+		}
+
+		code {
+			background: #F0F0F0;
+			padding: 1px 3px;
+			font-family: 'Courier New', Courier, monospace;
+			font-size: 10pt;
+		}
+
+		pre {
+			background: #F5F5F5;
+			padding: 12pt;
+			border: 1px solid #ccc;
+			overflow-x: auto;
+			margin: 12pt 0;
+			font-family: 'Courier New', Courier, monospace;
+			font-size: 10pt;
+
+			code {
+				background: transparent;
+				padding: 0;
+				border: none;
+			}
+		}
+
+		a {
+			color: #0000FF;
+			text-decoration: underline;
+		}
+	}
+}
+
+// === Document footer (tags, nav) ===
+.single-post-doc-footer {
+	margin-top: 24pt;
+}
+
+.single-post-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 12px 0;
+	font-size: 10pt;
+
+	.wp-block-post-terms {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+
+		a {
+			color: #0000FF;
+			text-decoration: underline;
+			font-size: 10pt;
+			padding: 2px 4px;
+		}
+	}
+}
+
+.single-post-nav {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 12px;
+
+	.wp-block-post-navigation-link a {
+		color: #0000FF;
+		text-decoration: underline;
+		font-size: 10pt;
+	}
+}
+
+// === Responsive ===
+
+// Mobile
 @media (max-width: 768px) {
 	.single-post-window {
 		position: relative !important;
@@ -25,43 +346,53 @@
 		top: auto !important;
 		transform: none !important;
 	}
-}
 
-// Tablet (481px - 768px)
-@media (min-width: 481px) {
-	.single-post-window {
-		width: min(90vw, 900px) !important;
+	.win98-ruler {
+		display: none;
+	}
+
+	.win98-toolbar-row {
+		gap: 0;
+	}
+
+	.single-post-page {
+		padding: clamp(20px, 5vw, 40px) clamp(16px, 4vw, 30px);
 	}
 }
 
-// Tablet Large / Desktop Small (769px - 1024px)
+// Tablet
+@media (min-width: 481px) {
+	.single-post-window {
+		width: min(95vw, 950px) !important;
+	}
+}
+
+// Desktop
 @media (min-width: 769px) {
 	.single-post-window {
-		width: 900px !important;
-		max-height: 80vh;
+		width: 950px !important;
+		max-height: 85vh;
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
 	}
 
-	.single-post-window .window-body {
+	.single-post-window .single-post-body {
 		overflow-y: auto;
 		flex: 1;
 		min-height: 0;
 	}
 }
 
-// Desktop Medium (1025px+)
 @media (min-width: 1025px) {
 	.single-post-window {
-		width: 900px !important;
+		width: 950px !important;
 	}
 }
 
-// Ajustes para pantallas muy grandes (1440px+)
 @media (min-width: 1440px) {
 	.single-post-window {
-		width: 900px !important;
+		width: 950px !important;
 	}
 }
 
@@ -70,122 +401,13 @@
 	display: inline;
 
 	.wp-block-post-title,
-	p,
-	span,
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
+	p, span,
+	h1, h2, h3, h4, h5, h6 {
 		display: inline;
 		margin: 0;
 		padding: 0;
 		font-size: inherit;
 		font-weight: inherit;
 		line-height: inherit;
-	}
-}
-
-// Single Post Content Styles
-.post-content {
-	flex-direction: column;
-	padding: clamp(12px, 3vw, 16px);
-
-	.wp-block-post-content {
-		font-size: clamp(11px, 2.5vw, 13px);
-		line-height: 1.8;
-
-		h2 {
-			font-size: clamp(16px, 3.5vw, 20px);
-			margin: clamp(16px, 4vw, 24px) 0 clamp(8px, 2vw, 12px) 0;
-			color: #000080;
-		}
-
-		h3 {
-			font-size: clamp(14px, 3vw, 18px);
-			margin: clamp(12px, 3vw, 18px) 0 clamp(6px, 1.5vw, 8px) 0;
-			color: #000080;
-		}
-
-		p {
-			margin-bottom: clamp(8px, 2vw, 12px);
-		}
-
-		ul,
-		ol {
-			margin: clamp(8px, 2vw, 12px) 0;
-			padding-left: clamp(20px, 5vw, 30px);
-		}
-
-		li {
-			margin-bottom: clamp(4px, 1vw, 6px);
-		}
-
-		img {
-			max-width: 100%;
-			height: auto;
-			margin: clamp(12px, 3vw, 16px) 0;
-			border: 2px inset #C0C0C0;
-		}
-
-		blockquote {
-			border-left: 4px solid #000080;
-			padding-left: clamp(12px, 3vw, 16px);
-			margin: clamp(12px, 3vw, 16px) 0;
-			font-style: italic;
-			color: #666;
-		}
-
-		code {
-			background: #E0E0E0;
-			padding: 2px 4px;
-			font-size: clamp(10px, 2vw, 11px);
-			border: 1px inset #C0C0C0;
-		}
-
-		pre {
-			background: #E0E0E0;
-			padding: clamp(8px, 2vw, 12px);
-			border: 2px inset #C0C0C0;
-			overflow-x: auto;
-			margin: clamp(12px, 3vw, 16px) 0;
-
-			code {
-				background: transparent;
-				padding: 0;
-				border: none;
-			}
-		}
-	}
-}
-
-.post-meta {
-	flex-direction: column;
-	gap: clamp(8px, 2vw, 12px);
-	padding: clamp(10px, 2.5vw, 14px);
-
-	.wp-block-post-terms {
-		display: flex;
-		flex-wrap: wrap;
-		gap: clamp(4px, 1vw, 6px);
-		margin-bottom: clamp(6px, 1.5vw, 8px);
-
-		a {
-			padding: clamp(4px, 1vw, 6px) clamp(8px, 2vw, 10px);
-			font-size: clamp(10px, 2vw, 11px);
-			text-decoration: none;
-		}
-	}
-
-	.wp-block-post-navigation-link {
-		margin-top: clamp(8px, 2vw, 12px);
-
-		a {
-			display: inline-block;
-			padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2.5vw, 14px);
-			font-size: clamp(10px, 2vw, 11px);
-			text-decoration: none;
-		}
 	}
 }

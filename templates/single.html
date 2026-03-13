@@ -6,8 +6,8 @@
 		<!-- Title bar -->
 		<div class="title-bar">
 			<div class="title-bar-text">
-				<img src="" data-icon="notepad_file-2.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
-				<span class="post-title-inline"><!-- wp:post-title {"level":0,"isLink":false} /--></span> - Blog
+				<img src="" data-icon="document-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
+				<span class="post-title-inline"><!-- wp:post-title {"level":0,"isLink":false} /--></span> - Microsoft Word
 			</div>
 			<div class="title-bar-controls">
 				<button aria-label="Minimize" class="window-minimize">
@@ -21,54 +21,114 @@
 				</button>
 			</div>
 		</div>
-		
+
 		<!-- Menu bar -->
 		<div class="window-menu-bar">
 			<div class="menu-item">File</div>
 			<div class="menu-item">Edit</div>
 			<div class="menu-item">View</div>
+			<div class="menu-item">Insert</div>
+			<div class="menu-item">Format</div>
+			<div class="menu-item">Tools</div>
+			<div class="menu-item">Table</div>
+			<div class="menu-item">Window</div>
 			<div class="menu-item">Help</div>
 		</div>
-		
-		<!-- Main content -->
-		<div class="window-body">
-			<!-- Post Header -->
-			<div class="content-section intro-section">
-				<!-- wp:post-title {"level":1} /-->
-				<!-- wp:post-date /-->
-				<!-- wp:post-author /-->
+
+		<!-- Toolbar -->
+		<div class="win98-toolbar">
+			<div class="win98-toolbar-row">
+				<button class="win98-toolbar-btn" title="New Blank Document">
+					<img src="" data-icon="notepad_file-0.png" alt="New" width="16" height="16">
+				</button>
+				<button class="win98-toolbar-btn" title="Open">
+					<img src="" data-icon="directory_open_cool-0.png" alt="Open" width="16" height="16">
+				</button>
+				<button class="win98-toolbar-btn" title="Save">
+					<img src="" data-icon="floppy_drive_3_5-0.png" alt="Save" width="16" height="16">
+				</button>
+				<span class="win98-toolbar-separator"></span>
+				<button class="win98-toolbar-btn" title="Print">
+					<img src="" data-icon="printer-0.png" alt="Print" width="16" height="16">
+				</button>
+				<button class="win98-toolbar-btn" title="Print Preview">
+					<img src="" data-icon="magnifying_glass-0.png" alt="Preview" width="16" height="16">
+				</button>
+				<span class="win98-toolbar-separator"></span>
+				<button class="win98-toolbar-btn win98-toolbar-btn--text" title="Cut">&#9986;</button>
+				<button class="win98-toolbar-btn win98-toolbar-btn--text" title="Copy">&#9112;</button>
+				<button class="win98-toolbar-btn win98-toolbar-btn--text" title="Paste">&#9114;</button>
+				<span class="win98-toolbar-separator"></span>
+				<button class="win98-toolbar-btn win98-toolbar-btn--text" title="Undo">&#8630;</button>
+				<button class="win98-toolbar-btn win98-toolbar-btn--text" title="Redo">&#8631;</button>
 			</div>
-			
-			<!-- Post Content -->
-			<fieldset class="content-fieldset">
-				<legend>
-					<img src="" data-icon="directory_open_cool-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
-					Content
-				</legend>
-				<div class="fieldset-content post-content">
-					<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
-				</div>
-			</fieldset>
-			
-			<!-- Post Meta -->
-			<fieldset class="content-fieldset">
-				<legend>
-					<img src="" data-icon="directory_admin_tools-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
-					Post Information
-				</legend>
-				<div class="fieldset-content post-meta">
-					<!-- wp:post-terms {"term":"category"} /-->
-					<!-- wp:post-terms {"term":"post_tag"} /-->
-					<!-- wp:post-navigation-link {"type":"previous","label":"← Previous Post"} /-->
-					<!-- wp:post-navigation-link {"type":"next","label":"Next Post →"} /-->
-				</div>
-			</fieldset>
-			
-			<!-- Status bar -->
-			<div class="status-bar">
-				<p class="status-bar-field">● Online</p>
-				<p class="status-bar-field"><!-- wp:post-date /--></p>
+			<div class="win98-toolbar-row">
+				<select class="win98-font-select" disabled>
+					<option>Times New Roman</option>
+				</select>
+				<select class="win98-size-select" disabled>
+					<option>12</option>
+				</select>
+				<span class="win98-toolbar-separator"></span>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Bold"><b>B</b></button>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Italic"><i>I</i></button>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Underline"><u>U</u></button>
+				<span class="win98-toolbar-separator"></span>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Align Left">&#9776;</button>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Center">&#9776;</button>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Align Right">&#9776;</button>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Justify">&#9776;</button>
 			</div>
+		</div>
+
+		<!-- Ruler -->
+		<div class="win98-ruler">
+			<div class="win98-ruler-marks">
+				<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
+			</div>
+		</div>
+
+		<!-- Document area -->
+		<div class="window-body single-post-body">
+			<div class="single-post-document-area">
+				<div class="single-post-page">
+					<!-- Post Header -->
+					<div class="single-post-doc-header">
+						<!-- wp:post-title {"level":1} /-->
+						<div class="single-post-doc-meta">
+							<!-- wp:post-date /-->
+							<span class="single-post-meta-sep">|</span>
+							<!-- wp:post-author /-->
+						</div>
+						<hr class="single-post-hr">
+					</div>
+
+					<!-- Post Content -->
+					<div class="single-post-doc-content post-content">
+						<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+					</div>
+
+					<!-- Post Meta / Tags -->
+					<div class="single-post-doc-footer">
+						<hr class="single-post-hr">
+						<div class="single-post-tags">
+							<!-- wp:post-terms {"term":"category"} /-->
+							<!-- wp:post-terms {"term":"post_tag"} /-->
+						</div>
+						<div class="single-post-nav">
+							<!-- wp:post-navigation-link {"type":"previous","label":"← Previous Post"} /-->
+							<!-- wp:post-navigation-link {"type":"next","label":"Next Post →"} /-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Status bar -->
+		<div class="status-bar">
+			<p class="status-bar-field">Page 1 &nbsp; Sec 1 &nbsp; 1/1</p>
+			<p class="status-bar-field"><!-- wp:post-date /--></p>
+			<p class="status-bar-field">Ln 1 &nbsp; Col 1</p>
 		</div>
 	</div>
 </div>

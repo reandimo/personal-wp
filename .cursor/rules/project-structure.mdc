@@ -49,7 +49,6 @@ nativo-theme/
 ├── tests/           # Tests (PHPUnit, Pest, Jest)
 │   ├── Unit/        # Tests unitarios
 │   └── Integration/ # Tests de integración
-├── .agent/          # Configuración del agente AI (legacy)
 ├── .cursor/         # Configuración de Cursor (reglas del agente AI)
 │   └── rules/       # Reglas de código del proyecto
 ├── functions.php    # Archivo principal del tema

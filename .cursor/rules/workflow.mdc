@@ -1,0 +1,205 @@
+---
+description: Flujo de trabajo y comandos útiles 2026
+alwaysApply: true
+---
+
+# Flujo de Trabajo
+
+## Assets (CSS/JS)
+
+1. **Editar archivos fuente** en `resources/styles/` o `resources/scripts/`
+2. **Compilar** con `npm run dev` (desarrollo) o `npm run production` (producción)
+3. **Archivos compilados** se generan en `public/css/` y `public/js/`
+4. **No editar directamente** los archivos en `public/` (se sobrescriben)
+
+## PHP
+
+1. **Nuevas clases**: Agregar en `includes/` y cargar en `functions.php`
+2. **Nuevos post types/taxonomías**: Usar `includes/Post_Type.php` y `includes/Taxonomy.php`
+3. **Funcionalidad WooCommerce**: Agregar en `includes/Woocommerce.php` o clases relacionadas
+4. **Funcionalidad ACF**: Usar `includes/acf/` para campos y opciones
+
+## Comandos Útiles
+
+```bash
+# Desarrollo de Assets
+npm run dev          # Compilar assets una vez
+npm run watch        # Compilar y observar cambios
+
+# Producción
+npm run production   # Compilar assets optimizados
+
+# PHP - Dependencias
+composer install     # Instalar dependencias PHP
+composer update      # Actualizar dependencias PHP
+
+# PHP - Code Quality
+composer test        # Ejecutar PHPCS
+./vendor/bin/phpcs --standard=PSR12 includes/
+./vendor/bin/phpcbf --standard=PSR12 includes/  # Auto-fix
+./vendor/bin/phpstan analyse includes/          # Análisis estático
+
+# PHP - Testing
+./vendor/bin/phpunit                            # Ejecutar tests
+./vendor/bin/pest                               # Ejecutar tests (Pest)
+
+# JavaScript/TypeScript - Linting
+npm run lint         # Ejecutar ESLint
+npm run lint:fix     # Auto-fix con ESLint
+npm run format       # Formatear con Prettier
+
+# TypeScript (si se usa)
+npm run type-check   # Verificar tipos TypeScript
+npx tsc --noEmit     # Compilar solo para verificación
+
+# WordPress CLI
+wp core download     # Descargar WordPress
+wp plugin install    # Instalar plugins
+wp plugin list       # Listar plugins instalados
+wp theme list        # Listar temas instalados
+wp db export         # Exportar base de datos
+wp cache flush       # Limpiar cache
+```
+
+## Archivos de Configuración
+
+### Core
+- `functions.php`: Punto de entrada del tema
+- `composer.json`: Dependencias PHP y configuración Bedrock
+- `package.json`: Dependencias JavaScript y scripts npm
+- `.env`: Variables de entorno (no committear)
+
+### Build Tools
+- `webpack.mix.js`: Configuración de compilación de assets (Laravel Mix)
+- `vite.config.js`: Alternativa moderna a webpack (si se usa Vite)
+
+### Code Quality
+- `phpcs.xml`: Configuración de estándares de código PHP (PSR-12)
+- `phpstan.neon`: Configuración de PHPStan para análisis estático
+- `eslint.config.js` o `.eslintrc.js`: Configuración de ESLint
+- `.prettierrc`: Configuración de Prettier
+- `tsconfig.json`: Configuración de TypeScript (si se usa)
+
+### Testing
+- `phpunit.xml`: Configuración de PHPUnit
+- `pest.php`: Configuración de Pest (si se usa)
+
+## Workflow Recomendado
+
+### Desarrollo Diario
+
+1. **Iniciar watch mode** para assets:
+   ```bash
+   npm run watch
+   ```
+
+2. **Hacer cambios** en archivos fuente (`resources/`, `includes/`)
+
+3. **Verificar code quality** antes de commit:
+   ```bash
+   npm run lint
+   ./vendor/bin/phpcs --standard=PSR12 includes/
+   ```
+
+4. **Ejecutar tests** si existen:
+   ```bash
+   ./vendor/bin/phpunit
+   ```
+
+### Pre-Commit Checklist
+
+- [ ] Código formateado correctamente
+- [ ] Sin errores de linting
+- [ ] Tests pasando (si existen)
+- [ ] Sin console.log() o var_dump() olvidados
+- [ ] Assets compilados (si es necesario commitearlos)
+
+### Deployment
+
+1. **Compilar assets para producción**:
+   ```bash
+   npm run production
+   ```
+
+2. **Verificar dependencias**:
+   ```bash
+   composer install --no-dev --optimize-autoloader
+   ```
+
+3. **Limpiar cache**:
+   ```bash
+   wp cache flush
+   ```
+
+## Integración Continua (CI)
+
+Ejemplo de workflow para GitHub Actions:
+
+```yaml
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          
+      - name: Install PHP dependencies
+        run: composer install
+        
+      - name: Run PHPCS
+        run: ./vendor/bin/phpcs --standard=PSR12 includes/
+        
+      - name: Run PHPStan
+        run: ./vendor/bin/phpstan analyse includes/
+        
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install JS dependencies
+        run: npm ci
+        
+      - name: Run ESLint
+        run: npm run lint
+        
+      - name: Build assets
+        run: npm run production
+```
+
+## Troubleshooting
+
+### Assets no se compilan
+```bash
+# Limpiar cache de npm
+rm -rf node_modules package-lock.json
+npm install
+
+# Verificar versión de Node
+node --version  # Debe ser 16+ o 18+
+```
+
+### Errores de Composer
+```bash
+# Limpiar cache de Composer
+composer clear-cache
+composer install
+
+# Regenerar autoload
+composer dump-autoload
+```
+
+### WordPress no reconoce cambios
+```bash
+# Limpiar todos los caches
+wp cache flush
+wp rewrite flush
+```
