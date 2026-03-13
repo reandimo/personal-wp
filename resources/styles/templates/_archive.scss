@@ -8,35 +8,54 @@
 	max-width: 100% !important;
 }
 
-// === Toolbar - Win98 Explorer style ===
-// Handles both class naming variants (explorer-toolbar, win98-toolbar)
+// === Toolbar - Win98 Explorer style with icon + text below ===
 .explorer-toolbar,
 .win98-toolbar.explorer-toolbar {
 	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-	gap: 2px;
+	align-items: stretch;
+	flex-wrap: nowrap;
+	gap: 0;
 	padding: 2px 4px;
 	background: var(--surface);
 	border-bottom: 1px solid var(--button-shadow);
+	overflow: hidden;
 }
 
 .explorer-toolbar-btn,
 .win98-toolbar-btn--with-label {
 	display: inline-flex;
+	flex-direction: column;
 	align-items: center;
-	gap: 4px;
-	padding: 2px 6px;
+	justify-content: center;
+	gap: 1px;
+	padding: 2px 4px;
 	background: transparent;
 	border: 1px solid transparent;
 	cursor: pointer;
-	font-size: 11px;
+	font-size: 9px;
+	min-width: 36px;
+	white-space: nowrap;
 
 	img {
 		width: 16px;
 		height: 16px;
 		image-rendering: pixelated;
 		flex-shrink: 0;
+	}
+
+	// Text icon fallback (for undo etc.)
+	.explorer-toolbar-icon-text {
+		display: block;
+		width: 16px;
+		height: 16px;
+		font-size: 16px;
+		line-height: 16px;
+		text-align: center;
+	}
+
+	span {
+		font-size: 9px;
+		line-height: 1;
 	}
 
 	&:hover {
@@ -57,10 +76,10 @@
 .explorer-toolbar-divider,
 .win98-toolbar-separator {
 	width: 1px;
-	height: 20px;
+	align-self: stretch;
 	background: var(--button-shadow);
 	border-right: 1px solid var(--button-highlight);
-	margin: 0 4px;
+	margin: 2px 3px;
 }
 
 // === Address bar ===
@@ -121,12 +140,50 @@
 	width: clamp(140px, 25vw, 200px);
 	min-width: 120px;
 	flex-shrink: 0;
-	overflow-y: auto;
-	overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
 	background: var(--button-highlight);
 	box-shadow: var(--border-field);
 
-	// 98.css tree-view (new template)
+	// "All Folders" header bar
+	.explorer-tree-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 2px 4px;
+		background: var(--surface);
+		border-bottom: 1px solid var(--button-shadow);
+		font-size: 11px;
+		font-weight: bold;
+		flex-shrink: 0;
+
+		.explorer-tree-close {
+			width: 14px;
+			height: 14px;
+			padding: 0;
+			font-size: 12px;
+			line-height: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			background: var(--surface);
+			border: 1px solid;
+			border-color: var(--button-highlight) var(--button-shadow) var(--button-shadow) var(--button-highlight);
+
+			&:active {
+				border-color: var(--button-shadow) var(--button-highlight) var(--button-highlight) var(--button-shadow);
+			}
+		}
+	}
+
+	.explorer-tree-content {
+		flex: 1;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+
+	// 98.css tree-view
 	ul.tree-view {
 		border: none;
 		box-shadow: none;
@@ -218,12 +275,6 @@
 	min-width: 120px;
 }
 
-.explorer-col-size {
-	width: 70px;
-	flex-shrink: 0;
-	text-align: right;
-}
-
 .explorer-col-type {
 	width: 140px;
 	flex-shrink: 0;
@@ -232,6 +283,12 @@
 .explorer-col-modified {
 	flex: 1;
 	min-width: 120px;
+}
+
+.explorer-col-size {
+	width: 80px;
+	flex-shrink: 0;
+	text-align: right;
 	border-right: none;
 }
 
@@ -244,8 +301,6 @@
 }
 
 // === File rows ===
-// WordPress renders post-template as <ul class="wp-block-post-template"><li>...</li></ul>
-// Target both .explorer-post-list (new) and .wp-block-post-template (cached)
 .explorer-post-list,
 .explorer-file-list .wp-block-post-template {
 	list-style: none;
@@ -282,7 +337,7 @@
 			}
 		}
 
-		// Name column - handles both .explorer-file-title and .wp-block-post-title
+		// Name column
 		.explorer-file-title,
 		.wp-block-post-title {
 			flex: 2;
@@ -324,27 +379,14 @@
 					content: '.doc';
 				}
 
-				// Hide the broken duplicate anchor
 				&.explorer-file-row {
 					display: none;
 				}
 			}
 		}
 
-		// Fake size column via ::before
+		// Fake type column via ::before (order 2, after Name)
 		&::before {
-			content: '24 KB';
-			width: 70px;
-			flex-shrink: 0;
-			padding: 1px 8px;
-			font-size: 11px;
-			text-align: right;
-			white-space: nowrap;
-			order: 2;
-		}
-
-		// Fake type column via ::after
-		&::after {
 			content: 'Microsoft Word Document';
 			width: 140px;
 			flex-shrink: 0;
@@ -353,10 +395,10 @@
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			order: 3;
+			order: 2;
 		}
 
-		// Date column
+		// Date column (order 3)
 		.explorer-file-date,
 		.wp-block-post-date {
 			flex: 1;
@@ -366,14 +408,26 @@
 			color: #000;
 			margin: 0;
 			white-space: nowrap;
-			order: 4;
+			order: 3;
 
 			time {
 				font-size: 11px;
 			}
 		}
 
-		// Hide excerpt (not needed in file list view)
+		// Fake size column via ::after (order 4, last)
+		&::after {
+			content: '24 KB';
+			width: 80px;
+			flex-shrink: 0;
+			padding: 1px 8px;
+			font-size: 11px;
+			text-align: right;
+			white-space: nowrap;
+			order: 4;
+		}
+
+		// Hide excerpt
 		.wp-block-post-excerpt {
 			display: none;
 		}
@@ -400,6 +454,18 @@
 	text-align: center;
 	font-size: 11px;
 	color: var(--dialog-gray);
+}
+
+// === Status bar - Explorer style ===
+.explorer-window .status-bar {
+	.explorer-status-objects {
+		flex-grow: 0;
+		min-width: 100px;
+	}
+
+	.explorer-status-size {
+		flex-grow: 1;
+	}
 }
 
 // === Responsive ===
@@ -432,6 +498,16 @@
 
 	.explorer-toolbar-btn span,
 	.win98-toolbar-btn--with-label span {
+		display: none;
+	}
+
+	// Compact toolbar on mobile
+	.explorer-toolbar-btn {
+		min-width: 24px;
+		padding: 2px;
+	}
+
+	.explorer-status-size {
 		display: none;
 	}
 }

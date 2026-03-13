@@ -7,7 +7,7 @@
 		<div class="title-bar">
 			<div class="title-bar-text">
 				<img src="" data-icon="directory_explorer-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 4px;">
-				C:\My Documents\Blog
+				Exploring - C:\My Documents\Blog
 			</div>
 			<div class="title-bar-controls">
 				<button aria-label="Minimize" class="window-minimize">
@@ -27,19 +27,20 @@
 			<div class="menu-item">File</div>
 			<div class="menu-item">Edit</div>
 			<div class="menu-item">View</div>
+			<div class="menu-item">Go</div>
 			<div class="menu-item">Favorites</div>
 			<div class="menu-item">Tools</div>
 			<div class="menu-item">Help</div>
 		</div>
 
-		<!-- Toolbar -->
+		<!-- Toolbar - Explorer style with icon + label buttons -->
 		<div class="explorer-toolbar">
 			<button class="explorer-toolbar-btn" title="Back" disabled>
-				<img src="" data-icon="directory_closed-0.png" alt="" width="16" height="16">
+				<img src="" data-icon="directory_closed_history-0.png" alt="" width="16" height="16">
 				<span>Back</span>
 			</button>
 			<button class="explorer-toolbar-btn" title="Forward" disabled>
-				<img src="" data-icon="directory_open_cool-0.png" alt="" width="16" height="16">
+				<img src="" data-icon="directory_closed_history-0.png" alt="" width="16" height="16" style="transform: scaleX(-1);">
 				<span>Forward</span>
 			</button>
 			<button class="explorer-toolbar-btn" title="Up">
@@ -47,13 +48,35 @@
 				<span>Up</span>
 			</button>
 			<div class="explorer-toolbar-divider"></div>
-			<button class="explorer-toolbar-btn" title="Search">
-				<img src="" data-icon="computer_search-0.png" alt="" width="16" height="16">
-				<span>Search</span>
+			<button class="explorer-toolbar-btn" title="Cut">
+				<img src="" data-icon="write_red.png" alt="" width="16" height="16">
+				<span>Cut</span>
 			</button>
-			<button class="explorer-toolbar-btn" title="Folders">
-				<img src="" data-icon="directory_closed-0.png" alt="" width="16" height="16">
-				<span>Folders</span>
+			<button class="explorer-toolbar-btn" title="Copy">
+				<img src="" data-icon="diskettes_copy-0.png" alt="" width="16" height="16">
+				<span>Copy</span>
+			</button>
+			<button class="explorer-toolbar-btn" title="Paste">
+				<img src="" data-icon="write_yellow-0.png" alt="" width="16" height="16">
+				<span>Paste</span>
+			</button>
+			<button class="explorer-toolbar-btn" title="Undo" disabled>
+				<span class="explorer-toolbar-icon-text">&#8630;</span>
+				<span>Undo</span>
+			</button>
+			<div class="explorer-toolbar-divider"></div>
+			<button class="explorer-toolbar-btn" title="Delete" disabled>
+				<img src="" data-icon="recycle_bin_empty-0.png" alt="" width="16" height="16">
+				<span>Delete</span>
+			</button>
+			<button class="explorer-toolbar-btn" title="Properties">
+				<img src="" data-icon="file_gears-0.png" alt="" width="16" height="16">
+				<span>Properties</span>
+			</button>
+			<div class="explorer-toolbar-divider"></div>
+			<button class="explorer-toolbar-btn" title="Views">
+				<img src="" data-icon="appwizard_list.png" alt="" width="16" height="16">
+				<span>Views</span>
 			</button>
 		</div>
 
@@ -70,48 +93,55 @@
 		<div class="window-body explorer-body">
 			<!-- Tree panel (sidebar) - uses 98.css tree-view -->
 			<div class="explorer-tree-panel">
-				<ul class="tree-view">
-					<li>
-						<img src="" data-icon="desktop-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 2px;">
-						Desktop
-						<ul>
-							<li>
-								<details open>
-									<summary>
-										<img src="" data-icon="computer-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 2px;">
-										My Computer
-									</summary>
-									<ul>
-										<li>
-											<details open>
-												<summary>
-													<img src="" data-icon="hard_disk_drive-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 2px;">
-													(C:)
-												</summary>
-												<ul>
-													<li>
-														<details open>
-															<summary>
-																<img src="" data-icon="directory_open_cool-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 2px;">
-																My Documents
-															</summary>
-															<ul>
-																<li class="explorer-tree-active">
+				<!-- All Folders header -->
+				<div class="explorer-tree-header">
+					<span>All Folders</span>
+					<button class="explorer-tree-close" title="Close">&times;</button>
+				</div>
+				<div class="explorer-tree-content">
+					<ul class="tree-view">
+						<li>
+							<img src="" data-icon="desktop-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 2px;">
+							Desktop
+							<ul>
+								<li>
+									<details open>
+										<summary>
+											<img src="" data-icon="computer-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 2px;">
+											My Computer
+										</summary>
+										<ul>
+											<li>
+												<details open>
+													<summary>
+														<img src="" data-icon="hard_disk_drive-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 2px;">
+														(C:)
+													</summary>
+													<ul>
+														<li>
+															<details open>
+																<summary>
 																	<img src="" data-icon="directory_open_cool-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 2px;">
-																	Blog
-																</li>
-															</ul>
-														</details>
-													</li>
-												</ul>
-											</details>
-										</li>
-									</ul>
-								</details>
-							</li>
-						</ul>
-					</li>
-				</ul>
+																	My Documents
+																</summary>
+																<ul>
+																	<li class="explorer-tree-active">
+																		<img src="" data-icon="directory_open_cool-0.png" alt="" width="16" height="16" style="vertical-align: middle; margin-right: 2px;">
+																		Blog
+																	</li>
+																</ul>
+															</details>
+														</li>
+													</ul>
+												</details>
+											</li>
+										</ul>
+									</details>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
 			</div>
 
 			<!-- File list panel -->
@@ -119,9 +149,9 @@
 				<!-- Column headers -->
 				<div class="explorer-list-header">
 					<button class="explorer-col explorer-col-name">Name</button>
-					<button class="explorer-col explorer-col-size">Size</button>
 					<button class="explorer-col explorer-col-type">Type</button>
 					<button class="explorer-col explorer-col-modified">Modified</button>
+					<button class="explorer-col explorer-col-size">Total Size</button>
 				</div>
 
 				<!-- File list -->
@@ -157,7 +187,10 @@
 		<!-- Status bar -->
 		<div class="status-bar">
 			<p class="status-bar-field explorer-status-objects">object(s)</p>
-			<p class="status-bar-field">My Computer</p>
+			<p class="status-bar-field explorer-status-size">Free Space: 420MB, Capacity: 1.50GB</p>
+			<p class="status-bar-field">
+				<img src="" data-icon="computer-0.png" alt="" width="14" height="14" style="vertical-align: middle; margin-right: 2px;">My Computer
+			</p>
 		</div>
 	</div>
 </div>
