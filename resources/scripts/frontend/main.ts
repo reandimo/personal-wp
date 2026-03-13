@@ -12,6 +12,9 @@ import { initWindowDrag, WindowManager, StartMenuManager, loadIcons } from '../t
 // Import Word toolbar functionality
 import { initWordToolbar } from '../components/word-toolbar';
 
+// Import Explorer resize functionality
+import { initExplorerResize } from '../components/explorer-resize';
+
 // Import cookies-js
 import Cookies from 'cookies-js';
 
@@ -165,6 +168,8 @@ if (document.readyState === 'loading') {
 		updateExplorerStatus();
 		// Init Word toolbar for single posts
 		initWordToolbar();
+		// Init Explorer resize
+		initExplorerResize();
 	});
 } else {
 	loadIcons();
@@ -178,6 +183,8 @@ if (document.readyState === 'loading') {
 	updateExplorerStatus();
 	// Init Word toolbar for single posts
 	initWordToolbar();
+	// Init Explorer resize
+	initExplorerResize();
 }
 
 /**
