@@ -15,6 +15,9 @@ import { initWordToolbar } from '../components/word-toolbar';
 // Import Explorer resize functionality
 import { initExplorerResize } from '../components/explorer-resize';
 
+// Import Explorer tree (categories)
+import { initExplorerTree } from '../components/explorer-tree';
+
 // Import cookies-js
 import Cookies from 'cookies-js';
 
@@ -170,6 +173,8 @@ if (document.readyState === 'loading') {
 		initWordToolbar();
 		// Init Explorer resize
 		initExplorerResize();
+		// Init Explorer tree categories
+		initExplorerTree();
 	});
 } else {
 	loadIcons();
@@ -185,6 +190,8 @@ if (document.readyState === 'loading') {
 	initWordToolbar();
 	// Init Explorer resize
 	initExplorerResize();
+	// Init Explorer tree categories
+	initExplorerTree();
 }
 
 /**
