@@ -8,3 +8,7 @@
 
 // Landing 2000s styles (customizations on top of 98.css)
 @import '../templates/index.scss';
+
+body{
+    margin: 0 !important;
+}
