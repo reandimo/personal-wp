@@ -137,7 +137,7 @@
 
 // === Tree panel with Win98 resize bar ===
 .explorer-tree-panel {
-	width: 200px;
+	width: clamp(180px, 25vw, 250px);
 	min-width: 80px;
 	max-width: 50%;
 	flex-shrink: 0;
@@ -148,6 +148,8 @@
 	position: relative;
 	resize: horizontal;
 	overflow: hidden;
+	// Padding-right for the resize bar
+	padding-right: 5px;
 
 	// Vertical resize bar on the right edge (Win98 style)
 	&::after {
@@ -198,8 +200,7 @@
 
 	.explorer-tree-content {
 		flex: 1;
-		overflow-y: auto;
-		overflow-x: hidden;
+		overflow: auto;
 	}
 
 	// 98.css tree-view
