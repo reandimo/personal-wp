@@ -9,6 +9,9 @@ import '../../styles/frontend/main.scss';
 // Import window drag functionality
 import { initWindowDrag, WindowManager, StartMenuManager, loadIcons } from '../templates/index';
 
+// Import Word toolbar functionality
+import { initWordToolbar } from '../components/word-toolbar';
+
 // Import cookies-js
 import Cookies from 'cookies-js';
 
@@ -160,6 +163,8 @@ if (document.readyState === 'loading') {
 		playWindows98StartupSound();
 		// Update explorer status bar object count
 		updateExplorerStatus();
+		// Init Word toolbar for single posts
+		initWordToolbar();
 	});
 } else {
 	loadIcons();
@@ -171,6 +176,8 @@ if (document.readyState === 'loading') {
 	playWindows98StartupSound();
 	// Update explorer status bar object count
 	updateExplorerStatus();
+	// Init Word toolbar for single posts
+	initWordToolbar();
 }
 
 /**

@@ -35,9 +35,13 @@
 			<div class="menu-item">Help</div>
 		</div>
 
-		<!-- Toolbar -->
+		<!-- Toolbar - Standard -->
 		<div class="win98-toolbar">
 			<div class="win98-toolbar-row">
+				<button class="win98-toolbar-btn win98-edit-btn" title="Edit Document" data-word-action="toggleEdit">
+					<img src="" data-icon="write_wordpad-0.png" alt="Edit" width="16" height="16">
+				</button>
+				<span class="win98-toolbar-separator"></span>
 				<button class="win98-toolbar-btn" title="New Blank Document">
 					<img src="" data-icon="notepad_file-0.png" alt="New" width="16" height="16">
 				</button>
@@ -54,15 +58,40 @@
 				<button class="win98-toolbar-btn" title="Print Preview">
 					<img src="" data-icon="magnifying_glass-0.png" alt="Preview" width="16" height="16">
 				</button>
+				<button class="win98-toolbar-btn" title="Spelling and Grammar">
+					<img src="" data-icon="accesibility_window_abc.png" alt="Spelling" width="16" height="16">
+				</button>
 				<span class="win98-toolbar-separator"></span>
-				<button class="win98-toolbar-btn win98-toolbar-btn--text" title="Cut">&#9986;</button>
-				<button class="win98-toolbar-btn win98-toolbar-btn--text" title="Copy">&#9112;</button>
-				<button class="win98-toolbar-btn win98-toolbar-btn--text" title="Paste">&#9114;</button>
+				<button class="win98-toolbar-btn" title="Cut">
+					<img src="" data-icon="write_red.png" alt="Cut" width="16" height="16">
+				</button>
+				<button class="win98-toolbar-btn" title="Copy">
+					<img src="" data-icon="diskettes_copy-0.png" alt="Copy" width="16" height="16">
+				</button>
+				<button class="win98-toolbar-btn" title="Paste">
+					<img src="" data-icon="write_yellow-0.png" alt="Paste" width="16" height="16">
+				</button>
 				<span class="win98-toolbar-separator"></span>
-				<button class="win98-toolbar-btn win98-toolbar-btn--text" title="Undo">&#8630;</button>
-				<button class="win98-toolbar-btn win98-toolbar-btn--text" title="Redo">&#8631;</button>
+				<button class="win98-toolbar-btn" title="Undo" data-word-action="undo">&#8630;</button>
+				<button class="win98-toolbar-btn" title="Redo" data-word-action="redo">&#8631;</button>
+				<span class="win98-toolbar-separator"></span>
+				<button class="win98-toolbar-btn" title="Insert Hyperlink">
+					<img src="" data-icon="connected_world-0.png" alt="Hyperlink" width="16" height="16">
+				</button>
+				<button class="win98-toolbar-btn" title="Tables and Borders">
+					<img src="" data-icon="charmap-0.png" alt="Tables" width="16" height="16">
+				</button>
+				<span class="win98-toolbar-separator"></span>
+				<button class="win98-toolbar-btn" title="Show/Hide &para;" data-word-action="pilcrow">&#182;</button>
+				<select class="win98-zoom-select" disabled>
+					<option>100%</option>
+				</select>
 			</div>
+			<!-- Toolbar - Formatting -->
 			<div class="win98-toolbar-row">
+				<select class="win98-style-select" disabled>
+					<option>Normal</option>
+				</select>
 				<select class="win98-font-select" disabled>
 					<option>Times New Roman</option>
 				</select>
@@ -70,14 +99,35 @@
 					<option>12</option>
 				</select>
 				<span class="win98-toolbar-separator"></span>
-				<button class="win98-toolbar-btn win98-fmt-btn" title="Bold"><b>B</b></button>
-				<button class="win98-toolbar-btn win98-fmt-btn" title="Italic"><i>I</i></button>
-				<button class="win98-toolbar-btn win98-fmt-btn" title="Underline"><u>U</u></button>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Bold" data-word-action="bold"><b>B</b></button>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Italic" data-word-action="italic"><i>I</i></button>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Underline" data-word-action="underline"><u>U</u></button>
 				<span class="win98-toolbar-separator"></span>
-				<button class="win98-toolbar-btn win98-fmt-btn" title="Align Left">&#9776;</button>
-				<button class="win98-toolbar-btn win98-fmt-btn" title="Center">&#9776;</button>
-				<button class="win98-toolbar-btn win98-fmt-btn" title="Align Right">&#9776;</button>
-				<button class="win98-toolbar-btn win98-fmt-btn" title="Justify">&#9776;</button>
+				<button class="win98-toolbar-btn win98-fmt-btn win98-align-btn" title="Align Left" data-word-action="justifyLeft">
+					<span class="win98-align-icon win98-align-left"></span>
+				</button>
+				<button class="win98-toolbar-btn win98-fmt-btn win98-align-btn" title="Center" data-word-action="justifyCenter">
+					<span class="win98-align-icon win98-align-center"></span>
+				</button>
+				<button class="win98-toolbar-btn win98-fmt-btn win98-align-btn" title="Align Right" data-word-action="justifyRight">
+					<span class="win98-align-icon win98-align-right"></span>
+				</button>
+				<button class="win98-toolbar-btn win98-fmt-btn win98-align-btn" title="Justify" data-word-action="justifyFull">
+					<span class="win98-align-icon win98-align-justify"></span>
+				</button>
+				<span class="win98-toolbar-separator"></span>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Numbering" data-word-action="insertOrderedList">
+					<span class="win98-list-icon win98-list-numbered"></span>
+				</button>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Bullets" data-word-action="insertUnorderedList">
+					<span class="win98-list-icon win98-list-bullet"></span>
+				</button>
+				<span class="win98-toolbar-separator"></span>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Decrease Indent" data-word-action="outdent">&#8676;</button>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Increase Indent" data-word-action="indent">&#8677;</button>
+				<span class="win98-toolbar-separator"></span>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Highlight" style="border-bottom: 2px solid #FFFF00;">A</button>
+				<button class="win98-toolbar-btn win98-fmt-btn" title="Font Color" style="border-bottom: 2px solid #FF0000;"><b>A</b></button>
 			</div>
 		</div>
 
@@ -91,7 +141,7 @@
 		<!-- Document area -->
 		<div class="window-body single-post-body">
 			<div class="single-post-document-area">
-				<div class="single-post-page">
+				<div class="single-post-page" spellcheck="false">
 					<!-- Post Header -->
 					<div class="single-post-doc-header">
 						<!-- wp:post-title {"level":1} /-->
@@ -116,19 +166,26 @@
 							<!-- wp:post-terms {"term":"post_tag"} /-->
 						</div>
 						<div class="single-post-nav">
-							<!-- wp:post-navigation-link {"type":"previous","label":"← Previous Post"} /-->
-							<!-- wp:post-navigation-link {"type":"next","label":"Next Post →"} /-->
+							<!-- wp:post-navigation-link {"type":"previous","label":"&larr; Previous Post"} /-->
+							<!-- wp:post-navigation-link {"type":"next","label":"Next Post &rarr;"} /-->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<!-- Status bar -->
-		<div class="status-bar">
-			<p class="status-bar-field">Page 1 &nbsp; Sec 1 &nbsp; 1/1</p>
+		<!-- Status bar - matches Word 97 layout -->
+		<div class="status-bar single-post-statusbar">
+			<p class="status-bar-field">Page 1</p>
+			<p class="status-bar-field">Sec 1</p>
+			<p class="status-bar-field">1/1</p>
 			<p class="status-bar-field"><!-- wp:post-date /--></p>
 			<p class="status-bar-field">Ln 1 &nbsp; Col 1</p>
+			<p class="status-bar-field win98-statusbar-indicator">REC</p>
+			<p class="status-bar-field win98-statusbar-indicator">TRK</p>
+			<p class="status-bar-field win98-statusbar-indicator">EXT</p>
+			<p class="status-bar-field win98-statusbar-indicator">OVR</p>
+			<p class="status-bar-field win98-statusbar-indicator">WPH</p>
 		</div>
 	</div>
 </div>

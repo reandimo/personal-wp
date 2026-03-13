@@ -1,4 +1,4 @@
-// Single Post Template Styles - Windows 98 Style (uses 98.css framework)
+// Single Post Template Styles - Windows 98 Word Style (uses 98.css framework)
 // Estilos específicos para templates/single.html
 
 // === Single Post Window ===
@@ -7,7 +7,7 @@
 	max-width: 100% !important;
 }
 
-// === Toolbar (Win98 style) ===
+// === Toolbar (Win98 Word style) ===
 .win98-toolbar {
 	background: #C0C0C0;
 	border-bottom: 1px solid #808080;
@@ -19,7 +19,8 @@
 	align-items: center;
 	gap: 1px;
 	padding: 1px 0;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
+	overflow: hidden;
 }
 
 .win98-toolbar-btn {
@@ -42,10 +43,6 @@
 		image-rendering: pixelated;
 	}
 
-	&--text {
-		font-size: 14px;
-	}
-
 	&:hover {
 		border-color: #FFFFFF #808080 #808080 #FFFFFF;
 		background: #C0C0C0;
@@ -55,6 +52,12 @@
 		border-color: #808080 #FFFFFF #FFFFFF #808080;
 		background: #C0C0C0;
 	}
+}
+
+// Pressed/active state for toggle buttons (like Edit)
+.win98-btn-active {
+	border-color: #808080 #FFFFFF #FFFFFF #808080;
+	background: #B0B0B0;
 }
 
 .win98-fmt-btn {
@@ -72,28 +75,121 @@
 	border-right: 1px solid #FFFFFF;
 }
 
-.win98-font-select {
+// Dropdowns - shared base
+.win98-font-select,
+.win98-size-select,
+.win98-style-select,
+.win98-zoom-select {
 	height: 20px;
-	width: clamp(100px, 20vw, 150px);
 	font-size: 11px;
 	border: 1px solid;
 	border-color: #808080 #FFFFFF #FFFFFF #808080;
 	background: #FFF;
-	margin-right: 2px;
 	padding: 0 2px;
+}
+
+.win98-font-select {
+	width: clamp(100px, 20vw, 150px);
+	margin-right: 2px;
 }
 
 .win98-size-select {
-	height: 20px;
 	width: 40px;
-	font-size: 11px;
-	border: 1px solid;
-	border-color: #808080 #FFFFFF #FFFFFF #808080;
-	background: #FFF;
-	padding: 0 2px;
 }
 
-// === Ruler (Win98 style) ===
+.win98-style-select {
+	width: 70px;
+	margin-right: 2px;
+}
+
+.win98-zoom-select {
+	width: 50px;
+}
+
+// === Alignment icons (pixel-art CSS lines) ===
+.win98-align-icon {
+	display: block;
+	width: 14px;
+	height: 10px;
+	position: relative;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		height: 1px;
+		background: #000;
+	}
+}
+
+.win98-align-left {
+	// 4 lines, left-aligned, decreasing width
+	background:
+		linear-gradient(#000, #000) 0 0 / 12px 1px no-repeat,
+		linear-gradient(#000, #000) 0 3px / 9px 1px no-repeat,
+		linear-gradient(#000, #000) 0 6px / 12px 1px no-repeat,
+		linear-gradient(#000, #000) 0 9px / 7px 1px no-repeat;
+}
+
+.win98-align-center {
+	background:
+		linear-gradient(#000, #000) center 0 / 12px 1px no-repeat,
+		linear-gradient(#000, #000) center 3px / 8px 1px no-repeat,
+		linear-gradient(#000, #000) center 6px / 12px 1px no-repeat,
+		linear-gradient(#000, #000) center 9px / 8px 1px no-repeat;
+}
+
+.win98-align-right {
+	background:
+		linear-gradient(#000, #000) right 0 / 12px 1px no-repeat,
+		linear-gradient(#000, #000) right 3px / 9px 1px no-repeat,
+		linear-gradient(#000, #000) right 6px / 12px 1px no-repeat,
+		linear-gradient(#000, #000) right 9px / 7px 1px no-repeat;
+}
+
+.win98-align-justify {
+	background:
+		linear-gradient(#000, #000) 0 0 / 12px 1px no-repeat,
+		linear-gradient(#000, #000) 0 3px / 12px 1px no-repeat,
+		linear-gradient(#000, #000) 0 6px / 12px 1px no-repeat,
+		linear-gradient(#000, #000) 0 9px / 12px 1px no-repeat;
+}
+
+// === List icons (numbering/bullets) ===
+.win98-list-icon {
+	display: block;
+	width: 14px;
+	height: 10px;
+}
+
+.win98-list-numbered {
+	background:
+		// "1" dot
+		linear-gradient(#000, #000) 0 0 / 1px 2px no-repeat,
+		// lines
+		linear-gradient(#000, #000) 4px 0 / 10px 1px no-repeat,
+		// "2" dot
+		linear-gradient(#000, #000) 0 4px / 1px 2px no-repeat,
+		// lines
+		linear-gradient(#000, #000) 4px 4px / 10px 1px no-repeat,
+		// "3" dot
+		linear-gradient(#000, #000) 0 8px / 1px 2px no-repeat,
+		// lines
+		linear-gradient(#000, #000) 4px 8px / 10px 1px no-repeat;
+}
+
+.win98-list-bullet {
+	background:
+		// bullet dots
+		linear-gradient(#000, #000) 0 0 / 2px 2px no-repeat,
+		linear-gradient(#000, #000) 4px 0 / 10px 1px no-repeat,
+		linear-gradient(#000, #000) 0 4px / 2px 2px no-repeat,
+		linear-gradient(#000, #000) 4px 4px / 10px 1px no-repeat,
+		linear-gradient(#000, #000) 0 8px / 2px 2px no-repeat,
+		linear-gradient(#000, #000) 4px 8px / 10px 1px no-repeat;
+}
+
+// === Ruler (Win98 Word style) ===
 .win98-ruler {
 	background: #FFF;
 	border-bottom: 1px solid #808080;
@@ -166,6 +262,13 @@
 	font-size: 12pt;
 	line-height: 1.5;
 	color: #000;
+	// Editable document: show text cursor
+	cursor: text;
+	outline: none;
+
+	&:focus {
+		outline: none;
+	}
 }
 
 // === Document content styles ===
@@ -333,6 +436,52 @@
 	}
 }
 
+// === Status bar - Word 97 style ===
+.single-post-statusbar {
+	// Override flex-grow for specific field widths like Word 97
+	.status-bar-field {
+		flex-grow: 0;
+	}
+
+	// First 3 fields: Page, Sec, page count - fixed widths
+	.status-bar-field:nth-child(1) { width: 60px; }
+	.status-bar-field:nth-child(2) { width: 50px; }
+	.status-bar-field:nth-child(3) { width: 35px; }
+
+	// Date field takes available space
+	.wp-block-post-date {
+		flex-grow: 1;
+	}
+
+	// Ln/Col
+	.status-bar-field:nth-child(-n+5) {
+		// let them size naturally
+	}
+
+	// REC, TRK, EXT, OVR, WPH indicators - dimmed like Word 97
+	.win98-statusbar-indicator {
+		width: 36px;
+		text-align: center;
+		color: #808080;
+		flex-grow: 0;
+	}
+}
+
+// Fix: WP renders wp:post-date as a <div> which breaks out of the <p.status-bar-field>.
+.single-post-window .status-bar {
+	p:empty {
+		display: none;
+	}
+
+	.wp-block-post-date {
+		box-shadow: var(--border-status-field);
+		flex-grow: 1;
+		margin: 0;
+		padding: 2px 3px;
+		font-size: 11px;
+	}
+}
+
 // === Responsive ===
 
 // Mobile
@@ -351,10 +500,23 @@
 
 	.win98-toolbar-row {
 		gap: 0;
+		flex-wrap: wrap;
+		overflow: visible;
 	}
 
 	.single-post-page {
 		padding: clamp(20px, 5vw, 40px) clamp(16px, 4vw, 30px);
+	}
+
+	// Hide status bar indicators on mobile
+	.win98-statusbar-indicator {
+		display: none !important;
+	}
+
+	// Hide style/zoom selects on mobile
+	.win98-style-select,
+	.win98-zoom-select {
+		display: none;
 	}
 }
 
@@ -391,24 +553,6 @@
 @media (min-width: 1440px) {
 	.single-post-window {
 		width: 950px !important;
-	}
-}
-
-// Fix: WP renders wp:post-date as a <div> which breaks out of the <p.status-bar-field>.
-// Style the orphaned .wp-block-post-date inside .status-bar to match a status-bar-field,
-// and hide the empty <p> tags left behind.
-.single-post-window .status-bar {
-	// Empty <p> tags left by WP block parsing
-	p:empty {
-		display: none;
-	}
-
-	.wp-block-post-date {
-		box-shadow: var(--border-status-field);
-		flex-grow: 1;
-		margin: 0;
-		padding: 2px 3px;
-		font-size: 11px;
 	}
 }
 
