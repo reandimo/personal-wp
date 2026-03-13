@@ -1,16 +1,21 @@
 /**
  * Explorer Tree - Dynamically loads categories as subfolders under Blog
+ * Highlights the active category when viewing a category archive
  */
 
 export function initExplorerTree(): void {
 	const blogNode = document.querySelector('.explorer-tree-active') as HTMLElement;
 	if (!blogNode) return;
 
+	// Detect current category from the URL (e.g. /category/uncategorized/)
+	const currentPath = window.location.pathname;
+	const categoryMatch = currentPath.match(/\/category\/([^/]+)/);
+	const currentCategorySlug = categoryMatch ? categoryMatch[1] : null;
+
 	// Fetch categories from WP REST API
 	fetch('/wp-json/wp/v2/categories?per_page=50&orderby=name&order=asc')
 		.then(r => r.json())
 		.then((categories: Array<{ id: number; name: string; slug: string; count: number; link: string }>) => {
-			// Filter out empty or default-only
 			const cats = categories.filter(c => c.count > 0);
 			if (cats.length === 0) return;
 
@@ -26,8 +31,14 @@ export function initExplorerTree(): void {
 				li.style.whiteSpace = 'nowrap';
 				li.style.cursor = 'pointer';
 
+				// Highlight if this is the current category
+				const isActive = currentCategorySlug === cat.slug;
+				if (isActive) {
+					li.classList.add('explorer-tree-active');
+				}
+
 				const img = document.createElement('img');
-				img.src = iconBase + 'directory_closed_cool-0.png';
+				img.src = iconBase + (isActive ? 'directory_open_cool-0.png' : 'directory_closed_cool-0.png');
 				img.alt = '';
 				img.width = 16;
 				img.height = 16;
@@ -67,9 +78,14 @@ export function initExplorerTree(): void {
 			// Replace the Blog <li> content
 			blogNode.appendChild(details);
 
-			// Keep the active style on the summary
-			blogNode.classList.remove('explorer-tree-active');
-			summary.classList.add('explorer-tree-active');
+			// If viewing a category, Blog is not active — the category is
+			if (currentCategorySlug) {
+				blogNode.classList.remove('explorer-tree-active');
+				summary.classList.remove('explorer-tree-active');
+			} else {
+				blogNode.classList.remove('explorer-tree-active');
+				summary.classList.add('explorer-tree-active');
+			}
 		})
 		.catch(() => {
 			// Silently fail - tree stays as-is without categories
