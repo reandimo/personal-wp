@@ -152,14 +152,12 @@
 	display: flex;
 	justify-content: center;
 	padding: clamp(16px, 3vw, 30px) clamp(8px, 2vw, 20px);
-	min-height: 100%;
 }
 
 .single-post-page {
 	background: #FFFFFF;
 	width: 100%;
 	max-width: 650px;
-	min-height: 400px;
 	padding: clamp(40px, 8vw, 72px) clamp(30px, 6vw, 72px);
 	box-shadow:
 		2px 2px 4px rgba(0, 0, 0, 0.3),
