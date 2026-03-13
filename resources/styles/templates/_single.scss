@@ -394,6 +394,24 @@
 	}
 }
 
+// Fix: WP renders wp:post-date as a <div> which breaks out of the <p.status-bar-field>.
+// Style the orphaned .wp-block-post-date inside .status-bar to match a status-bar-field,
+// and hide the empty <p> tags left behind.
+.single-post-window .status-bar {
+	// Empty <p> tags left by WP block parsing
+	p:empty {
+		display: none;
+	}
+
+	.wp-block-post-date {
+		box-shadow: var(--border-status-field);
+		flex-grow: 1;
+		margin: 0;
+		padding: 2px 3px;
+		font-size: 11px;
+	}
+}
+
 // Post title inline in title bar
 .title-bar-text .post-title-inline {
 	display: inline;
