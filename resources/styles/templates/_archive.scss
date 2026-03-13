@@ -1,64 +1,475 @@
-// Archive Template Styles
-// Estilos específicos para templates/archive.html (Blog)
+// Archive Template Styles - Windows 98 Explorer
+// Uses 98.css framework: .window, .title-bar, .tree-view, .status-bar
+// Targets both file-based and WP database-cached template HTML structures
 
-// Blog Posts Styles
-.blog-posts {
-	flex-direction: column;
-	gap: clamp(12px, 3vw, 16px);
+// === Explorer Window sizing ===
+.explorer-window {
+	width: min(100%, 850px) !important;
+	max-width: 100% !important;
 }
 
-.blog-post-item {
-	margin-bottom: clamp(12px, 3vw, 16px);
-	padding: clamp(10px, 2.5vw, 14px);
-	background: #FFFFFF;
-	border: 2px inset #C0C0C0;
-	border-color: #808080 #FFFFFF #FFFFFF #808080;
-
-	h3 {
-		margin: 0 0 clamp(6px, 1.5vw, 8px) 0;
-		font-size: clamp(14px, 3vw, 18px);
-		color: #000080;
-	}
-
-	.wp-block-post-date {
-		font-size: clamp(10px, 2vw, 11px);
-		color: #808080;
-		margin-bottom: clamp(6px, 1.5vw, 8px);
-	}
-
-	.wp-block-post-excerpt {
-		font-size: clamp(11px, 2.5vw, 13px);
-		line-height: 1.6;
-		margin-bottom: clamp(8px, 2vw, 10px);
-	}
-
-	.wp-block-separator {
-		margin: clamp(8px, 2vw, 12px) 0;
-		border-color: #808080;
-	}
-}
-
-.blog-pagination {
+// === Toolbar - Win98 Explorer style ===
+// Handles both class naming variants (explorer-toolbar, win98-toolbar)
+.explorer-toolbar,
+.win98-toolbar.explorer-toolbar {
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	gap: clamp(4px, 1vw, 8px);
-	margin-top: clamp(12px, 3vw, 16px);
-	padding: clamp(8px, 2vw, 12px);
+	flex-wrap: wrap;
+	gap: 2px;
+	padding: 2px 4px;
+	background: var(--surface);
+	border-bottom: 1px solid var(--button-shadow);
+}
 
-	.wp-block-query-pagination-previous,
-	.wp-block-query-pagination-next,
-	.wp-block-query-pagination-numbers {
-		button,
-		a {
-			padding: clamp(4px, 1vw, 6px) clamp(8px, 2vw, 12px);
-			font-size: clamp(10px, 2vw, 11px);
+.explorer-toolbar-btn,
+.win98-toolbar-btn--with-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 2px 6px;
+	background: transparent;
+	border: 1px solid transparent;
+	cursor: pointer;
+	font-size: 11px;
+
+	img {
+		width: 16px;
+		height: 16px;
+		image-rendering: pixelated;
+		flex-shrink: 0;
+	}
+
+	&:hover {
+		border-color: var(--button-highlight) var(--button-shadow) var(--button-shadow) var(--button-highlight);
+	}
+
+	&:active {
+		border-color: var(--button-shadow) var(--button-highlight) var(--button-highlight) var(--button-shadow);
+	}
+
+	&[disabled] {
+		opacity: 0.5;
+		cursor: default;
+		&:hover { border-color: transparent; }
+	}
+}
+
+.explorer-toolbar-divider,
+.win98-toolbar-separator {
+	width: 1px;
+	height: 20px;
+	background: var(--button-shadow);
+	border-right: 1px solid var(--button-highlight);
+	margin: 0 4px;
+}
+
+// === Address bar ===
+.explorer-address-bar {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 2px 4px;
+	background: var(--surface);
+	border-bottom: 1px solid var(--button-shadow);
+}
+
+.explorer-address-label {
+	font-size: 11px;
+	white-space: nowrap;
+	padding: 0 4px;
+}
+
+.explorer-address-input,
+.explorer-address-field {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 1px 4px;
+	background: var(--button-highlight);
+	box-shadow: var(--border-field);
+	font-size: 11px;
+	min-height: 20px;
+
+	img {
+		width: 16px;
+		height: 16px;
+		image-rendering: pixelated;
+		flex-shrink: 0;
+	}
+
+	span {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+
+// === Main body - split panels ===
+.explorer-body {
+	display: flex !important;
+	flex-direction: row !important;
+	padding: 0 !important;
+	gap: 0 !important;
+	flex: 1;
+	min-height: 0;
+	overflow: hidden;
+}
+
+// === Tree panel ===
+.explorer-tree-panel {
+	width: clamp(140px, 25vw, 200px);
+	min-width: 120px;
+	flex-shrink: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background: var(--button-highlight);
+	box-shadow: var(--border-field);
+
+	// 98.css tree-view (new template)
+	ul.tree-view {
+		border: none;
+		box-shadow: none;
+		height: 100%;
+		margin: 0;
+		font-size: 11px;
+		overflow: auto;
+
+		img {
+			image-rendering: pixelated;
+		}
+
+		li {
+			white-space: nowrap;
+		}
+	}
+
+	// Div-based tree (old cached template)
+	.explorer-tree-item {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		padding: 1px 4px;
+		font-size: 11px;
+		white-space: nowrap;
+		cursor: pointer;
+		user-select: none;
+
+		img {
+			width: 16px;
+			height: 16px;
+			image-rendering: pixelated;
+			flex-shrink: 0;
+		}
+	}
+
+	.explorer-tree-indent { padding-left: 16px; }
+	.explorer-tree-indent-2 { padding-left: 32px; }
+	.explorer-tree-indent-3 { padding-left: 48px; }
+	.explorer-tree-indent-4 { padding-left: 64px; }
+
+	.explorer-tree-active {
+		background: var(--dialog-blue);
+		color: var(--button-highlight);
+	}
+}
+
+// === File panel ===
+.explorer-file-panel {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	background: var(--button-highlight);
+	box-shadow: var(--border-field);
+	overflow: hidden;
+}
+
+// === Column headers - Win98 raised buttons ===
+.explorer-list-header {
+	display: flex;
+	flex-shrink: 0;
+}
+
+.explorer-col {
+	padding: 2px 8px;
+	font-size: 11px;
+	font-weight: normal;
+	background: var(--surface);
+	border: none;
+	border-right: 1px solid var(--button-shadow);
+	box-shadow:
+		inset 1px 1px 0 var(--button-highlight),
+		inset -1px -1px 0 var(--button-shadow);
+	cursor: pointer;
+	user-select: none;
+	white-space: nowrap;
+	text-align: left;
+
+	&:active {
+		box-shadow:
+			inset 1px 1px 0 var(--button-shadow),
+			inset -1px -1px 0 var(--button-highlight);
+	}
+}
+
+.explorer-col-name {
+	flex: 2;
+	min-width: 120px;
+}
+
+.explorer-col-size {
+	width: 70px;
+	flex-shrink: 0;
+	text-align: right;
+}
+
+.explorer-col-type {
+	width: 140px;
+	flex-shrink: 0;
+}
+
+.explorer-col-modified {
+	flex: 1;
+	min-width: 120px;
+	border-right: none;
+}
+
+// === File list ===
+.explorer-file-list {
+	flex: 1;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background: var(--button-highlight);
+}
+
+// === File rows ===
+// WordPress renders post-template as <ul class="wp-block-post-template"><li>...</li></ul>
+// Target both .explorer-post-list (new) and .wp-block-post-template (cached)
+.explorer-post-list,
+.explorer-file-list .wp-block-post-template {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: block;
+
+	// Hide the broken empty <a> tags WP generates
+	> li > a.explorer-file-row {
+		display: none;
+	}
+
+	// Each post <li> = a file row
+	> li {
+		display: flex;
+		align-items: center;
+		padding: 1px 0;
+		font-size: 11px;
+		cursor: pointer;
+		border: 1px solid transparent;
+
+		&:hover {
+			background: var(--dialog-blue);
+			color: var(--button-highlight);
+
+			.explorer-file-title,
+			.explorer-file-title a,
+			.wp-block-post-title,
+			.wp-block-post-title a,
+			.explorer-file-date,
+			.wp-block-post-date,
+			.wp-block-post-date time {
+				color: var(--button-highlight) !important;
+			}
+		}
+
+		// Name column - handles both .explorer-file-title and .wp-block-post-title
+		.explorer-file-title,
+		.wp-block-post-title {
+			flex: 2;
+			min-width: 120px;
+			padding: 1px 8px 1px 4px;
+			font-size: 11px;
+			font-weight: normal;
+			margin: 0;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: flex;
+			align-items: center;
+			gap: 4px;
+			order: 1;
+
+			// Word document icon
+			&::before {
+				content: '';
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				background: url('/wp-content/themes/personal-wp/public/misc/windows98-icons/png/write_wordpad-0.png') no-repeat center;
+				background-size: 16px 16px;
+				image-rendering: pixelated;
+				flex-shrink: 0;
+			}
+
+			a {
+				color: #000;
+				text-decoration: none;
+				font-size: 11px;
+				font-weight: normal;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+
+				&::after {
+					content: '.doc';
+				}
+
+				// Hide the broken duplicate anchor
+				&.explorer-file-row {
+					display: none;
+				}
+			}
+		}
+
+		// Fake size column via ::before
+		&::before {
+			content: '24 KB';
+			width: 70px;
+			flex-shrink: 0;
+			padding: 1px 8px;
+			font-size: 11px;
+			text-align: right;
+			white-space: nowrap;
+			order: 2;
+		}
+
+		// Fake type column via ::after
+		&::after {
+			content: 'Microsoft Word Document';
+			width: 140px;
+			flex-shrink: 0;
+			padding: 1px 8px;
+			font-size: 11px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			order: 3;
+		}
+
+		// Date column
+		.explorer-file-date,
+		.wp-block-post-date {
+			flex: 1;
+			min-width: 120px;
+			padding: 1px 8px;
+			font-size: 11px;
+			color: #000;
+			margin: 0;
+			white-space: nowrap;
+			order: 4;
+
+			time {
+				font-size: 11px;
+			}
+		}
+
+		// Hide excerpt (not needed in file list view)
+		.wp-block-post-excerpt {
+			display: none;
 		}
 	}
 }
 
-.blog-no-results {
+// === Pagination ===
+.explorer-pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: clamp(4px, 1vw, 8px);
+	padding: clamp(6px, 1.5vw, 10px);
+	background: var(--button-highlight);
+
+	a {
+		padding: 2px 8px;
+		font-size: 11px;
+	}
+}
+
+.explorer-no-results {
 	padding: clamp(16px, 4vw, 24px);
 	text-align: center;
-	font-size: clamp(12px, 3vw, 14px);
+	font-size: 11px;
+	color: var(--dialog-gray);
+}
+
+// === Responsive ===
+
+@media (max-width: 768px) {
+	.explorer-window {
+		position: relative !important;
+		margin: 0 auto;
+		left: auto !important;
+		top: auto !important;
+		transform: none !important;
+	}
+
+	.explorer-tree-panel {
+		display: none;
+	}
+
+	.explorer-col-size,
+	.explorer-col-type {
+		display: none;
+	}
+
+	.explorer-post-list > li,
+	.explorer-file-list .wp-block-post-template > li {
+		&::before,
+		&::after {
+			display: none;
+		}
+	}
+
+	.explorer-toolbar-btn span,
+	.win98-toolbar-btn--with-label span {
+		display: none;
+	}
+}
+
+@media (min-width: 481px) {
+	.explorer-window {
+		width: min(95vw, 850px) !important;
+	}
+}
+
+@media (min-width: 769px) {
+	.explorer-window {
+		width: 850px !important;
+		max-height: 80vh;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	.explorer-body {
+		flex: 1;
+		min-height: 0;
+		overflow: hidden;
+	}
+
+	.explorer-file-list {
+		overflow-y: auto;
+	}
+}
+
+@media (min-width: 1025px) {
+	.explorer-window {
+		width: 850px !important;
+	}
+}
+
+@media (min-width: 1440px) {
+	.explorer-window {
+		width: 850px !important;
+	}
 }

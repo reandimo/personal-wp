@@ -158,6 +158,8 @@ if (document.readyState === 'loading') {
 		StartMenuManager.initializeAll();
 		// Play startup sound after DOM is ready
 		playWindows98StartupSound();
+		// Update explorer status bar object count
+		updateExplorerStatus();
 	});
 } else {
 	loadIcons();
@@ -167,4 +169,16 @@ if (document.readyState === 'loading') {
 	StartMenuManager.initializeAll();
 	// Play startup sound immediately
 	playWindows98StartupSound();
+	// Update explorer status bar object count
+	updateExplorerStatus();
+}
+
+/**
+ * Update Explorer window status bar with object count
+ */
+function updateExplorerStatus(): void {
+	const statusField = document.querySelector('.explorer-status-objects');
+	if (!statusField) return;
+	const fileRows = document.querySelectorAll('.explorer-file-list .wp-block-post-template > li, .explorer-post-list > li');
+	statusField.textContent = `${fileRows.length} object(s)`;
 }
