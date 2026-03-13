@@ -1,0 +1,14 @@
+name: Deploy Theme
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger push-to-deploy
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" \
+            "${{ secrets.DEPLOY_WEBHOOK_URL }}"

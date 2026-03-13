@@ -3,8 +3,36 @@
  * Import all frontend styles here
  */
 
-// Import 98.css library
-@import '98.css/style.css';
+// Import 98.css library (dist version has inlined SVGs for scrollbar arrows)
+@import '98.css/dist/98.css';
+
+// 98.css dist compiles CSS custom properties to static values,
+// but our custom styles reference them. Re-declare the :root variables.
+:root {
+  --text-color: #222222;
+  --surface: #c0c0c0;
+  --button-highlight: #ffffff;
+  --button-face: #dfdfdf;
+  --button-shadow: #808080;
+  --window-frame: #0a0a0a;
+  --dialog-blue: #000080;
+  --dialog-blue-light: #1084d0;
+  --dialog-gray: #808080;
+  --dialog-gray-light: #b5b5b5;
+  --link-blue: #0000ff;
+  --element-spacing: 8px;
+  --grouped-button-spacing: 4px;
+  --grouped-element-spacing: 6px;
+  --border-width: 1px;
+  --border-raised-outer: inset -1px -1px var(--window-frame), inset 1px 1px var(--button-highlight);
+  --border-raised-inner: inset -2px -2px var(--button-shadow), inset 2px 2px var(--button-face);
+  --border-sunken-outer: inset -1px -1px var(--button-highlight), inset 1px 1px var(--window-frame);
+  --border-sunken-inner: inset -2px -2px var(--button-face), inset 2px 2px var(--button-shadow);
+  --border-window-outer: inset -1px -1px var(--window-frame), inset 1px 1px var(--button-face);
+  --border-window-inner: inset -2px -2px var(--button-shadow), inset 2px 2px var(--button-highlight);
+  --border-field: inset -1px -1px var(--button-highlight), inset 1px 1px var(--button-shadow), inset -2px -2px var(--button-face), inset 2px 2px var(--window-frame);
+  --border-status-field: inset -1px -1px var(--button-face), inset 1px 1px var(--button-shadow);
+}
 
 // Landing 2000s styles (customizations on top of 98.css)
 @import '../templates/index.scss';

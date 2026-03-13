@@ -1,6 +1,14 @@
 // Base Styles - Estilos comunes compartidos entre todos los templates
 // Landing Page Windows 98 Style - Estilos complementarios para 98.css
 
+// Fix: hide the extra scrollbar buttons that browsers render by default
+::-webkit-scrollbar-button:vertical:start:increment,
+::-webkit-scrollbar-button:vertical:end:decrement,
+::-webkit-scrollbar-button:horizontal:start:increment,
+::-webkit-scrollbar-button:horizontal:end:decrement {
+	display: none;
+}
+
 .landing-2000s-wrapper {
 	display: flex;
 	justify-content: center;
@@ -22,45 +30,10 @@
 	position: relative;
 	transition: transform 0s;
 	
-	// Estilos para los controles de ventana
-	.title-bar-controls {
-		button {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 16px;
-			height: 14px;
-			padding: 0;
-			font-size: 0;
-			line-height: 0;
-			
-			.window-control-icon {
-				display: block;
-				font-size: 11px;
-				line-height: 1;
-				font-weight: 700;
-				color: #000000;
-				text-align: center;
-				user-select: none;
-			}
-			
-			&.window-minimize .window-control-icon {
-				font-size: 8px;
-				line-height: 1;
-				margin-top: -2px;
-			}
-			
-			&.window-maximize .window-control-icon {
-				font-size: 10px;
-				line-height: 1;
-			}
-			
-			&.window-close .window-control-icon {
-				font-size: 12px;
-				line-height: 1;
-				font-weight: 400;
-			}
-		}
+	// 98.css handles title-bar-controls button icons via background-image SVGs.
+	// Hide the redundant text spans from the HTML.
+	.title-bar-controls .window-control-icon {
+		display: none;
 	}
 }
 
