@@ -216,10 +216,24 @@ function initSearchDialog(dialog: HTMLElement): void {
 }
 
 export function initExplorerSearch(): void {
-	const searchButtons = document.querySelectorAll<HTMLButtonElement>('.explorer-toolbar-btn[title="Search"]');
+	console.log('[Explorer Search] Initializing...');
+	// Find search buttons by title attribute or by text content
+	const allToolbarBtns = document.querySelectorAll<HTMLButtonElement>('.explorer-toolbar-btn');
+	const searchButtons: HTMLButtonElement[] = [];
+
+	allToolbarBtns.forEach((btn) => {
+		const title = btn.getAttribute('title');
+		const text = btn.textContent?.trim();
+		if (title === 'Search' || text === 'Search') {
+			searchButtons.push(btn);
+		}
+	});
+
+	console.log('[Explorer Search] Found', searchButtons.length, 'search button(s)');
 
 	searchButtons.forEach((btn) => {
 		btn.addEventListener('click', () => {
+			console.log('[Explorer Search] Search button clicked!');
 			// Don't open duplicate
 			const existing = document.querySelector('.explorer-search-dialog');
 			if (existing) {

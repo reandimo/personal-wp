@@ -178,6 +178,8 @@ if (document.readyState === 'loading') {
 		initExplorerResize();
 		// Init Explorer tree categories
 		initExplorerTree();
+		// Init Explorer search
+		initExplorerSearch();
 	});
 } else {
 	loadIcons();
