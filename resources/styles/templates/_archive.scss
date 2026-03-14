@@ -488,6 +488,196 @@
 	}
 }
 
+// === Search Dialog - Win98 "Find: All Files" ===
+.explorer-search-dialog {
+	width: min(95vw, 480px);
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.explorer-search-body {
+	padding: 0 !important;
+	display: flex;
+	flex-direction: column;
+}
+
+.explorer-search-tabs {
+	display: flex;
+	padding: 4px 4px 0;
+	background: var(--surface);
+
+	.explorer-search-tab {
+		padding: 2px 12px;
+		font-size: 11px;
+		background: var(--surface);
+		border: 1px solid var(--button-shadow);
+		border-bottom: none;
+		margin-bottom: -1px;
+		position: relative;
+		z-index: 1;
+
+		&.active {
+			background: var(--surface);
+			border-bottom: 1px solid var(--surface);
+			padding-bottom: 3px;
+		}
+	}
+}
+
+.explorer-search-form {
+	padding: 8px 12px;
+	background: var(--surface);
+	border-top: 1px solid var(--button-shadow);
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.explorer-search-field {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	label {
+		font-size: 11px;
+		white-space: nowrap;
+		min-width: 50px;
+	}
+
+	input {
+		flex: 1;
+		padding: 2px 4px;
+		font-size: 11px;
+		font-family: inherit;
+	}
+}
+
+.explorer-search-lookin {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 1px 4px;
+	background: var(--button-highlight);
+	box-shadow: var(--border-field);
+	font-size: 11px;
+	min-height: 20px;
+
+	img {
+		width: 16px;
+		height: 16px;
+		image-rendering: pixelated;
+	}
+}
+
+.explorer-search-actions {
+	display: flex;
+	gap: 4px;
+	justify-content: flex-end;
+	padding-top: 4px;
+
+	button {
+		min-width: 80px;
+		padding: 2px 8px;
+		font-size: 11px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 4px;
+
+		img {
+			width: 16px;
+			height: 16px;
+			image-rendering: pixelated;
+		}
+
+		&:disabled {
+			opacity: 0.5;
+		}
+	}
+}
+
+.explorer-search-results-area {
+	border-top: 1px solid var(--button-shadow);
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+}
+
+.explorer-search-results-header {
+	display: flex;
+	flex-shrink: 0;
+}
+
+.explorer-search-results-header .explorer-col-name {
+	flex: 2;
+}
+
+.explorer-search-results-header .explorer-col-modified {
+	flex: 1;
+	border-right: none;
+}
+
+.explorer-search-results {
+	max-height: 200px;
+	overflow-y: auto;
+	background: var(--button-highlight);
+}
+
+.explorer-search-result-row {
+	display: flex;
+	align-items: center;
+	padding: 1px 0;
+	font-size: 11px;
+	cursor: pointer;
+	text-decoration: none;
+	color: #000;
+	border: 1px solid transparent;
+
+	&:hover {
+		background: var(--dialog-blue);
+		color: var(--button-highlight);
+	}
+}
+
+.explorer-search-result-name {
+	flex: 2;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 1px 8px 1px 4px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	img {
+		width: 16px;
+		height: 16px;
+		image-rendering: pixelated;
+		flex-shrink: 0;
+	}
+}
+
+.explorer-search-result-date {
+	flex: 1;
+	padding: 1px 8px;
+	white-space: nowrap;
+}
+
+.explorer-search-empty {
+	padding: 16px;
+	text-align: center;
+	font-size: 11px;
+	color: #808080;
+}
+
+.explorer-search-status {
+	padding: 2px 6px;
+	font-size: 11px;
+	background: var(--surface);
+	border-top: 1px solid var(--button-shadow);
+	box-shadow: inset 1px 1px 0 var(--button-highlight);
+}
+
 // === Responsive ===
 
 @media (max-width: 768px) {

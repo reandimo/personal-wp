@@ -332,7 +332,6 @@
 	font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
 }
 
-// Start button - personalizado, pero usa estilos base de 98.css
 .start-button {
 	display: flex;
 	align-items: center;
@@ -341,7 +340,6 @@
 	padding: 0 12px;
 	font-weight: 700;
 	white-space: nowrap;
-	// 98.css ya proporciona estilos base para button (background, border, hover, active, focus)
 }
 
 .start-button-icon {
@@ -361,54 +359,66 @@
 	height: 100%;
 }
 
-// Taskbar clock - estilos personalizados
 .taskbar-clock {
 	padding: 2px 8px;
 	user-select: none;
-	// 98.css ya proporciona fuente base
 }
 
-// Menú de inicio
-// Start menu - estilos personalizados (componente único, no está en 98.css)
+// Start menu - Windows 98 authentic style
 .start-menu {
 	position: fixed;
 	bottom: 30px;
 	left: 2px;
-	width: min(90vw, 200px);
-	max-width: 200px;
-	// Box-shadow estilo Windows 98 para efecto 3D
-	box-shadow: 
-		2px -2px 0px 0px #000000,
-		3px -3px 0px 0px #808080;
+	width: min(90vw, 260px);
+	max-width: 260px;
+	border: 2px outset #C0C0C0;
 	z-index: 10001;
 	display: none;
-	// 98.css ya proporciona fuente base para el documento
+	background: #C0C0C0;
 
 	&.open,
 	&[aria-hidden="false"] {
-		display: block;
+		display: flex;
+		flex-direction: row;
 	}
 }
 
-// Start menu header - estilos personalizados (similar a title-bar pero más compacto)
-.start-menu-header {
-	padding: 4px 8px;
-	height: 24px;
+// Vertical blue sidebar with "Windows98" text
+.start-menu-sidebar {
+	width: 24px;
+	min-width: 24px;
+	background: linear-gradient(to top, #000080 0%, #1084d0 100%);
 	display: flex;
-	align-items: center;
-	// Background estilo Windows 98 - gradiente azul similar a title-bar activa
-	background: linear-gradient(to bottom, #000080 0%, #1084d0 100%);
-	color: #FFFFFF;
-	// Usar estilos base de 98.css si se agrega clase .title-bar en el HTML
+	align-items: flex-end;
+	justify-content: center;
+	padding-bottom: 8px;
+	position: relative;
 }
 
-.start-menu-title {
-	// 98.css ya proporciona estilos base para .title-bar-text si se usa esa clase
+.start-menu-sidebar-text {
+	color: #C0C0C0;
+	font-size: 16px;
+	font-weight: 400;
+	letter-spacing: 1px;
+	writing-mode: vertical-lr;
+	transform: rotate(180deg);
+	white-space: nowrap;
+	user-select: none;
+
+	.sidebar-bold {
+		font-weight: 700;
+		color: #FFFFFF;
+	}
 }
 
-// Start menu content - fondo estándar de Windows 98
+// Main menu area
+.start-menu-main {
+	flex: 1;
+	min-width: 0;
+}
+
 .start-menu-content {
-	padding: 4px 0;
+	padding: 2px 0;
 	background: #C0C0C0;
 }
 
@@ -417,22 +427,26 @@
 	flex-direction: column;
 }
 
-// Start menu items - estilos de hover/active/focus personalizados
+// Menu items - authentic Win98 layout with 32x32 icons
 .start-menu-item {
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	padding: 4px 8px 4px 24px;
-	// color: #000000; // Default, no necesario especificar
+	padding: 6px 24px 6px 4px;
 	font-size: 11px;
 	cursor: pointer;
 	user-select: none;
 	position: relative;
+	min-height: 36px;
 
 	&:hover,
 	&:active {
 		background: #000080;
 		color: #FFFFFF;
+
+		.submenu-arrow {
+			color: #FFFFFF;
+		}
 	}
 
 	&:focus {
@@ -442,23 +456,36 @@
 }
 
 .start-menu-icon {
-	font-size: 16px;
 	line-height: 1;
-	width: 16px;
+	width: 32px;
+	height: 32px;
 	text-align: center;
 	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .start-menu-label {
-	line-height: 1.5;
+	line-height: 1.3;
 	flex: 1;
 }
 
-// Start menu divider - estilo Windows 98 para separadores
+// Submenu arrow for items with submenus
+.submenu-arrow {
+	font-size: 8px;
+	color: #000000;
+	position: absolute;
+	right: 8px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+// Start menu divider
 .start-menu-divider {
 	height: 1px;
 	background: #808080;
-	margin: 2px 0;
+	margin: 3px 2px;
 	border-top: 1px solid #FFFFFF;
 }
 
@@ -580,7 +607,7 @@
 	}
 
 	.start-menu {
-		width: min(90vw, 200px);
+		width: min(90vw, 260px);
 	}
 }
 

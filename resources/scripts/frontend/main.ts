@@ -18,6 +18,9 @@ import { initExplorerResize } from '../components/explorer-resize';
 // Import Explorer tree (categories)
 import { initExplorerTree } from '../components/explorer-tree';
 
+// Import Explorer search
+import { initExplorerSearch } from '../components/explorer-search';
+
 // Import cookies-js
 import Cookies from 'cookies-js';
 
@@ -192,6 +195,8 @@ if (document.readyState === 'loading') {
 	initExplorerResize();
 	// Init Explorer tree categories
 	initExplorerTree();
+	// Init Explorer search
+	initExplorerSearch();
 }
 
 /**

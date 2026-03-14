@@ -113,6 +113,12 @@ export class StartMenuManager {
 			case 'email':
 				window.location.href = 'mailto:reandimo23@gmail.com';
 				break;
+			case 'find':
+				showWindows98Alert('Find: Feature not available in this version.');
+				break;
+			case 'help':
+				showWindows98Alert('Welcome to Reandimo\'s personal website!\n\nNavigate using the Start menu or desktop shortcuts.');
+				break;
 			case 'shutdown':
 				showWindows98Alert('Are you sure you want to close this session?');
 				break;
