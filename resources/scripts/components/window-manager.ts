@@ -28,31 +28,47 @@ export class WindowManager {
 	}
 
 	private initShortcuts(): void {
-		const shortcuts = document.querySelectorAll<HTMLButtonElement>('.shortcut-button');
+		const shortcuts = document.querySelectorAll<HTMLButtonElement>('.shortcut-button, .desktop-icon');
 		shortcuts.forEach((shortcut) => {
-			shortcut.addEventListener('click', () => {
-				// Verificar si tiene URL de redirección
-				const redirectUrl = shortcut.getAttribute('data-redirect-url');
-				if (redirectUrl) {
-					window.location.href = redirectUrl;
-					return;
-				}
-
-				// Si no tiene redirección, abrir ventana
-				const windowId = shortcut.getAttribute('data-window-id');
-				const windowTitle = shortcut.getAttribute('data-window-title') || 'Nueva Ventana';
-				const windowIcon = shortcut.getAttribute('data-window-icon') || '📄';
-
-				if (windowId) {
-					this.openWindow({
-						id: windowId,
-						title: windowTitle,
-						icon: windowIcon,
-						content: this.getWindowContent(windowId),
-					});
-				}
+			shortcut.addEventListener('dblclick', (e) => {
+				e.preventDefault();
+				this.handleShortcutAction(shortcut);
 			});
+			// Single click for .shortcut-button (inside window)
+			if (shortcut.classList.contains('shortcut-button')) {
+				shortcut.addEventListener('click', () => {
+					this.handleShortcutAction(shortcut);
+				});
+			}
 		});
+	}
+
+	private handleShortcutAction(shortcut: HTMLButtonElement): void {
+		// Verificar si tiene URL de redirección
+		const redirectUrl = shortcut.getAttribute('data-redirect-url');
+		if (redirectUrl) {
+			const target = shortcut.getAttribute('data-target');
+			if (target === '_blank') {
+				window.open(redirectUrl, '_blank', 'noopener,noreferrer');
+			} else {
+				window.location.href = redirectUrl;
+			}
+			return;
+		}
+
+		// Si no tiene redirección, abrir ventana
+		const windowId = shortcut.getAttribute('data-window-id');
+		const windowTitle = shortcut.getAttribute('data-window-title') || 'Nueva Ventana';
+		const windowIcon = shortcut.getAttribute('data-window-icon') || '📄';
+
+		if (windowId) {
+			this.openWindow({
+				id: windowId,
+				title: windowTitle,
+				icon: windowIcon,
+				content: this.getWindowContent(windowId),
+			});
+		}
 	}
 
 	private getWindowContent(windowId: string): string {

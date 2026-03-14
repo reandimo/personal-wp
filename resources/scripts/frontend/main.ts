@@ -21,6 +21,9 @@ import { initExplorerTree } from '../components/explorer-tree';
 // Import Explorer search
 import { initExplorerSearch } from '../components/explorer-search';
 
+// Import Desktop icons
+import { initDesktopIcons } from '../components/desktop-icons';
+
 // Import cookies-js
 import Cookies from 'cookies-js';
 
@@ -161,6 +164,7 @@ function playWindows98StartupSound(): void {
 // Initialize window drag when DOM is ready
 if (document.readyState === 'loading') {
 	document.addEventListener('DOMContentLoaded', () => {
+		initDesktopIcons();
 		loadIcons();
 		initWindowDrag();
 		// Initialize window manager and get instance
@@ -182,6 +186,7 @@ if (document.readyState === 'loading') {
 		initExplorerSearch();
 	});
 } else {
+	initDesktopIcons();
 	loadIcons();
 	initWindowDrag();
 	WindowManager.initializeAll();
