@@ -490,8 +490,10 @@
 
 // === Search Dialog - Win98 "Find: All Files" ===
 .explorer-search-dialog {
-	width: min(95vw, 480px);
-	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+	width: min(95vw, 520px);
+
+	// No menu bar for this dialog
+	.window-menu-bar { display: none; }
 }
 
 .explorer-search-body {
@@ -500,124 +502,83 @@
 	flex-direction: column;
 }
 
+// Tabs area using 98.css tabs
 .explorer-search-tabs {
-	display: flex;
-	padding: 4px 4px 0;
-	background: var(--surface);
+	margin: 0;
+	padding: 0;
 
-	.explorer-search-tab {
-		padding: 2px 12px;
-		font-size: 11px;
-		background: var(--surface);
-		border: 1px solid var(--button-shadow);
-		border-bottom: none;
-		margin-bottom: -1px;
-		position: relative;
-		z-index: 1;
+	menu[role="tablist"] {
+		padding-left: 8px;
 
-		&.active {
-			background: var(--surface);
-			border-bottom: 1px solid var(--surface);
-			padding-bottom: 3px;
+		button[role="tab"] {
+			font-size: 11px;
 		}
 	}
+
+	// Tab panel content
+	.explorer-search-tabpanel {
+		padding: 12px;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
 }
 
-.explorer-search-form {
-	padding: 8px 12px;
-	background: var(--surface);
-	border-top: 1px solid var(--button-shadow);
-	display: flex;
-	flex-direction: column;
-	gap: 6px;
-}
-
+// Form fields inside tab panel
 .explorer-search-field {
-	display: flex;
-	align-items: center;
-	gap: 8px;
+	.field-row {
+		gap: 8px;
 
-	label {
-		font-size: 11px;
-		white-space: nowrap;
-		min-width: 50px;
+		label {
+			font-size: 11px;
+			white-space: nowrap;
+			min-width: 48px;
+		}
+
+		input[type="text"] {
+			flex: 1;
+			font-size: 11px;
+		}
 	}
 
-	input {
+	.explorer-search-lookin {
 		flex: 1;
-		padding: 2px 4px;
 		font-size: 11px;
-		font-family: inherit;
 	}
 }
 
-.explorer-search-lookin {
-	flex: 1;
-	display: flex;
-	align-items: center;
-	gap: 4px;
-	padding: 1px 4px;
-	background: var(--button-highlight);
-	box-shadow: var(--border-field);
-	font-size: 11px;
-	min-height: 20px;
-
-	img {
-		width: 16px;
-		height: 16px;
-		image-rendering: pixelated;
-	}
-}
-
+// Action buttons row
 .explorer-search-actions {
 	display: flex;
 	gap: 4px;
 	justify-content: flex-end;
-	padding-top: 4px;
+	padding: 0 8px 6px;
 
 	button {
 		min-width: 80px;
-		padding: 2px 8px;
 		font-size: 11px;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		gap: 4px;
-
-		img {
-			width: 16px;
-			height: 16px;
-			image-rendering: pixelated;
-		}
-
-		&:disabled {
-			opacity: 0.5;
-		}
 	}
 }
 
+// Results list
 .explorer-search-results-area {
-	border-top: 1px solid var(--button-shadow);
 	display: flex;
 	flex-direction: column;
 	min-height: 0;
+	margin: 0 4px;
+	box-shadow: var(--border-field);
 }
 
 .explorer-search-results-header {
 	display: flex;
 	flex-shrink: 0;
-}
 
-.explorer-search-results-header .explorer-col-name {
-	flex: 2;
-}
-
-.explorer-search-results-header .explorer-col-modified {
-	flex: 1;
-	border-right: none;
+	.explorer-col-name { flex: 2; }
+	.explorer-col-modified { flex: 1; border-right: none; }
 }
 
 .explorer-search-results {
+	min-height: 80px;
 	max-height: 200px;
 	overflow-y: auto;
 	background: var(--button-highlight);
@@ -631,7 +592,6 @@
 	cursor: pointer;
 	text-decoration: none;
 	color: #000;
-	border: 1px solid transparent;
 
 	&:hover {
 		background: var(--dialog-blue);
@@ -670,12 +630,13 @@
 	color: #808080;
 }
 
-.explorer-search-status {
-	padding: 2px 6px;
-	font-size: 11px;
-	background: var(--surface);
-	border-top: 1px solid var(--button-shadow);
-	box-shadow: inset 1px 1px 0 var(--button-highlight);
+// Status bar at bottom
+.explorer-search-statusbar {
+	margin-top: 4px;
+
+	.status-bar-field {
+		font-size: 11px;
+	}
 }
 
 // === Responsive ===

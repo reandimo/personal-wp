@@ -12,9 +12,16 @@ interface WPPost {
 	date: string;
 }
 
+interface WPCategory {
+	id: number;
+	name: string;
+	count: number;
+	slug: string;
+}
+
 function createSearchDialog(): HTMLElement {
 	const dialog = document.createElement('div');
-	dialog.className = 'window landing-2000s-window explorer-search-dialog';
+	dialog.className = 'window explorer-search-dialog';
 	dialog.style.position = 'fixed';
 	dialog.style.zIndex = '2000';
 	dialog.style.left = '50%';
@@ -28,35 +35,35 @@ function createSearchDialog(): HTMLElement {
 				Find: All Files
 			</div>
 			<div class="title-bar-controls">
-				<button aria-label="Close" class="explorer-search-close">
-					<span class="window-control-icon" aria-hidden="true">&times;</span>
-				</button>
+				<button aria-label="Close"></button>
 			</div>
 		</div>
 		<div class="window-body explorer-search-body">
-			<div class="explorer-search-tabs">
-				<div class="explorer-search-tab active">Name & Location</div>
-			</div>
-			<div class="explorer-search-form">
-				<div class="explorer-search-field">
-					<label for="explorer-search-input">Na<u>m</u>ed:</label>
-					<input type="text" id="explorer-search-input" placeholder="" autofocus />
-				</div>
-				<div class="explorer-search-field">
-					<label>Look in:</label>
-					<div class="explorer-search-lookin">
-						<img src="" data-icon="hard_disk_drive-0.png" alt="" width="16" height="16">
-						<span>C:\\My Documents\\Blog</span>
+			<section class="tabs explorer-search-tabs">
+				<menu role="tablist">
+					<button role="tab" aria-selected="true">Name &amp; Location</button>
+				</menu>
+				<article role="tabpanel" class="explorer-search-tabpanel">
+					<div class="field-row-stacked explorer-search-field">
+						<div class="field-row">
+							<label for="explorer-search-input">Na<u>m</u>ed:</label>
+							<input type="text" id="explorer-search-input" autofocus />
+						</div>
 					</div>
-				</div>
-				<div class="explorer-search-actions">
-					<button class="explorer-search-btn-find" id="explorer-search-btn">
-						<img src="" data-icon="computer_search-0.png" alt="" width="16" height="16">
-						Find Now
-					</button>
-					<button class="explorer-search-btn-stop" id="explorer-search-stop" disabled>Stop</button>
-					<button class="explorer-search-btn-new" id="explorer-search-new">New Search</button>
-				</div>
+					<div class="field-row-stacked explorer-search-field">
+						<div class="field-row">
+							<label>Look in:</label>
+							<select class="explorer-search-lookin" id="explorer-search-category">
+								<option value="">C:\\My Documents\\Blog</option>
+							</select>
+						</div>
+					</div>
+				</article>
+			</section>
+			<div class="explorer-search-actions">
+				<button id="explorer-search-btn">Find Now</button>
+				<button id="explorer-search-stop" disabled>Stop</button>
+				<button id="explorer-search-new">New Search</button>
 			</div>
 			<div class="explorer-search-results-area">
 				<div class="explorer-search-results-header">
@@ -65,7 +72,9 @@ function createSearchDialog(): HTMLElement {
 				</div>
 				<div class="explorer-search-results" id="explorer-search-results"></div>
 			</div>
-			<div class="explorer-search-status">0 file(s) found</div>
+			<div class="status-bar explorer-search-statusbar">
+				<p class="status-bar-field" id="explorer-search-status">0 file(s) found</p>
+			</div>
 		</div>
 	`;
 
@@ -84,10 +93,21 @@ function formatDate(dateStr: string): string {
 	return `${month}/${day}/${year} ${h12}:${minutes} ${ampm}`;
 }
 
-async function searchPosts(query: string): Promise<WPPost[]> {
+async function fetchCategories(): Promise<WPCategory[]> {
 	const response = await fetch(
-		`/wp-json/wp/v2/posts?search=${encodeURIComponent(query)}&per_page=20&_fields=id,title,link,date`
+		'/wp-json/wp/v2/categories?per_page=50&orderby=name&order=asc&_fields=id,name,count,slug'
 	);
+	if (!response.ok) return [];
+	const cats: WPCategory[] = await response.json();
+	return cats.filter((c) => c.count > 0);
+}
+
+async function searchPosts(query: string, categoryId?: number): Promise<WPPost[]> {
+	let url = `/wp-json/wp/v2/posts?search=${encodeURIComponent(query)}&per_page=20&_fields=id,title,link,date`;
+	if (categoryId) {
+		url += `&categories=${categoryId}`;
+	}
+	const response = await fetch(url);
 	if (!response.ok) throw new Error('Search failed');
 	return response.json();
 }
@@ -97,11 +117,23 @@ function initSearchDialog(dialog: HTMLElement): void {
 	const findBtn = dialog.querySelector<HTMLButtonElement>('#explorer-search-btn');
 	const stopBtn = dialog.querySelector<HTMLButtonElement>('#explorer-search-stop');
 	const newBtn = dialog.querySelector<HTMLButtonElement>('#explorer-search-new');
-	const closeBtn = dialog.querySelector<HTMLButtonElement>('.explorer-search-close');
+	const closeBtn = dialog.querySelector<HTMLButtonElement>('.title-bar-controls button');
 	const resultsDiv = dialog.querySelector<HTMLElement>('#explorer-search-results');
-	const statusDiv = dialog.querySelector<HTMLElement>('.explorer-search-status');
+	const statusDiv = dialog.querySelector<HTMLElement>('#explorer-search-status');
 
-	if (!input || !findBtn || !stopBtn || !newBtn || !closeBtn || !resultsDiv || !statusDiv) return;
+	const categorySelect = dialog.querySelector<HTMLSelectElement>('#explorer-search-category');
+
+	if (!input || !findBtn || !stopBtn || !newBtn || !closeBtn || !resultsDiv || !statusDiv || !categorySelect) return;
+
+	// Load categories into dropdown
+	fetchCategories().then((cats) => {
+		cats.forEach((cat) => {
+			const option = document.createElement('option');
+			option.value = String(cat.id);
+			option.textContent = `C:\\My Documents\\Blog\\${cat.name}`;
+			categorySelect.appendChild(option);
+		});
+	});
 
 	let abortController: AbortController | null = null;
 
@@ -109,13 +141,15 @@ function initSearchDialog(dialog: HTMLElement): void {
 		const query = input.value.trim();
 		if (!query) return;
 
+		const selectedCat = categorySelect.value ? Number(categorySelect.value) : undefined;
+
 		resultsDiv.innerHTML = '';
 		statusDiv.textContent = 'Searching...';
 		findBtn.disabled = true;
 		stopBtn.disabled = false;
 
 		try {
-			const posts = await searchPosts(query);
+			const posts = await searchPosts(query, selectedCat);
 			stopBtn.disabled = true;
 			findBtn.disabled = false;
 
@@ -181,34 +215,54 @@ function initSearchDialog(dialog: HTMLElement): void {
 	};
 	document.addEventListener('keydown', handleEscape);
 
-	// Make dialog draggable via title bar
+	// Make dialog draggable via title bar — same pattern as initWindowDrag
 	const titleBar = dialog.querySelector<HTMLElement>('.title-bar');
 	if (titleBar) {
 		let isDragging = false;
-		let offsetX = 0;
-		let offsetY = 0;
+		let startX = 0;
+		let startY = 0;
+		let xOffset = 0;
+		let yOffset = 0;
+
+		// Convert the initial centered position (left:50% + translate(-50%,-50%))
+		// into absolute left/top so dragging starts from the right place
+		const rect = dialog.getBoundingClientRect();
+		dialog.style.left = `${rect.left}px`;
+		dialog.style.top = `${rect.top}px`;
+		dialog.style.transform = 'none';
 
 		titleBar.style.cursor = 'move';
 
-		titleBar.addEventListener('mousedown', (e) => {
+		const onMouseDown = (e: MouseEvent): void => {
 			if ((e.target as HTMLElement).closest('.title-bar-controls')) return;
 			isDragging = true;
-			const rect = dialog.getBoundingClientRect();
-			offsetX = e.clientX - rect.left;
-			offsetY = e.clientY - rect.top;
-			dialog.style.transform = 'none';
+			startX = e.clientX - xOffset;
+			startY = e.clientY - yOffset;
 			e.preventDefault();
-		});
+		};
 
-		document.addEventListener('mousemove', (e) => {
+		const onMouseMove = (e: MouseEvent): void => {
 			if (!isDragging) return;
-			dialog.style.left = `${e.clientX - offsetX}px`;
-			dialog.style.top = `${e.clientY - offsetY}px`;
-		});
+			e.preventDefault();
+			xOffset = e.clientX - startX;
+			yOffset = e.clientY - startY;
+			const currentLeft = parseInt(dialog.style.left, 10) || 0;
+			const currentTop = parseInt(dialog.style.top, 10) || 0;
+			dialog.style.left = `${currentLeft + xOffset}px`;
+			dialog.style.top = `${currentTop + yOffset}px`;
+			startX = e.clientX;
+			startY = e.clientY;
+			xOffset = 0;
+			yOffset = 0;
+		};
 
-		document.addEventListener('mouseup', () => {
+		const onMouseUp = (): void => {
 			isDragging = false;
-		});
+		};
+
+		titleBar.addEventListener('mousedown', onMouseDown);
+		document.addEventListener('mousemove', onMouseMove);
+		document.addEventListener('mouseup', onMouseUp);
 	}
 
 	// Focus input
